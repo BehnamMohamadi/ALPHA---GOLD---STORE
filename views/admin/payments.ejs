@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>
+    <%= title %> | ALPHA
+  </title>
+
+  <link rel="stylesheet" href="/css/admin/admin.css">
+</head>
+
+<body>
+  <div class="admin-layout">
+    <%- include("partials/sidebar", { activePage: "payments" , adminUser }) %>
+
+      <main class="admin-main">
+        <%- include("partials/topbar", { pageTitle: "پرداخت‌ها" ,
+          pageSubtitle: "مشاهده و بررسی تمام تلاش‌های پرداخت فروشگاه" }) %>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>
+                  تراکنش‌های پرداخت
+                </h2>
+
+                <p>
+                  اطلاعات این صفحه فقط
+                  خواندنی است و وضعیت پرداخت
+                  توسط Payment Service مدیریت
+                  می‌شود.
+                </p>
+              </div>
+            </div>
+
+            <div class="panel-toolbar">
+              <div class="toolbar-filters">
+                <div class="search-box">
+                  <span>
+                    ⌕
+                  </span>
+
+                  <input id="paymentsSearch" placeholder="جستجو در شماره سفارش، Authority یا Ref ID...">
+                </div>
+
+                <select id="paymentAttemptStatusFilter">
+                  <option value="">
+                    همه وضعیت‌ها
+                  </option>
+
+                  <option value="created">
+                    ایجادشده
+                  </option>
+
+                  <option value="pending">
+                    در انتظار
+                  </option>
+
+                  <option value="processing">
+                    در حال پردازش
+                  </option>
+
+                  <option value="paid">
+                    موفق
+                  </option>
+
+                  <option value="failed">
+                    ناموفق
+                  </option>
+
+                  <option value="cancelled">
+                    لغوشده
+                  </option>
+                </select>
+
+                <select id="paymentGatewayFilter">
+                  <option value="">
+                    همه درگاه‌ها
+                  </option>
+
+                  <option value="mock">
+                    Mock
+                  </option>
+
+                  <option value="zarinpal">
+                    ZarinPal
+                  </option>
+                </select>
+
+                <select id="paymentReviewFilter">
+                  <option value="">
+                    همه پرداخت‌ها
+                  </option>
+
+                  <option value="true">
+                    نیازمند بررسی
+                  </option>
+
+                  <option value="false">
+                    بدون نیاز به بررسی
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>
+                      سفارش
+                    </th>
+
+                    <th>
+                      مشتری
+                    </th>
+
+                    <th>
+                      درگاه
+                    </th>
+
+                    <th>
+                      مبلغ
+                    </th>
+
+                    <th>
+                      وضعیت
+                    </th>
+
+                    <th>
+                      Authority
+                    </th>
+
+                    <th>
+                      Ref ID
+                    </th>
+
+                    <th>
+                      بررسی
+                    </th>
+
+                    <th>
+                      تاریخ
+                    </th>
+
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody id="paymentsBody">
+                  <tr>
+                    <td colspan="10">
+                      در حال دریافت اطلاعات...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination" id="paymentsPagination"></div>
+          </section>
+      </main>
+  </div>
+
+  <%- include("partials/scripts") %>
+
+    <script src="/js/admin/payments.js"></script>
+</body>
+
+</html>

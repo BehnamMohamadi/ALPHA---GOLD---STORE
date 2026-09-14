@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+  <title><%= title %> | ALPHA</title>
+  <link
+    rel="stylesheet"
+    href="/css/admin/admin.css"
+  >
+</head>
+
+<body>
+  <div class="admin-layout">
+    <%- include("partials/sidebar", {
+      activePage: "users",
+      adminUser
+    }) %>
+
+    <main class="admin-main">
+      <%- include("partials/topbar", {
+        pageTitle: "کاربران",
+        pageSubtitle: "مدیریت حساب‌ها، نقش‌ها و آدرس‌های مشتریان"
+      }) %>
+
+      <section class="panel">
+        <div class="panel-toolbar">
+          <div class="toolbar-filters">
+            <div class="search-box">
+              <span>⌕</span>
+              <input
+                id="userSearch"
+                placeholder="جستجو نام، موبایل یا ایمیل..."
+              >
+            </div>
+
+            <select id="userRoleFilter">
+              <option value="">همه نقش‌ها</option>
+              <option value="user">کاربر</option>
+              <option value="admin">ادمین</option>
+            </select>
+
+            <select id="userStatusFilter">
+              <option value="">همه وضعیت‌ها</option>
+              <option value="active">فعال</option>
+              <option value="suspended">تعلیق</option>
+              <option value="deactivated">غیرفعال</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>کاربر</th>
+                <th>موبایل</th>
+                <th>نقش</th>
+                <th>وضعیت</th>
+                <th>تاریخ عضویت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+
+            <tbody id="usersBody"></tbody>
+          </table>
+        </div>
+
+        <div
+          class="pagination"
+          id="usersPagination"
+        ></div>
+      </section>
+
+      <section
+        class="panel hidden user-editor-panel"
+        id="userEditor"
+      >
+        <div class="panel-head">
+          <div>
+            <h2>مدیریت کاربر</h2>
+            <p id="editingUserLabel"></p>
+          </div>
+        </div>
+
+        <form
+          id="userEditForm"
+          class="form-grid"
+          novalidate
+        >
+          <input
+            type="hidden"
+            name="userId"
+          >
+
+          <label class="field">
+            <span>نام</span>
+            <input name="firstname">
+          </label>
+
+          <label class="field">
+            <span>نام خانوادگی</span>
+            <input name="lastname">
+          </label>
+
+          <label class="field">
+            <span>موبایل</span>
+            <input name="phonenumber">
+          </label>
+
+          <label class="field">
+            <span>ایمیل</span>
+            <input name="email">
+          </label>
+
+          <label class="field">
+            <span>نقش</span>
+
+            <select name="role">
+              <option value="user">
+                کاربر
+              </option>
+
+              <option value="admin">
+                ادمین
+              </option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>وضعیت حساب</span>
+
+            <select name="accountStatus">
+              <option value="active">
+                فعال
+              </option>
+
+              <option value="suspended">
+                تعلیق
+              </option>
+
+              <option value="deactivated">
+                غیرفعال
+              </option>
+            </select>
+          </label>
+
+          <div class="field full">
+            <div class="form-inline-actions">
+              <button
+                class="btn btn-gold"
+                id="saveUserButton"
+              >
+                ذخیره تغییرات
+              </button>
+
+              <button
+                class="btn btn-secondary"
+                type="button"
+                id="closeUserEditor"
+              >
+                بستن
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div class="panel-head addresses-head">
+          <div>
+            <h2>آدرس‌های ذخیره‌شده</h2>
+            <p>
+              آدرس‌های ثبت‌شده توسط مشتری
+            </p>
+          </div>
+        </div>
+
+        <div
+          id="userAddresses"
+          class="address-admin-grid"
+        ></div>
+      </section>
+    </main>
+  </div>
+
+  <%- include("partials/scripts") %>
+
+  <script src="/js/admin/users.js"></script>
+</body>
+</html>

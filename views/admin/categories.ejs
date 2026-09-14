@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title><%= title %> | ALPHA</title>
+  <link rel="stylesheet" href="/css/admin/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <%- include("partials/sidebar", { activePage: "categories", adminUser }) %>
+
+  <main class="admin-main">
+    <%- include("partials/topbar", {
+      pageTitle: "دسته‌بندی‌ها",
+      pageSubtitle: "مدیریت دسته‌بندی‌های محصولات"
+    }) %>
+
+    <section class="split-grid">
+      <article class="panel">
+        <div class="panel-head">
+          <div><h2>دسته‌بندی‌ها</h2></div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>آیکون</th>
+                <th>نام</th>
+                <th>Slug</th>
+                <th>ترتیب</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+
+            <tbody id="categoriesBody"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <h2 id="categoryFormTitle">افزودن دسته</h2>
+          </div>
+        </div>
+
+        <form id="categoryForm" class="stack-form" novalidate>
+          <input type="hidden" name="categoryId">
+
+          <label class="field">
+            <span>نام *</span>
+            <input name="name">
+          </label>
+
+          <label class="field">
+            <span>Slug</span>
+            <input name="slug">
+          </label>
+
+          <label class="field">
+            <span>ترتیب نمایش</span>
+            <input type="number" name="sortOrder" min="0" value="0">
+          </label>
+
+          <div class="field toggle-field">
+            <span>فعال</span>
+            <label class="switch">
+              <input type="checkbox" name="isActive" checked>
+              <i></i>
+            </label>
+          </div>
+
+          <label class="upload-box">
+            <input type="file" id="categoryIconFile" accept="image/*">
+            <span>انتخاب آیکون</span>
+          </label>
+
+          <div class="form-inline-actions">
+            <button class="btn btn-gold" id="categorySubmitButton">
+              ثبت دسته
+            </button>
+
+            <button
+              class="btn btn-secondary hidden"
+              type="button"
+              id="categoryCancelEdit"
+            >
+              انصراف از ویرایش
+            </button>
+          </div>
+        </form>
+      </article>
+    </section>
+  </main>
+</div>
+
+<%- include("partials/scripts") %>
+<script src="/js/admin/categories.js"></script>
+</body>
+</html>

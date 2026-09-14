@@ -1,0 +1,1 @@
+<% const sprite = /\/demo-(\d)\.svg$/.exec(src || ''); if(sprite){ %><div class="product-photo sprite sprite-<%= sprite[1] %>" role="img" aria-label="<%= alt %>"></div><% }else{ %><img class="product-photo" src="<%= src || '/images/brand/placeholder.svg' %>" alt="<%= alt %>" loading="lazy" width="600" height="600"><% } %>

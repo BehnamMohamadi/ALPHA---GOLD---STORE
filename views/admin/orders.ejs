@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>
+    <%= title %> | ALPHA
+  </title>
+
+  <link rel="stylesheet" href="/css/admin/admin.css">
+</head>
+
+<body>
+  <div class="admin-layout">
+    <%- include("partials/sidebar", { activePage: "orders" , adminUser }) %>
+
+      <main class="admin-main">
+        <%- include("partials/topbar", { pageTitle: "سفارش‌ها" , pageSubtitle: "مدیریت و بررسی سفارش‌های فروشگاه" }) %>
+
+          <section class="panel">
+            <div class="panel-toolbar">
+              <div class="toolbar-filters">
+                <div class="search-box">
+                  <span>
+                    ⌕
+                  </span>
+
+                  <input id="ordersSearch" placeholder="جستجو در سفارش‌های این صفحه...">
+                </div>
+
+                <select id="orderStatusFilter">
+                  <option value="">
+                    همه وضعیت‌ها
+                  </option>
+
+                  <option value="pending">
+                    در انتظار
+                  </option>
+
+                  <option value="payment_pending">
+                    در حال پرداخت
+                  </option>
+
+                  <option value="review">
+                    نیازمند بررسی
+                  </option>
+
+                  <option value="shipped">ارسال‌شده</option><option value="delivered">تحویل‌شده</option><option value="confirmed">
+                    تأییدشده
+                  </option>
+
+                  <option value="cancelled">
+                    لغوشده
+                  </option>
+
+                  <option value="expired">
+                    منقضی‌شده
+                  </option>
+                </select>
+
+                <select id="paymentStatusFilter">
+                  <option value="">
+                    همه پرداخت‌ها
+                  </option>
+
+                  <option value="unpaid">
+                    پرداخت‌نشده
+                  </option>
+
+                  <option value="pending">
+                    در انتظار پرداخت
+                  </option>
+
+                  <option value="paid">
+                    پرداخت‌شده
+                  </option>
+
+                  <option value="failed">
+                    ناموفق
+                  </option>
+
+                  <option value="refunded">
+                    برگشت‌خورده
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>
+                      شماره
+                    </th>
+
+                    <th>
+                      کاربر
+                    </th>
+
+                    <th>
+                      تعداد
+                    </th>
+
+                    <th>
+                      مبلغ کل
+                    </th>
+
+                    <th>
+                      سفارش
+                    </th>
+
+                    <th>
+                      پرداخت
+                    </th>
+
+                    <th>
+                      تاریخ
+                    </th>
+
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody id="ordersBody">
+                  <tr>
+                    <td colspan="8">
+                      در حال دریافت سفارش‌ها...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination" id="ordersPagination"></div>
+          </section>
+      </main>
+  </div>
+
+  <%- include("partials/scripts") %>
+
+    <script src="/js/admin/orders.js"></script>
+</body>
+
+</html>

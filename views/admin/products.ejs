@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title><%= title %> | ALPHA</title>
+  <link rel="stylesheet" href="/css/admin/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <%- include("partials/sidebar", { activePage: "products", adminUser }) %>
+
+    <main class="admin-main">
+      <%- include("partials/topbar", {
+        pageTitle: "محصولات",
+        pageSubtitle: "مدیریت اطلاعات محصول، موجودی و تصاویر"
+      }) %>
+
+      <section class="panel">
+        <div class="panel-toolbar products-toolbar">
+          <div class="toolbar-filters">
+            <div class="search-box">
+              <span>⌕</span>
+              <input id="productSearch" placeholder="جستجو بین محصولات این صفحه...">
+            </div>
+
+            <select id="productCategoryFilter">
+              <option value="">همه دسته‌بندی‌ها</option>
+            </select>
+
+            <select id="productStatusFilter">
+              <option value="">همه وضعیت‌ها</option>
+              <option value="true">فعال</option>
+              <option value="false">غیرفعال</option>
+            </select>
+
+            <select id="productSort">
+              <option value="-createdAt">جدیدترین</option>
+              <option value="createdAt">قدیمی‌ترین</option>
+              <option value="stock">کمترین موجودی</option>
+              <option value="-stock">بیشترین موجودی</option>
+            </select>
+          </div>
+
+          <a href="/admin/products/new" class="btn btn-gold add-product-button">
+            + افزودن محصول
+          </a>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>محصول</th>
+                <th>SKU</th>
+                <th>دسته</th>
+                <th>وزن</th>
+                <th>عیار</th>
+                <th>موجودی</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody id="productsBody"></tbody>
+          </table>
+        </div>
+
+        <div class="pagination" id="productsPagination"></div>
+      </section>
+    </main>
+  </div>
+
+  <%- include("partials/scripts") %>
+  <script src="/js/admin/products.js"></script>
+</body>
+</html>

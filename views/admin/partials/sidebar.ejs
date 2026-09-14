@@ -1,0 +1,174 @@
+<% const path=typeof activePage==="string" ? activePage : "" ; const navClass=(name)=>
+  path === name
+  ? "admin-nav-link active"
+  : "admin-nav-link";
+
+  const adminInitials = adminUser
+  ? `${
+  adminUser.firstname?.charAt(0) || ""
+  }${
+  adminUser.lastname?.charAt(0) || ""
+  }`.toUpperCase()
+  : "A";
+  %>
+
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-head">
+      <div class="admin-brand">
+        <div class="admin-brand-mark">
+          <img src="/images/brand/logo-seal.png?v=alpha" alt="نشان آلفا" class="admin-brand-logo">
+        </div>
+
+        <div>
+          <strong>
+            ALPHA
+          </strong>
+
+          <span>
+            پنل مدیریت
+          </span>
+        </div>
+      </div>
+
+      <button class="sidebar-toggle-button" id="sidebarCloseButton" type="button" aria-label="بستن منوی مدیریت"
+        title="بستن منو">
+        ☰
+      </button>
+    </div>
+
+    <nav class="admin-nav">
+      <span class="admin-nav-title">
+        اصلی
+      </span>
+
+      <a class="<%= navClass('dashboard') %>" href="/admin">
+        <span class="nav-icon">
+          ▦
+        </span>
+
+        <span>
+          داشبورد
+        </span>
+      </a>
+
+      <span class="admin-nav-title">
+        کاتالوگ
+      </span>
+
+      <a class="<%= navClass('products') %>" href="/admin/products">
+        <span class="nav-icon">
+          ◇
+        </span>
+
+        <span>
+          محصولات
+        </span>
+      </a>
+
+      <a class="<%= navClass('categories') %>" href="/admin/categories">
+        <span class="nav-icon">
+          ▤
+        </span>
+
+        <span>
+          دسته‌بندی‌ها
+        </span>
+      </a>
+
+      <a class="<%= navClass('subcategories') %>" href="/admin/subcategories">
+        <span class="nav-icon">
+          ⌘
+        </span>
+
+        <span>
+          زیردسته‌ها
+        </span>
+      </a>
+
+      <span class="admin-nav-title">
+        فروش
+      </span>
+
+      <a class="<%= navClass('orders') %>" href="/admin/orders">
+        <span class="nav-icon">
+          ▣
+        </span>
+
+        <span>
+          سفارش‌ها
+        </span>
+      </a>
+
+      <a class="<%= navClass('payments') %>" href="/admin/payments">
+        <span class="nav-icon">
+          ◈
+        </span>
+
+        <span>
+          پرداخت‌ها
+        </span>
+      </a>
+
+      <a class="<%= navClass('carts') %>" href="/admin/carts">
+        <span class="nav-icon">
+          ◫
+        </span>
+
+        <span>
+          سبدهای خرید
+        </span>
+      </a>
+
+      <a class="<%= navClass('pricing') %>" href="/admin/gold-pricing">
+        <span class="nav-icon">
+          ◆
+        </span>
+
+        <span>
+          قیمت طلا
+        </span>
+      </a>
+
+      <span class="admin-nav-title">
+        مشتریان
+      </span>
+
+      <a class="<%= navClass('users') %>" href="/admin/users">
+        <span class="nav-icon">
+          ♙
+        </span>
+
+        <span>
+          کاربران
+        </span>
+      </a>
+      <% for(const [key,label] of Object.entries({settings:'تنظیمات فروشگاه',sms:'پیامک و ورود',shipping:'روش‌های ارسال',content:'محتوای سایت',support:'پشتیبانی',audit:'رویدادهای مدیریت'})){ %>
+      <a class="<%= navClass(key) %>" href="/admin/<%= key %>"><span class="nav-icon">◇</span><span><%= label %></span></a><% } %><a class="admin-nav-link" href="/" target="_blank" rel="noopener">مشاهده فروشگاه ↗</a>
+    </nav>
+
+    <div class="admin-sidebar-user">
+      <div class="avatar" dir="ltr">
+        <%= adminInitials %>
+      </div>
+
+      <div class="sidebar-user-copy">
+        <b>
+          <%= adminUser ? `${adminUser.firstname} ${adminUser.lastname}` : "مدیر" %>
+        </b>
+
+        <span>
+          Administrator
+        </span>
+      </div>
+
+      <button class="logout-button" id="logoutButton" type="button" title="خروج">
+        <span class="logout-icon">
+          ↪
+        </span>
+
+        <span class="logout-text">
+          خروج
+        </span>
+      </button>
+    </div>
+  </aside>

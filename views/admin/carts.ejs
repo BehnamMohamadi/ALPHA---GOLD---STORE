@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title><%= title %> | ALPHA</title>
+  <link rel="stylesheet" href="/css/admin/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <%- include("partials/sidebar", { activePage: "carts", adminUser }) %>
+
+  <main class="admin-main">
+    <%- include("partials/topbar", {
+      pageTitle: "سبدهای خرید",
+      pageSubtitle: "مشاهده سبدهای خرید کاربران"
+    }) %>
+
+    <section class="panel">
+      <div class="panel-toolbar">
+        <div class="toolbar-filters">
+          <div class="search-box">
+            <span>⌕</span>
+            <input
+              id="cartSearch"
+              placeholder="جستجو بر اساس کاربر یا محصول..."
+            >
+          </div>
+        </div>
+      </div>
+
+      <div id="cartsList" class="cart-admin-list"></div>
+    </section>
+  </main>
+</div>
+
+<%- include("partials/scripts") %>
+<script src="/js/admin/carts.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title><%= title %> | ALPHA</title>
+  <link rel="stylesheet" href="/css/admin/admin.css">
+</head>
+<body class="login-body">
+  <main class="login-shell">
+    <section class="login-art">
+      <div class="login-art-inner">
+        <div class="admin-brand big">
+          <div class="admin-brand-mark">✦</div>
+          <div><strong>ALPHA</strong><span>پنل مدیریت فروشگاه طلا</span></div>
+        </div>
+        <h1>مدیریت فروشگاه،<br>بدون شلوغی.</h1>
+        <p>محصول، قیمت طلا، سفارش و کاربران را از یک داشبورد واحد مدیریت کنید.</p>
+      </div>
+    </section>
+    <section class="login-form-wrap">
+      <form class="login-card" id="adminLoginForm" method="post" action="/api/auth/login" autocomplete="on">
+        <span class="eyebrow">ADMIN LOGIN</span>
+        <h2>ورود مدیر</h2>
+        <p>با شماره موبایل حساب ادمین وارد شوید.</p>
+        <label class="field"><span>شماره موبایل</span><input name="phonenumber" placeholder="09xxxxxxxxx" required pattern="09[0-9]{9}"></label>
+        <label class="field"><span>رمز عبور</span><input name="password" type="password" minlength="8" required></label>
+        <div id="loginError" class="form-error hidden"></div>
+        <button class="btn btn-gold full-btn">ورود به پنل</button>
+      </form>
+    </section>
+  </main>
+  <script src="/js/admin/api.js"></script>
+  <script src="/js/admin/login.js"></script>
+</body>
+</html>
