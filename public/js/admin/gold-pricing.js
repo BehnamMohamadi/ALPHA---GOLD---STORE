@@ -25,14 +25,14 @@ form.addEventListener("submit",async e=>{
       gold22:Number(d.get("gold22")),
       gold24:Number(d.get("gold24"))
     },
-    wage:{
-      type:d.get("wageType"),
-      value:Number(d.get("wageValue"))
-    },
     profitPercent:Number(d.get("profitPercent")),
     taxPercent:Number(d.get("taxPercent")),
     source:d.get("source")||"manual"
   };
+  const wageValue=String(d.get("wageValue")??"").trim();
+  if(wageValue!==""){
+    body.wage={type:d.get("wageType"),value:Number(wageValue)};
+  }
   try{
     await AdminAPI.request("/api/goldPricing",{method:exists?"PUT":"POST",body});
     adminToast(exists?"تنظیمات قیمت‌گذاری بروزرسانی شد.":"تنظیمات قیمت‌گذاری ساخته شد.");
