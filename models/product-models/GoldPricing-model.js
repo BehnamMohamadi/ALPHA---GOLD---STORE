@@ -53,13 +53,13 @@ const goldPricingSchema = new Schema(
 
     profitPercent: {
       type: Number,
-      default: 7,
+      default: null,
       min: [0, "profit percent cannot be negative"],
     },
 
     taxPercent: {
       type: Number,
-      default: 9,
+      default: null,
       min: [0, "tax percent cannot be negative"],
     },
 
