@@ -76,7 +76,7 @@ const productSchema = new Schema(
       },
       value: {
         type: Number,
-        default: 0,
+        default: null,
         min: [0, "wage cannot be negative"],
       },
     },
