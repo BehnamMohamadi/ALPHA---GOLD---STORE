@@ -35,6 +35,22 @@ const goldPricingSchema = new Schema(
       },
     },
 
+    wage: {
+      type: {
+        type: String,
+        enum: {
+          values: ["percent", "fixed"],
+          message: "invalid wage type",
+        },
+        default: "percent",
+      },
+      value: {
+        type: Number,
+        default: null,
+        min: [0, "wage cannot be negative"],
+      },
+    },
+
     profitPercent: {
       type: Number,
       default: 7,
