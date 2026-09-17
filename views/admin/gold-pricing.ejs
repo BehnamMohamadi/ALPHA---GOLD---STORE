@@ -10,7 +10,7 @@
   <div class="admin-layout">
     <%- include("partials/sidebar", { activePage: "pricing", adminUser }) %>
     <main class="admin-main">
-      <%- include("partials/topbar", { pageTitle: "قیمت طلا", pageSubtitle: "قیمت‌های پایه‌ای که در Pricing Service استفاده می‌شوند" }) %>
+      <%- include("partials/topbar", { pageTitle: "قیمت طلا", pageSubtitle: "تنظیمات عمومی قیمت‌گذاری برای محصولات استاندارد" }) %>
       
 <section class="pricing-cards">
   <article class="price-card"><span>طلای ۱۸ عیار</span><strong id="cardGold18">—</strong><small>تومان / گرم</small></article>
@@ -21,14 +21,25 @@
 
 <section class="split-grid pricing-form-grid">
   <article class="panel">
-    <div class="panel-head"><div><h2>تنظیم قیمت عمومی</h2><p>Singleton: GoldPricing / key=main</p></div></div>
+    <div class="panel-head"><div><h2>تنظیم قیمت عمومی</h2><p>محصولات با نوع قیمت‌گذاری «استاندارد» فقط از این تنظیمات استفاده می‌کنند.</p></div></div>
     <form id="goldPricingForm" class="form-grid">
       <label class="field"><span>قیمت ۱۸ عیار</span><input type="number" min="0" name="gold18"></label>
       <label class="field"><span>قیمت ۲۱ عیار</span><input type="number" min="0" name="gold21"></label>
       <label class="field"><span>قیمت ۲۲ عیار</span><input type="number" min="0" name="gold22"></label>
       <label class="field"><span>قیمت ۲۴ عیار</span><input type="number" min="0" name="gold24"></label>
-      <label class="field"><span>درصد سود پیش‌فرض</span><input type="number" min="0" step="0.01" name="profitPercent"></label>
-      <label class="field"><span>درصد مالیات</span><input type="number" min="0" step="0.01" name="taxPercent"></label>
+      <label class="field">
+        <span>نوع اجرت عمومی</span>
+        <select name="wageType">
+          <option value="percent">درصدی</option>
+          <option value="fixed">ثابت</option>
+        </select>
+      </label>
+      <label class="field"><span>مقدار اجرت عمومی</span><input type="number" min="0" step="0.01" name="wageValue"></label>
+      <label class="field"><span>درصد سود عمومی</span><input type="number" min="0" step="0.01" name="profitPercent"></label>
+      <label class="field"><span>درصد مالیات عمومی</span><input type="number" min="0" step="0.01" name="taxPercent"></label>
+      <p class="full" style="margin:0;color:#7a7467;font-size:12px;line-height:2;">
+        در حالت استاندارد، اجرت، سود و مالیات محصول از مقادیر همین صفحه خوانده می‌شوند. مقادیر سفارشی ذخیره‌شده روی خود محصول فقط زمانی استفاده می‌شوند که نوع قیمت‌گذاری محصول روی «سفارشی» باشد.
+      </p>
       <label class="field full"><span>منبع</span><input name="source"></label>
       <div class="full"><button class="btn btn-gold">بروزرسانی قیمت‌ها</button></div>
     </form>
