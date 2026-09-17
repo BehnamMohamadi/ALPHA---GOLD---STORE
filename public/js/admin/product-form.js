@@ -1,6 +1,4 @@
-const initialProductId =
-  document.getElementById("productFormPage").dataset.productId;
-
+const initialProductId = document.getElementById("productFormPage").dataset.productId;
 let activeProductId = initialProductId || "";
 
 const form = document.getElementById("productForm");
@@ -10,12 +8,10 @@ let categories = [];
 let subCategories = [];
 let currentProduct = null;
 
-const DEFAULT_COVER =
-  "/images/models-images/product-images/products/product-cover-image-default.webp";
+const DEFAULT_COVER = "/images/models-images/product-images/products/product-cover-image-default.webp";
 
 const setValue = (name, value) => {
   const element = form.elements[name];
-
   if (!element) return;
 
   if (element.type === "checkbox") {
@@ -25,16 +21,19 @@ const setValue = (name, value) => {
   }
 };
 
+const nullableNumber = (value) => {
+  const text = String(value ?? "").trim();
+  return text === "" ? null : Number(text);
+};
+
 const clearValidationErrors = () => {
   formErrors.classList.add("hidden");
   formErrors.innerHTML = "";
 
-  form
-    .querySelectorAll(".field-error")
-    .forEach((element) => {
-      element.classList.remove("field-error");
-      element.removeAttribute("aria-invalid");
-    });
+  form.querySelectorAll(".field-error").forEach((element) => {
+    element.classList.remove("field-error");
+    element.removeAttribute("aria-invalid");
+  });
 };
 
 const showValidationErrors = (
@@ -42,62 +41,36 @@ const showValidationErrors = (
   title = "لطفاً اطلاعات محصول را بررسی کنید",
 ) => {
   clearValidationErrors();
-
   if (!errors.length) return;
 
   formErrors.innerHTML = `
-    <strong class="form-errors-title">
-      ${AdminAPI.escape(title)}
-    </strong>
-
+    <strong class="form-errors-title">${AdminAPI.escape(title)}</strong>
     <ul>
-      ${errors
-        .map(
-          (error) => `
-            <li>${AdminAPI.escape(error.message)}</li>
-          `,
-        )
-        .join("")}
+      ${errors.map((error) => `<li>${AdminAPI.escape(error.message)}</li>`).join("")}
     </ul>
   `;
-
   formErrors.classList.remove("hidden");
 
   errors.forEach((error) => {
     if (!error.field) return;
-
     const field = form.elements[error.field];
-
     if (!field) return;
-
     field.classList.add("field-error");
     field.setAttribute("aria-invalid", "true");
   });
 
-  const first = errors.find(
-    (error) => error.field && form.elements[error.field],
-  );
-
+  const first = errors.find((error) => error.field && form.elements[error.field]);
   if (first) {
     const field = form.elements[first.field];
-
-    field.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
-
+    field.scrollIntoView({ behavior: "smooth", block: "center" });
     setTimeout(() => field.focus(), 200);
   } else {
-    formErrors.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
+    formErrors.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 };
 
 const validateProductForm = () => {
   const errors = [];
-
   const name = form.elements.name.value.trim();
   const sku = form.elements.sku.value.trim();
   const category = form.elements.category.value;
@@ -106,54 +79,18 @@ const validateProductForm = () => {
   const goldWeight = Number(form.elements.goldWeight.value);
 
   if (!name) {
-    errors.push({
-      field: "name",
-      message: "نام محصول را وارد کنید.",
-    });
+    errors.push({ field: "name", message: "نام محصول را وارد کنید." });
   } else if (name.length < 2) {
-    errors.push({
-      field: "name",
-      message: "نام محصول باید حداقل ۲ کاراکتر باشد.",
-    });
+    errors.push({ field: "name", message: "نام محصول باید حداقل ۲ کاراکتر باشد." });
   }
 
-  if (!sku) {
-    errors.push({
-      field: "sku",
-      message: "کد SKU محصول را وارد کنید.",
-    });
-  }
+  if (!sku) errors.push({ field: "sku", message: "کد SKU محصول را وارد کنید." });
+  if (!gender) errors.push({ field: "gender", message: "جنسیت محصول را انتخاب کنید." });
+  if (!category) errors.push({ field: "category", message: "دسته‌بندی محصول را انتخاب کنید." });
+  if (!subCategory) errors.push({ field: "subCategory", message: "زیردسته محصول را انتخاب کنید." });
 
-  if (!gender) {
-    errors.push({
-      field: "gender",
-      message: "جنسیت محصول را انتخاب کنید.",
-    });
-  }
-
-  if (!category) {
-    errors.push({
-      field: "category",
-      message: "دسته‌بندی محصول را انتخاب کنید.",
-    });
-  }
-
-  if (!subCategory) {
-    errors.push({
-      field: "subCategory",
-      message: "زیردسته محصول را انتخاب کنید.",
-    });
-  }
-
-  if (
-    !form.elements.goldWeight.value ||
-    !Number.isFinite(goldWeight) ||
-    goldWeight <= 0
-  ) {
-    errors.push({
-      field: "goldWeight",
-      message: "وزن طلا باید عددی بزرگ‌تر از صفر باشد.",
-    });
+  if (!form.elements.goldWeight.value || !Number.isFinite(goldWeight) || goldWeight <= 0) {
+    errors.push({ field: "goldWeight", message: "وزن طلا باید عددی بزرگ‌تر از صفر باشد." });
   }
 
   return errors;
@@ -165,153 +102,75 @@ const backendErrorMessage = (error) =>
   error?.message ||
   "عملیات انجام نشد.";
 
-const renderSubCategories = (
-  categoryId,
-  selectedId = "",
-) => {
+const renderSubCategories = (categoryId, selectedId = "") => {
   const options = subCategories.filter(
-    (subCategory) =>
-      (
-        subCategory.category?._id ||
-        subCategory.category
-      ) === categoryId,
+    (subCategory) => (subCategory.category?._id || subCategory.category) === categoryId,
   );
 
   const select = document.getElementById("subCategorySelect");
-
   select.innerHTML =
     `<option value="">انتخاب کنید</option>` +
-    options
-      .map(
-        (subCategory) => `
-          <option
-            value="${subCategory._id}"
-            ${
-              subCategory._id === selectedId
-                ? "selected"
-                : ""
-            }
-          >
-            ${AdminAPI.escape(subCategory.name)}
-          </option>
-        `,
-      )
-      .join("");
+    options.map((subCategory) => `
+      <option value="${subCategory._id}" ${subCategory._id === selectedId ? "selected" : ""}>
+        ${AdminAPI.escape(subCategory.name)}
+      </option>
+    `).join("");
 };
 
 const addDetailRow = (title = "", value = "") => {
   const row = document.createElement("div");
-
   row.className = "detail-row";
-
   row.innerHTML = `
-    <input
-      class="detail-title"
-      placeholder="عنوان"
-      value="${AdminAPI.escape(title)}"
-    >
-
-    <input
-      class="detail-value"
-      placeholder="مقدار"
-      value="${AdminAPI.escape(value)}"
-    >
-
-    <button
-      type="button"
-      class="remove-detail"
-    >
-      ×
-    </button>
+    <input class="detail-title" placeholder="عنوان" value="${AdminAPI.escape(title)}">
+    <input class="detail-value" placeholder="مقدار" value="${AdminAPI.escape(value)}">
+    <button type="button" class="remove-detail">×</button>
   `;
-
   row.querySelector(".remove-detail").onclick = () => row.remove();
-
   document.getElementById("detailsContainer").appendChild(row);
 };
 
 const renderStoredImages = (product) => {
-  document.getElementById("coverPreview").src =
-    product?.coverImage || DEFAULT_COVER;
-
-  document.getElementById("galleryPreview").innerHTML =
-    (product?.images || [])
-      .filter(Boolean)
-      .map(
-        (src) => `
-          <img src="${AdminAPI.escape(src)}" alt="">
-        `,
-      )
-      .join("");
+  document.getElementById("coverPreview").src = product?.coverImage || DEFAULT_COVER;
+  document.getElementById("galleryPreview").innerHTML = (product?.images || [])
+    .filter(Boolean)
+    .map((src) => `<img src="${AdminAPI.escape(src)}" alt="">`)
+    .join("");
 };
 
 const previewCoverFile = () => {
   const file = document.getElementById("coverFile").files[0];
-
-  if (!file) {
-    document.getElementById("coverPreview").src =
-      currentProduct?.coverImage || DEFAULT_COVER;
-    return;
-  }
-
-  document.getElementById("coverPreview").src =
-    URL.createObjectURL(file);
+  document.getElementById("coverPreview").src = file
+    ? URL.createObjectURL(file)
+    : currentProduct?.coverImage || DEFAULT_COVER;
 };
 
 const previewGalleryFiles = () => {
-  const files = [
-    ...document.getElementById("galleryFiles").files,
-  ];
-
+  const files = [...document.getElementById("galleryFiles").files];
   if (!files.length) {
     renderStoredImages(currentProduct);
     return;
   }
 
-  document.getElementById("galleryPreview").innerHTML =
-    files
-      .slice(0, 10)
-      .map(
-        (file) => `
-          <img src="${URL.createObjectURL(file)}" alt="">
-        `,
-      )
-      .join("");
+  document.getElementById("galleryPreview").innerHTML = files
+    .slice(0, 10)
+    .map((file) => `<img src="${URL.createObjectURL(file)}" alt="">`)
+    .join("");
 };
 
 const loadLookups = async () => {
-  const [categoryPayload, subCategoryPayload] =
-    await Promise.all([
-      AdminAPI.request(
-        `/api/categories/all${AdminAPI.qs({
-          limit: 100,
-          sort: "sortOrder",
-        })}`,
-      ),
-
-      AdminAPI.request(
-        `/api/subCategories/all${AdminAPI.qs({
-          limit: 100,
-          sort: "sortOrder",
-        })}`,
-      ),
-    ]);
+  const [categoryPayload, subCategoryPayload] = await Promise.all([
+    AdminAPI.request(`/api/categories/all${AdminAPI.qs({ limit: 100, sort: "sortOrder" })}`),
+    AdminAPI.request(`/api/subCategories/all${AdminAPI.qs({ limit: 100, sort: "sortOrder" })}`),
+  ]);
 
   categories = categoryPayload?.data?.categories || [];
-  subCategories =
-    subCategoryPayload?.data?.subCategories || [];
+  subCategories = subCategoryPayload?.data?.subCategories || [];
 
   document.getElementById("categorySelect").innerHTML =
     `<option value="">انتخاب کنید</option>` +
-    categories
-      .map(
-        (category) => `
-          <option value="${category._id}">
-            ${AdminAPI.escape(category.name)}
-          </option>
-        `,
-      )
-      .join("");
+    categories.map((category) => `
+      <option value="${category._id}">${AdminAPI.escape(category.name)}</option>
+    `).join("");
 };
 
 const fillProduct = (product) => {
@@ -322,64 +181,41 @@ const fillProduct = (product) => {
   setValue("slug", product.slug);
   setValue("gender", product.gender);
 
-  const categoryId =
-    product.category?._id ||
-    product.category;
-
-  const subCategoryId =
-    product.subCategory?._id ||
-    product.subCategory;
+  const categoryId = product.category?._id || product.category;
+  const subCategoryId = product.subCategory?._id || product.subCategory;
 
   setValue("category", categoryId);
   renderSubCategories(categoryId, subCategoryId);
   setValue("subCategory", subCategoryId);
-
   setValue("goldWeight", product.goldWeight);
   setValue("karat", product.karat);
   setValue("stock", product.stock);
   setValue("accessoriesPrice", product.accessoriesPrice);
-  setValue("wageType", product.wage?.type);
+  setValue("wageType", product.wage?.type || "percent");
   setValue("wageValue", product.wage?.value);
-  setValue("pricingMode", product.pricing?.mode);
+  setValue("pricingMode", product.pricing?.mode || "standard");
   setValue("profitPercent", product.pricing?.profitPercent);
   setValue("taxPercent", product.pricing?.taxPercent);
-  setValue("wageEnabled", product.pricing?.wageEnabled);
+  setValue("wageEnabled", product.pricing?.wageEnabled !== false);
   setValue("isActive", product.isActive);
   setValue("isFeatured", product.isFeatured);
   setValue("description", product.description);
 
   document.getElementById("detailsContainer").innerHTML = "";
-
-  (product.details || []).forEach((detail) => {
-    addDetailRow(detail.title, detail.value);
-  });
-
-  if (!(product.details || []).length) {
-    addDetailRow();
-  }
+  (product.details || []).forEach((detail) => addDetailRow(detail.title, detail.value));
+  if (!(product.details || []).length) addDetailRow();
 
   renderStoredImages(product);
+  form.elements.pricingMode.dispatchEvent(new Event("change", { bubbles: true }));
 };
 
 const buildProductBody = () => {
   const data = new FormData(form);
 
-  const nullableNumber = (key) =>
-    data.get(key) === ""
-      ? null
-      : Number(data.get(key));
-
-  const details = [
-    ...document.querySelectorAll(".detail-row"),
-  ]
+  const details = [...document.querySelectorAll(".detail-row")]
     .map((row) => ({
-      title: row
-        .querySelector(".detail-title")
-        .value.trim(),
-
-      value: row
-        .querySelector(".detail-value")
-        .value.trim(),
+      title: row.querySelector(".detail-title").value.trim(),
+      value: row.querySelector(".detail-value").value.trim(),
     }))
     .filter((detail) => detail.title && detail.value);
 
@@ -391,22 +227,17 @@ const buildProductBody = () => {
     gender: data.get("gender"),
     goldWeight: Number(data.get("goldWeight")),
     karat: Number(data.get("karat")),
-
     wage: {
-      type: data.get("wageType"),
-      value: Number(data.get("wageValue") || 0),
+      type: data.get("wageType") || "percent",
+      value: nullableNumber(data.get("wageValue")),
     },
-
-    accessoriesPrice:
-      Number(data.get("accessoriesPrice") || 0),
-
+    accessoriesPrice: Number(data.get("accessoriesPrice") || 0),
     pricing: {
       mode: data.get("pricingMode"),
-      profitPercent: nullableNumber("profitPercent"),
-      taxPercent: nullableNumber("taxPercent"),
+      profitPercent: nullableNumber(data.get("profitPercent")),
+      taxPercent: nullableNumber(data.get("taxPercent")),
       wageEnabled: form.elements.wageEnabled.checked,
     },
-
     details,
     stock: Number(data.get("stock") || 0),
     description: data.get("description") || "",
@@ -414,74 +245,44 @@ const buildProductBody = () => {
     isFeatured: form.elements.isFeatured.checked,
   };
 
-  if (data.get("slug")) {
-    body.slug = data.get("slug").trim();
-  }
-
+  if (data.get("slug")) body.slug = data.get("slug").trim();
   return body;
 };
 
 const uploadSelectedImages = async (productId) => {
-  const coverFile =
-    document.getElementById("coverFile").files[0];
-
-  const galleryFiles = [
-    ...document.getElementById("galleryFiles").files,
-  ];
+  const coverFile = document.getElementById("coverFile").files[0];
+  const galleryFiles = [...document.getElementById("galleryFiles").files];
 
   if (galleryFiles.length > 10) {
-    throw new Error(
-      "حداکثر ۱۰ تصویر برای گالری انتخاب کنید.",
-    );
+    throw new Error("حداکثر ۱۰ تصویر برای گالری انتخاب کنید.");
   }
 
   if (coverFile) {
     const coverData = new FormData();
     coverData.append("coverImage", coverFile);
-
-    await AdminAPI.request(
-      `/api/products/edit-cover/${productId}`,
-      {
-        method: "PATCH",
-        body: coverData,
-      },
-    );
+    await AdminAPI.request(`/api/products/edit-cover/${productId}`, {
+      method: "PATCH",
+      body: coverData,
+    });
   }
 
   if (galleryFiles.length) {
     const galleryData = new FormData();
-
-    galleryFiles.forEach((file) => {
-      galleryData.append("images", file);
+    galleryFiles.forEach((file) => galleryData.append("images", file));
+    await AdminAPI.request(`/api/products/images/${productId}`, {
+      method: "PUT",
+      body: galleryData,
     });
-
-    await AdminAPI.request(
-      `/api/products/images/${productId}`,
-      {
-        method: "PUT",
-        body: galleryData,
-      },
-    );
   }
 };
 
-document
-  .getElementById("categorySelect")
-  .addEventListener("change", (event) => {
-    renderSubCategories(event.target.value);
-  });
+document.getElementById("categorySelect").addEventListener("change", (event) => {
+  renderSubCategories(event.target.value);
+});
 
-document
-  .getElementById("addDetailButton")
-  .addEventListener("click", () => addDetailRow());
-
-document
-  .getElementById("coverFile")
-  .addEventListener("change", previewCoverFile);
-
-document
-  .getElementById("galleryFiles")
-  .addEventListener("change", previewGalleryFiles);
+document.getElementById("addDetailButton").addEventListener("click", () => addDetailRow());
+document.getElementById("coverFile").addEventListener("change", previewCoverFile);
+document.getElementById("galleryFiles").addEventListener("change", previewGalleryFiles);
 
 form.addEventListener("input", (event) => {
   if (event.target.classList.contains("field-error")) {
@@ -499,81 +300,48 @@ form.addEventListener("change", (event) => {
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-
   clearValidationErrors();
 
   const errors = validateProductForm();
-
   if (errors.length) {
     showValidationErrors(errors);
     return;
   }
 
-  const saveButton =
-    document.getElementById("saveProductButton");
-
+  const saveButton = document.getElementById("saveProductButton");
   const defaultText = saveButton.textContent;
-
   saveButton.disabled = true;
   saveButton.textContent = "در حال ذخیره...";
 
   try {
     const body = buildProductBody();
-
     let payload;
 
     if (activeProductId) {
-      payload = await AdminAPI.request(
-        `/api/products/${activeProductId}`,
-        {
-          method: "PATCH",
-          body,
-        },
-      );
+      payload = await AdminAPI.request(`/api/products/${activeProductId}`, {
+        method: "PATCH",
+        body,
+      });
     } else {
-      payload = await AdminAPI.request(
-        "/api/products",
-        {
-          method: "POST",
-          body,
-        },
-      );
-
-      activeProductId =
-        payload?.data?.product?._id || "";
-
-      currentProduct =
-        payload?.data?.product || null;
+      payload = await AdminAPI.request("/api/products", {
+        method: "POST",
+        body,
+      });
+      activeProductId = payload?.data?.product?._id || "";
+      currentProduct = payload?.data?.product || null;
     }
 
-    if (!activeProductId) {
-      throw new Error("شناسه محصول دریافت نشد.");
-    }
+    if (!activeProductId) throw new Error("شناسه محصول دریافت نشد.");
 
     await uploadSelectedImages(activeProductId);
-
-    adminToast(
-      initialProductId
-        ? "محصول بروزرسانی شد."
-        : "محصول با موفقیت ساخته شد.",
-    );
-
+    adminToast(initialProductId ? "محصول بروزرسانی شد." : "محصول با موفقیت ساخته شد.");
     location.href = "/admin/products";
   } catch (error) {
     showValidationErrors(
-      [
-        {
-          field: null,
-          message: backendErrorMessage(error),
-        },
-      ],
+      [{ field: null, message: backendErrorMessage(error) }],
       "ذخیره محصول انجام نشد",
     );
-
-    adminToast(
-      "اطلاعات محصول را بررسی کنید.",
-      "error",
-    );
+    adminToast("اطلاعات محصول را بررسی کنید.", "error");
   } finally {
     saveButton.disabled = false;
     saveButton.textContent = defaultText;
@@ -585,20 +353,15 @@ form.addEventListener("submit", async (event) => {
     await loadLookups();
 
     if (activeProductId) {
-      const payload = await AdminAPI.request(
-        `/api/products/admin/${activeProductId}`,
-      );
-
+      const payload = await AdminAPI.request(`/api/products/admin/${activeProductId}`);
       fillProduct(payload?.data?.product);
     } else {
       renderSubCategories("");
       addDetailRow();
       renderStoredImages(null);
+      form.elements.pricingMode.dispatchEvent(new Event("change", { bubbles: true }));
     }
   } catch (error) {
-    adminToast(
-      backendErrorMessage(error),
-      "error",
-    );
+    adminToast(backendErrorMessage(error), "error");
   }
 })();
