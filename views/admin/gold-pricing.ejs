@@ -34,12 +34,13 @@
           <option value="fixed">ثابت</option>
         </select>
       </label>
-      <label class="field"><span>مقدار اجرت عمومی</span><input type="number" min="0" step="0.01" name="wageValue"></label>
-      <label class="field"><span>درصد سود عمومی</span><input type="number" min="0" step="0.01" name="profitPercent"></label>
-      <label class="field"><span>درصد مالیات عمومی</span><input type="number" min="0" step="0.01" name="taxPercent"></label>
-      <p class="full" style="margin:0;color:#7a7467;font-size:12px;line-height:2;">
-        در حالت استاندارد، اجرت، سود و مالیات محصول از مقادیر همین صفحه خوانده می‌شوند. مقادیر سفارشی ذخیره‌شده روی خود محصول فقط زمانی استفاده می‌شوند که نوع قیمت‌گذاری محصول روی «سفارشی» باشد.
-      </p>
+      <label class="field"><span>مقدار اجرت عمومی</span><input type="number" min="0" step="0.01" name="wageValue" placeholder="خالی = عدم اعمال اجرت عمومی"></label>
+      <label class="field"><span>درصد سود عمومی</span><input type="number" min="0" step="0.01" name="profitPercent" placeholder="خالی = عدم اعمال سود عمومی"></label>
+      <label class="field"><span>درصد مالیات عمومی</span><input type="number" min="0" step="0.01" name="taxPercent" placeholder="خالی = عدم اعمال مالیات عمومی"></label>
+      <div class="full" style="padding:12px 14px;border:1px solid #dfd6c6;border-radius:8px;background:#f8f5ee;color:#665b48;font-size:12px;line-height:2;">
+        <strong>منطق فیلدهای خالی:</strong><br>
+        در تنظیمات عمومی، خالی بودن اجرت، سود یا مالیات یعنی آن مؤلفه در قیمت‌گذاری استاندارد اعمال نمی‌شود. عدد ۰ هم یک مقدار معتبر و صریح است. در محصولات سفارشی، فیلد خالی ابتدا از مقدار عمومی ارث می‌برد و فقط اگر مقدار عمومی هم خالی باشد، آن مؤلفه اعمال نمی‌شود.
+      </div>
       <label class="field full"><span>منبع</span><input name="source"></label>
       <div class="full"><button class="btn btn-gold">بروزرسانی قیمت‌ها</button></div>
     </form>
