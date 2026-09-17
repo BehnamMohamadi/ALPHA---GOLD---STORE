@@ -13,7 +13,7 @@ const detailSchema = Joi.object({
 const wageSchema = Joi.object({
   type: Joi.string().valid("percent", "fixed").default("percent"),
 
-  value: Joi.number().min(0).default(0),
+  value: Joi.number().min(0).allow(null).default(null),
 }).unknown(false);
 
 const pricingSchema = Joi.object({
