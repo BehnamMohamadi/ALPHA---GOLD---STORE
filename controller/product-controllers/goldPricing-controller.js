@@ -76,6 +76,10 @@ const updateGoldPricing = catchAsync(async (req, res, next) => {
   }
 
   if (req.body.wage) {
+    if (!goldPricing.wage) {
+      goldPricing.wage = {};
+    }
+
     if (req.body.wage.type !== undefined) {
       goldPricing.wage.type = req.body.wage.type;
     }
