@@ -47,10 +47,7 @@
 
           <label class="field">
             <span>Slug</span>
-            <input
-              name="slug"
-              placeholder="در صورت خالی بودن از نام ساخته می‌شود"
-            >
+            <input name="slug" placeholder="در صورت خالی بودن از نام ساخته می‌شود">
           </label>
 
           <label class="field">
@@ -76,12 +73,7 @@
 
           <label class="field">
             <span>وزن طلا (گرم) *</span>
-            <input
-              type="number"
-              step="0.01"
-              min="0.01"
-              name="goldWeight"
-            >
+            <input type="number" step="0.01" min="0.01" name="goldWeight">
           </label>
 
           <label class="field">
@@ -101,12 +93,7 @@
 
           <label class="field">
             <span>قیمت متعلقات</span>
-            <input
-              type="number"
-              min="0"
-              name="accessoriesPrice"
-              value="0"
-            >
+            <input type="number" min="0" name="accessoriesPrice" value="0">
           </label>
 
           <label class="field">
@@ -124,7 +111,7 @@
               min="0"
               step="0.01"
               name="wageValue"
-              value="0"
+              placeholder="خالی = استفاده از مقدار عمومی"
             >
           </label>
 
@@ -152,7 +139,7 @@
               min="0"
               step="0.01"
               name="profitPercent"
-              placeholder="خالی = مقدار عمومی"
+              placeholder="خالی = استفاده از مقدار عمومی"
             >
           </label>
 
@@ -163,7 +150,7 @@
               min="0"
               step="0.01"
               name="taxPercent"
-              placeholder="خالی = مقدار عمومی"
+              placeholder="خالی = استفاده از مقدار عمومی"
             >
           </label>
 
@@ -193,20 +180,14 @@
 
           <label class="field full">
             <span>توضیحات</span>
-            <textarea
-              name="description"
-              rows="6"
-              maxlength="5000"
-            ></textarea>
+            <textarea name="description" rows="6" maxlength="5000"></textarea>
           </label>
         </div>
       </section>
 
       <aside class="form-side">
         <section class="panel" id="imagePanel">
-          <div class="panel-head">
-            <div><h2>تصاویر محصول</h2></div>
-          </div>
+          <div class="panel-head"><div><h2>تصاویر محصول</h2></div></div>
 
           <div class="cover-preview">
             <img id="coverPreview" src="" alt="">
@@ -223,12 +204,7 @@
           <div class="gallery-preview" id="galleryPreview"></div>
 
           <label class="upload-box">
-            <input
-              type="file"
-              id="galleryFiles"
-              accept="image/*"
-              multiple
-            >
+            <input type="file" id="galleryFiles" accept="image/*" multiple>
             <span>انتخاب تصاویر گالری (حداکثر ۱۰)</span>
           </label>
           <p style="margin:8px 0 0;font-size:12px;color:#7a7467;line-height:1.9;">
@@ -237,36 +213,18 @@
         </section>
 
         <section class="panel">
-          <div class="panel-head">
-            <div><h2>ویژگی‌های تکمیلی</h2></div>
-          </div>
+          <div class="panel-head"><div><h2>ویژگی‌های تکمیلی</h2></div></div>
 
-          <div
-            id="detailsContainer"
-            class="details-builder"
-          ></div>
+          <div id="detailsContainer" class="details-builder"></div>
 
-          <button
-            type="button"
-            id="addDetailButton"
-            class="btn btn-secondary full-btn"
-          >
+          <button type="button" id="addDetailButton" class="btn btn-secondary full-btn">
             + افزودن ویژگی
           </button>
         </section>
 
         <div class="sticky-actions">
-          <a class="btn btn-secondary" href="/admin/products">
-            انصراف
-          </a>
-
-          <button
-            class="btn btn-gold"
-            type="submit"
-            id="saveProductButton"
-          >
-            ذخیره محصول
-          </button>
+          <a class="btn btn-secondary" href="/admin/products">انصراف</a>
+          <button class="btn btn-gold" type="submit" id="saveProductButton">ذخیره محصول</button>
         </div>
       </aside>
     </form>
@@ -290,24 +248,22 @@
     notice.dataset.mode = mode;
 
     if (mode === "custom") {
-      notice.innerHTML = "<strong>قیمت‌گذاری سفارشی فعال است.</strong><br>اجرت، سود و مالیات سفارشی همین محصول در محاسبه قیمت استفاده می‌شوند. نرخ طلا همچنان از تنظیمات عمومی فروشگاه خوانده می‌شود.";
+      notice.innerHTML = "<strong>قیمت‌گذاری سفارشی فعال است.</strong><br>هر مقدار سفارشی که وارد کنید روی همین محصول اعمال می‌شود. هر فیلد سفارشی که خالی بماند، مقدار عمومی همان بخش را به ارث می‌برد؛ اگر مقدار عمومی هم خالی باشد، آن مؤلفه اعمال نمی‌شود. برای صفر واقعی، عدد ۰ وارد کنید.";
       notice.style.background = "#f4efe4";
       notice.style.borderColor = "#b89a63";
       notice.style.color = "#5f4a28";
       return;
     }
 
-    notice.innerHTML = "<strong>قیمت‌گذاری استاندارد فعال است.</strong><br>اجرت، سود و مالیات از تنظیمات عمومی قیمت‌گذاری فروشگاه خوانده می‌شوند. مقادیر سفارشی این فرم ذخیره می‌شوند اما تا زمانی که حالت «سفارشی» را انتخاب نکنید، در قیمت محصول استفاده نمی‌شوند.";
+    notice.innerHTML = "<strong>قیمت‌گذاری استاندارد فعال است.</strong><br>اجرت، سود و مالیات فقط از تنظیمات عمومی قیمت‌گذاری خوانده می‌شوند. مقادیر سفارشی این فرم ذخیره می‌شوند اما در قیمت فعلی محصول استفاده نمی‌شوند.";
     notice.style.background = "#f8f5ee";
     notice.style.borderColor = "#dfd6c6";
     notice.style.color = "#665b48";
   };
 
   modeSelect.addEventListener("change", renderPricingModeNotice);
-
   const observer = new MutationObserver(renderPricingModeNotice);
   observer.observe(form, { childList: true, subtree: true });
-
   renderPricingModeNotice();
   window.addEventListener("load", renderPricingModeNotice, { once: true });
 })();
