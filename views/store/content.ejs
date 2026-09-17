@@ -1,95 +1,5 @@
 <%- include('partials/head') %>
 
-<% if(slug === 'guide'){ %>
-<style>
-  .alpha-pricing-formula {
-    margin: 0 0 34px;
-    padding: 24px 26px;
-    border: 1px solid rgba(184, 154, 99, .45);
-    border-radius: 18px;
-    background:
-      radial-gradient(circle at 10% 0%, rgba(184,154,99,.12), transparent 36%),
-      linear-gradient(135deg, #171614 0%, #211f1b 100%);
-    color: #f7f2e8;
-    box-shadow: 0 16px 42px rgba(27, 22, 14, .12);
-    overflow: hidden;
-  }
-
-  .alpha-pricing-formula__head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-
-  .alpha-pricing-formula__mark {
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    flex: 0 0 32px;
-    border: 1px solid rgba(214, 180, 112, .55);
-    border-radius: 50%;
-    color: #d6b470;
-    font-size: 17px;
-  }
-
-  .alpha-pricing-formula__head strong {
-    display: block;
-    color: #fffaf0;
-    font-size: 16px;
-    font-weight: 750;
-  }
-
-  .alpha-pricing-formula__head small {
-    display: block;
-    margin-top: 2px;
-    color: #bcb4a6;
-    font-size: 11px;
-  }
-
-  .alpha-pricing-formula__equation {
-    direction: rtl;
-    overflow-x: auto;
-    padding: 15px 17px;
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 12px;
-    background: rgba(255,255,255,.045);
-    color: #f5dfad;
-    font-size: clamp(13px, 1.25vw, 16px);
-    font-weight: 700;
-    line-height: 2;
-    white-space: nowrap;
-    scrollbar-width: thin;
-  }
-
-  .alpha-pricing-formula__equation b {
-    color: #ffffff;
-    font-weight: 800;
-  }
-
-  .alpha-pricing-formula__note {
-    margin: 14px 2px 0 !important;
-    color: #c9c1b3 !important;
-    font-size: 12px !important;
-    line-height: 1.9 !important;
-  }
-
-  @media (max-width: 640px) {
-    .alpha-pricing-formula {
-      margin-bottom: 26px;
-      padding: 19px 16px;
-      border-radius: 14px;
-    }
-
-    .alpha-pricing-formula__equation {
-      padding: 13px 14px;
-      font-size: 13px;
-    }
-  }
-</style>
-<% } %>
-
 <main id="main" class="container section">
   <div class="content-header">
     <span class="eyebrow">ALPHA JOURNAL</span>
@@ -99,22 +9,59 @@
   <div class="content-layout">
     <article class="prose">
       <% if(slug === 'guide'){ %>
-        <section class="alpha-pricing-formula" aria-labelledby="pricing-formula-title">
-          <div class="alpha-pricing-formula__head">
-            <span class="alpha-pricing-formula__mark" aria-hidden="true">✦</span>
-            <div>
-              <strong id="pricing-formula-title">فرمول محاسبه قیمت طلا</strong>
-              <small>ساختار محاسبه قیمت نهایی هر محصول در آلفا</small>
-            </div>
+        <section class="guide-price-showcase" aria-labelledby="pricing-formula-title">
+          <div class="guide-price-showcase__ornament" aria-hidden="true">✦</div>
+
+          <header class="guide-price-showcase__head">
+            <span class="guide-price-showcase__eyebrow">شفافیت در قیمت‌گذاری</span>
+            <h2 id="pricing-formula-title">قیمت طلا چطور محاسبه می‌شود؟</h2>
+            <p>قیمت نهایی هر محصول از چند جزء مشخص ساخته می‌شود؛ هر بخش را می‌توانید در جزئیات همان محصول ببینید.</p>
+          </header>
+
+          <div class="guide-price-equation" aria-label="فرمول محاسبه قیمت نهایی طلا">
+            <span class="guide-price-equation__final">قیمت نهایی</span>
+            <i>=</i>
+            <span>وزن × نرخ هر گرم</span>
+            <i>+</i>
+            <span>اجرت</span>
+            <i>+</i>
+            <span>سود فروش</span>
+            <i>+</i>
+            <span>مالیات</span>
+            <i>+</i>
+            <span>متعلقات</span>
           </div>
 
-          <div class="alpha-pricing-formula__equation" role="note">
-            <b>قیمت نهایی</b> = (وزن × نرخ هر گرم طلا) + اجرت + [(ارزش طلا + اجرت) × درصد سود] + [(اجرت + سود) × درصد مالیات] + متعلقات
+          <div class="guide-price-parts">
+            <article>
+              <span class="guide-price-parts__number">01</span>
+              <h3>ارزش طلا</h3>
+              <p>وزن خالص محصول × نرخ روز هر گرم طلای همان عیار</p>
+            </article>
+
+            <article>
+              <span class="guide-price-parts__number">02</span>
+              <h3>اجرت ساخت</h3>
+              <p>به‌صورت درصدی از ارزش طلا یا مبلغ ثابت برای هر محصول</p>
+            </article>
+
+            <article>
+              <span class="guide-price-parts__number">03</span>
+              <h3>سود فروش</h3>
+              <p>(ارزش طلا + اجرت) × درصد سود فروش</p>
+            </article>
+
+            <article>
+              <span class="guide-price-parts__number">04</span>
+              <h3>مالیات</h3>
+              <p>(اجرت + سود فروش) × درصد مالیات</p>
+            </article>
           </div>
 
-          <p class="alpha-pricing-formula__note">
-            اگر اجرت، سود یا مالیات برای محصول اعمال نشود، مقدار آن بخش در محاسبه صفر در نظر گرفته می‌شود.
-          </p>
+          <div class="guide-price-showcase__note">
+            <span aria-hidden="true">ⓘ</span>
+            <p>متعلقات در صورت وجود جداگانه به مبلغ نهایی اضافه می‌شوند. اگر اجرت، سود یا مالیات برای محصول اعمال نشود، مقدار آن بخش در محاسبه صفر در نظر گرفته می‌شود.</p>
+          </div>
         </section>
       <% } %>
 
