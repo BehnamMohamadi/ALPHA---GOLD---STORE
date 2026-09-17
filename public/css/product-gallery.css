@@ -1,0 +1,97 @@
+/* Product detail gallery: keep the main image stable and make gallery thumbnails clearly visible. */
+.gallery{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  background:transparent!important;
+  border-radius:0!important;
+  overflow:visible!important;
+}
+
+#main-product-photo{
+  width:100%;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  border-radius:8px;
+  background:#f0eee7;
+}
+
+#main-product-photo>.product-photo{
+  display:block;
+  width:100%;
+  height:100%;
+  max-width:100%;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center;
+}
+
+.thumbnails{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  min-width:0;
+  margin-top:14px;
+  padding:2px 2px 10px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x proximity;
+  scrollbar-width:thin;
+  scrollbar-color:#b79b6c #ece8df;
+}
+
+.thumbnails::-webkit-scrollbar{height:7px}
+.thumbnails::-webkit-scrollbar-track{background:#ece8df;border-radius:999px}
+.thumbnails::-webkit-scrollbar-thumb{background:#b79b6c;border-radius:999px}
+
+.thumbnails button{
+  box-sizing:border-box;
+  flex:0 0 92px;
+  width:92px;
+  min-width:92px;
+  height:92px;
+  min-height:92px;
+  padding:0;
+  overflow:hidden;
+  border:2px solid #ded8cc;
+  border-radius:8px;
+  background:#f0eee7;
+  scroll-snap-align:start;
+}
+
+.thumbnails button>.product-photo{
+  display:block;
+  width:100%;
+  height:100%;
+  max-width:none;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+  object-fit:cover!important;
+  object-position:center;
+}
+
+.thumbnails button:hover,
+.thumbnails button:focus,
+.thumbnails button:focus-visible{
+  border-color:#967744;
+  box-shadow:0 0 0 2px #9677441f;
+  outline:none;
+}
+
+.image-note{
+  margin-top:2px;
+  text-align:right;
+}
+
+@media(max-width:760px){
+  .thumbnails{gap:9px;margin-top:10px}
+  .thumbnails button{
+    flex-basis:76px;
+    width:76px;
+    min-width:76px;
+    height:76px;
+    min-height:76px;
+  }
+}
