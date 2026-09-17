@@ -18,6 +18,8 @@ const createGoldPricing = catchAsync(async (req, res, next) => {
 
     prices: req.body.prices,
 
+    wage: req.body.wage,
+
     profitPercent: req.body.profitPercent,
 
     taxPercent: req.body.taxPercent,
@@ -71,6 +73,16 @@ const updateGoldPricing = catchAsync(async (req, res, next) => {
         goldPricing.prices[field] = req.body.prices[field];
       }
     });
+  }
+
+  if (req.body.wage) {
+    if (req.body.wage.type !== undefined) {
+      goldPricing.wage.type = req.body.wage.type;
+    }
+
+    if (req.body.wage.value !== undefined) {
+      goldPricing.wage.value = req.body.wage.value;
+    }
   }
 
   if (req.body.profitPercent !== undefined) {
