@@ -1,5 +1,11 @@
 const form=document.getElementById("goldPricingForm");
 let exists=false;
+
+const nullableNumber=value=>{
+  const text=String(value??"").trim();
+  return text===""?null:Number(text);
+};
+
 const loadPricing=async()=>{
   try{
     const p=await AdminAPI.request("/api/goldPricing"),g=p?.data?.goldPricing;exists=true;
@@ -15,28 +21,30 @@ const loadPricing=async()=>{
     document.getElementById("pricingUpdated").textContent=AdminAPI.date(g.updatedAt);
   }catch(e){if(e.status===404){exists=false;adminToast("هنوز GoldPricing ساخته نشده است.","error")}else adminToast(e.message,"error")}
 };
+
 form.addEventListener("submit",async e=>{
   e.preventDefault();
   const d=new FormData(form);
   const body={
     prices:{
-      gold18:Number(d.get("gold18")),
-      gold21:Number(d.get("gold21")),
-      gold22:Number(d.get("gold22")),
-      gold24:Number(d.get("gold24"))
+      gold18:nullableNumber(d.get("gold18")),
+      gold21:nullableNumber(d.get("gold21")),
+      gold22:nullableNumber(d.get("gold22")),
+      gold24:nullableNumber(d.get("gold24"))
     },
-    profitPercent:Number(d.get("profitPercent")),
-    taxPercent:Number(d.get("taxPercent")),
+    wage:{
+      type:d.get("wageType")||"percent",
+      value:nullableNumber(d.get("wageValue"))
+    },
+    profitPercent:nullableNumber(d.get("profitPercent")),
+    taxPercent:nullableNumber(d.get("taxPercent")),
     source:d.get("source")||"manual"
   };
-  const wageValue=String(d.get("wageValue")??"").trim();
-  if(wageValue!==""){
-    body.wage={type:d.get("wageType"),value:Number(wageValue)};
-  }
   try{
     await AdminAPI.request("/api/goldPricing",{method:exists?"PUT":"POST",body});
     adminToast(exists?"تنظیمات قیمت‌گذاری بروزرسانی شد.":"تنظیمات قیمت‌گذاری ساخته شد.");
     loadPricing();
   }catch(err){adminToast(err.message,"error")}
 });
+
 loadPricing();
