@@ -1,1 +1,169 @@
-<%- include('partials/head') %><main id="main" class="container section"><div class="content-header"><span class="eyebrow">ALPHA JOURNAL</span><h1><%= title %></h1></div><div class="content-layout"><article class="prose"><% if(page?.body){ %><% page.body.split('\n\n').forEach(p=>{ %><p><%= p %></p><% }) %><% }else if(slug==='guide'){ %><h2>طلای خود را با شناخت انتخاب کنید</h2><p>وزن درج‌شده در مشخصات، وزن خالص طلای محصول است. قیمت هر گرم بر اساس عیار آن از نرخ ثبت‌شده فروشگاه گرفته می‌شود.</p><h2>اجرت، سود و مالیات</h2><p>اجرت می‌تواند درصدی از ارزش طلا یا مبلغی ثابت برای هر عدد محصول باشد. سود بر مجموع ارزش طلا و اجرت و مالیات بر مجموع اجرت و سود محاسبه می‌شود. قیمت متعلقات جداگانه به مبلغ نهایی اضافه می‌شود.</p><p>درصدها ممکن است برای هر محصول متفاوت باشند؛ جزئیات صفحه محصول و بازبینی سفارش ملاک خرید شماست.</p><h2>اعتبار قیمت</h2><p>قبل از پرداخت، قیمت نهایی سفارش را بررسی می‌کنید. این پیش‌فاکتور دو دقیقه اعتبار دارد. اگر زمان تمام شود، باید قیمت جدید را دریافت و دوباره تأیید کنید.</p><% }else if(slug==='about'){ %><h2>آلفا؛ جزئیاتی برای هر روز</h2><p>آلفا جایی برای انتخاب آگاهانه زیورآلات طلاست. وزن، عیار و اجزای قیمت را کنار هم می‌بینید تا انتخابی متناسب با سلیقه‌تان داشته باشید.</p><a class="button" href="/shop">کشف مجموعه آلفا ←</a><% }else if(slug==='faq'){ %><% [['قیمت محصول چه زمانی نهایی می‌شود؟','در مرحله بازبینی سفارش، نرخ و جزئیات محاسبه به شما نمایش داده می‌شود. پس از تأیید، پرداخت با همان مبلغ آغاز می‌شود.'],['چطور سفارش را پیگیری کنم؟','از بخش سفارش‌های من در حساب کاربری، وضعیت و کد رهگیری ارسال را ببینید.'],['اگر پرداخت ناموفق شد چه کنم؟','در صفحه نتیجه پرداخت وضعیت را بررسی کنید. اگر بانک مبلغی کسر کرده ولی سفارش نیازمند بررسی است، از پشتیبانی همان سفارش پیام بفرستید.'],['چطور با پشتیبانی ارتباط بگیرم؟','در حساب کاربری، بخش پشتیبانی یک درخواست جدید ثبت کنید.']].forEach(([q,a])=>{ %><details><summary><%= q %></summary><p><%= a %></p></details><% }) %><% }else if(slug==='contact'){ %><h2>خوشحال می‌شویم از شما بشنویم</h2><p>برای پرسش درباره محصول یا پیگیری سفارش، درخواست خود را در بخش پشتیبانی ثبت کنید.</p><% if(settings.phone){ %><p>تلفن: <b dir="ltr"><%= settings.phone %></b></p><% } %><% if(settings.email){ %><p>ایمیل: <%= settings.email %></p><% } %><% if(settings.address){ %><p>نشانی: <%= settings.address %></p><% } %><a class="button" href="/account/support">ارتباط با پشتیبانی ←</a><% }else{ %><div class="notice">اطلاعات نهایی این صفحه هنوز توسط فروشگاه منتشر نشده است. پیش از خرید از پشتیبانی راهنمایی بگیرید.</div><a href="/contact" class="button secondary">تماس با آلفا</a><% } %></article><aside class="content-art"><img src="/images/brand/still-life-light.png" alt="زیورآلات آلفا روی سنگ روشن"><p>زیبایی در انتخاب‌های کوچک شماست.</p><nav><a href="/guide">راهنمای خرید</a><a href="/faq">پرسش‌های متداول</a><a href="/shipping">ارسال و تحویل</a><a href="/returns">شرایط بازگشت</a><a href="/terms">شرایط خرید</a><a href="/privacy">حریم خصوصی</a></nav></aside></div></main><%- include('partials/footer') %>
+<%- include('partials/head') %>
+
+<% if(slug === 'guide'){ %>
+<style>
+  .alpha-pricing-formula {
+    margin: 0 0 34px;
+    padding: 24px 26px;
+    border: 1px solid rgba(184, 154, 99, .45);
+    border-radius: 18px;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(184,154,99,.12), transparent 36%),
+      linear-gradient(135deg, #171614 0%, #211f1b 100%);
+    color: #f7f2e8;
+    box-shadow: 0 16px 42px rgba(27, 22, 14, .12);
+    overflow: hidden;
+  }
+
+  .alpha-pricing-formula__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .alpha-pricing-formula__mark {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    border: 1px solid rgba(214, 180, 112, .55);
+    border-radius: 50%;
+    color: #d6b470;
+    font-size: 17px;
+  }
+
+  .alpha-pricing-formula__head strong {
+    display: block;
+    color: #fffaf0;
+    font-size: 16px;
+    font-weight: 750;
+  }
+
+  .alpha-pricing-formula__head small {
+    display: block;
+    margin-top: 2px;
+    color: #bcb4a6;
+    font-size: 11px;
+  }
+
+  .alpha-pricing-formula__equation {
+    direction: rtl;
+    overflow-x: auto;
+    padding: 15px 17px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px;
+    background: rgba(255,255,255,.045);
+    color: #f5dfad;
+    font-size: clamp(13px, 1.25vw, 16px);
+    font-weight: 700;
+    line-height: 2;
+    white-space: nowrap;
+    scrollbar-width: thin;
+  }
+
+  .alpha-pricing-formula__equation b {
+    color: #ffffff;
+    font-weight: 800;
+  }
+
+  .alpha-pricing-formula__note {
+    margin: 14px 2px 0 !important;
+    color: #c9c1b3 !important;
+    font-size: 12px !important;
+    line-height: 1.9 !important;
+  }
+
+  @media (max-width: 640px) {
+    .alpha-pricing-formula {
+      margin-bottom: 26px;
+      padding: 19px 16px;
+      border-radius: 14px;
+    }
+
+    .alpha-pricing-formula__equation {
+      padding: 13px 14px;
+      font-size: 13px;
+    }
+  }
+</style>
+<% } %>
+
+<main id="main" class="container section">
+  <div class="content-header">
+    <span class="eyebrow">ALPHA JOURNAL</span>
+    <h1><%= title %></h1>
+  </div>
+
+  <div class="content-layout">
+    <article class="prose">
+      <% if(slug === 'guide'){ %>
+        <section class="alpha-pricing-formula" aria-labelledby="pricing-formula-title">
+          <div class="alpha-pricing-formula__head">
+            <span class="alpha-pricing-formula__mark" aria-hidden="true">✦</span>
+            <div>
+              <strong id="pricing-formula-title">فرمول محاسبه قیمت طلا</strong>
+              <small>ساختار محاسبه قیمت نهایی هر محصول در آلفا</small>
+            </div>
+          </div>
+
+          <div class="alpha-pricing-formula__equation" role="note">
+            <b>قیمت نهایی</b> = (وزن × نرخ هر گرم طلا) + اجرت + [(ارزش طلا + اجرت) × درصد سود] + [(اجرت + سود) × درصد مالیات] + متعلقات
+          </div>
+
+          <p class="alpha-pricing-formula__note">
+            اگر اجرت، سود یا مالیات برای محصول اعمال نشود، مقدار آن بخش در محاسبه صفر در نظر گرفته می‌شود.
+          </p>
+        </section>
+      <% } %>
+
+      <% if(page?.body){ %>
+        <% page.body.split('\n\n').forEach(p=>{ %>
+          <p><%= p %></p>
+        <% }) %>
+      <% }else if(slug==='guide'){ %>
+        <h2>طلای خود را با شناخت انتخاب کنید</h2>
+        <p>وزن درج‌شده در مشخصات، وزن خالص طلای محصول است. قیمت هر گرم بر اساس عیار آن از نرخ ثبت‌شده فروشگاه گرفته می‌شود.</p>
+        <h2>اجرت، سود و مالیات</h2>
+        <p>اجرت می‌تواند درصدی از ارزش طلا یا مبلغی ثابت برای هر عدد محصول باشد. سود بر مجموع ارزش طلا و اجرت و مالیات بر مجموع اجرت و سود محاسبه می‌شود. قیمت متعلقات جداگانه به مبلغ نهایی اضافه می‌شود.</p>
+        <p>درصدها ممکن است برای هر محصول متفاوت باشند؛ جزئیات صفحه محصول و بازبینی سفارش ملاک خرید شماست.</p>
+        <h2>اعتبار قیمت</h2>
+        <p>قبل از پرداخت، قیمت نهایی سفارش را بررسی می‌کنید. این پیش‌فاکتور دو دقیقه اعتبار دارد. اگر زمان تمام شود، باید قیمت جدید را دریافت و دوباره تأیید کنید.</p>
+      <% }else if(slug==='about'){ %>
+        <h2>آلفا؛ جزئیاتی برای هر روز</h2>
+        <p>آلفا جایی برای انتخاب آگاهانه زیورآلات طلاست. وزن، عیار و اجزای قیمت را کنار هم می‌بینید تا انتخابی متناسب با سلیقه‌تان داشته باشید.</p>
+        <a class="button" href="/shop">کشف مجموعه آلفا ←</a>
+      <% }else if(slug==='faq'){ %>
+        <% [['قیمت محصول چه زمانی نهایی می‌شود؟','در مرحله بازبینی سفارش، نرخ و جزئیات محاسبه به شما نمایش داده می‌شود. پس از تأیید، پرداخت با همان مبلغ آغاز می‌شود.'],['چطور سفارش را پیگیری کنم؟','از بخش سفارش‌های من در حساب کاربری، وضعیت و کد رهگیری ارسال را ببینید.'],['اگر پرداخت ناموفق شد چه کنم؟','در صفحه نتیجه پرداخت وضعیت را بررسی کنید. اگر بانک مبلغی کسر کرده ولی سفارش نیازمند بررسی است، از پشتیبانی همان سفارش پیام بفرستید.'],['چطور با پشتیبانی ارتباط بگیرم؟','در حساب کاربری، بخش پشتیبانی یک درخواست جدید ثبت کنید.']].forEach(([q,a])=>{ %>
+          <details><summary><%= q %></summary><p><%= a %></p></details>
+        <% }) %>
+      <% }else if(slug==='contact'){ %>
+        <h2>خوشحال می‌شویم از شما بشنویم</h2>
+        <p>برای پرسش درباره محصول یا پیگیری سفارش، درخواست خود را در بخش پشتیبانی ثبت کنید.</p>
+        <% if(settings.phone){ %><p>تلفن: <b dir="ltr"><%= settings.phone %></b></p><% } %>
+        <% if(settings.email){ %><p>ایمیل: <%= settings.email %></p><% } %>
+        <% if(settings.address){ %><p>نشانی: <%= settings.address %></p><% } %>
+        <a class="button" href="/account/support">ارتباط با پشتیبانی ←</a>
+      <% }else{ %>
+        <div class="notice">اطلاعات نهایی این صفحه هنوز توسط فروشگاه منتشر نشده است. پیش از خرید از پشتیبانی راهنمایی بگیرید.</div>
+        <a href="/contact" class="button secondary">تماس با آلفا</a>
+      <% } %>
+    </article>
+
+    <aside class="content-art">
+      <img src="/images/brand/still-life-light.png" alt="زیورآلات آلفا روی سنگ روشن">
+      <p>زیبایی در انتخاب‌های کوچک شماست.</p>
+      <nav>
+        <a href="/guide">راهنمای خرید</a>
+        <a href="/faq">پرسش‌های متداول</a>
+        <a href="/shipping">ارسال و تحویل</a>
+        <a href="/returns">شرایط بازگشت</a>
+        <a href="/terms">شرایط خرید</a>
+        <a href="/privacy">حریم خصوصی</a>
+      </nav>
+    </aside>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
