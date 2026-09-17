@@ -110,7 +110,7 @@
           </label>
 
           <label class="field">
-            <span>نوع اجرت</span>
+            <span>نوع اجرت سفارشی</span>
             <select name="wageType">
               <option value="percent">درصدی</option>
               <option value="fixed">ثابت</option>
@@ -118,7 +118,7 @@
           </label>
 
           <label class="field">
-            <span>مقدار اجرت</span>
+            <span>مقدار اجرت سفارشی</span>
             <input
               type="number"
               min="0"
@@ -135,6 +135,15 @@
               <option value="custom">سفارشی</option>
             </select>
           </label>
+
+          <div
+            id="pricingModeNotice"
+            class="full"
+            role="status"
+            aria-live="polite"
+            data-mode=""
+            style="padding:12px 14px;border:1px solid #dfd6c6;border-radius:8px;background:#f8f5ee;color:#665b48;font-size:12px;line-height:2;"
+          ></div>
 
           <label class="field">
             <span>درصد سود سفارشی</span>
@@ -159,9 +168,9 @@
           </label>
 
           <div class="field toggle-field">
-            <span>اعمال اجرت</span>
+            <span>اعمال اجرت سفارشی</span>
             <label class="switch">
-              <input type="checkbox" name="wageEnabled" aria-label="اعمال اجرت" checked>
+              <input type="checkbox" name="wageEnabled" aria-label="اعمال اجرت سفارشی" checked>
               <i></i>
             </label>
           </div>
@@ -266,5 +275,42 @@
 
 <%- include("partials/scripts") %>
 <script src="/js/admin/product-form.js"></script>
+<script>
+(() => {
+  const form = document.getElementById("productForm");
+  const modeSelect = form?.elements?.pricingMode;
+  const notice = document.getElementById("pricingModeNotice");
+
+  if (!form || !modeSelect || !notice) return;
+
+  const renderPricingModeNotice = () => {
+    const mode = modeSelect.value === "custom" ? "custom" : "standard";
+    if (notice.dataset.mode === mode) return;
+
+    notice.dataset.mode = mode;
+
+    if (mode === "custom") {
+      notice.innerHTML = "<strong>قیمت‌گذاری سفارشی فعال است.</strong><br>اجرت، سود و مالیات سفارشی همین محصول در محاسبه قیمت استفاده می‌شوند. نرخ طلا همچنان از تنظیمات عمومی فروشگاه خوانده می‌شود.";
+      notice.style.background = "#f4efe4";
+      notice.style.borderColor = "#b89a63";
+      notice.style.color = "#5f4a28";
+      return;
+    }
+
+    notice.innerHTML = "<strong>قیمت‌گذاری استاندارد فعال است.</strong><br>اجرت، سود و مالیات از تنظیمات عمومی قیمت‌گذاری فروشگاه خوانده می‌شوند. مقادیر سفارشی این فرم ذخیره می‌شوند اما تا زمانی که حالت «سفارشی» را انتخاب نکنید، در قیمت محصول استفاده نمی‌شوند.";
+    notice.style.background = "#f8f5ee";
+    notice.style.borderColor = "#dfd6c6";
+    notice.style.color = "#665b48";
+  };
+
+  modeSelect.addEventListener("change", renderPricingModeNotice);
+
+  const observer = new MutationObserver(renderPricingModeNotice);
+  observer.observe(form, { childList: true, subtree: true });
+
+  renderPricingModeNotice();
+  window.addEventListener("load", renderPricingModeNotice, { once: true });
+})();
+</script>
 </body>
 </html>
