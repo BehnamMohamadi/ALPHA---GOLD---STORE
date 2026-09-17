@@ -2,28 +2,29 @@ const Joi = require("joi");
 
 const pricesSchema = Joi.object({
   gold18: Joi.number().min(0).allow(null),
-
   gold21: Joi.number().min(0).allow(null),
-
   gold22: Joi.number().min(0).allow(null),
-
   gold24: Joi.number().min(0).allow(null),
 })
   .min(1)
   .unknown(false);
 
+const wageSchema = Joi.object({
+  type: Joi.string().valid("percent", "fixed").required(),
+  value: Joi.number().min(0).required(),
+}).unknown(false);
+
 const createGoldPricingSchema = Joi.object({
   prices: Joi.object({
     gold18: Joi.number().min(0).allow(null).required(),
-
     gold21: Joi.number().min(0).allow(null),
-
     gold22: Joi.number().min(0).allow(null),
-
     gold24: Joi.number().min(0).allow(null),
   })
     .required()
     .unknown(false),
+
+  wage: wageSchema,
 
   profitPercent: Joi.number().min(0).default(7),
 
@@ -34,6 +35,8 @@ const createGoldPricingSchema = Joi.object({
 
 const updateGoldPricingSchema = Joi.object({
   prices: pricesSchema,
+
+  wage: wageSchema,
 
   profitPercent: Joi.number().min(0),
 
