@@ -1,0 +1,45 @@
+/* Buying guide pricing showcase — page-specific overrides. */
+.content-layout > .prose{min-width:0}
+.guide-price-showcase{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+.guide-price-showcase *{box-sizing:border-box}
+.guide-price-equation{min-width:0;max-width:100%}
+.guide-price-equation span{max-width:100%}
+
+.guide-price-validity{display:flex;align-items:flex-start;gap:12px;margin-top:8px;padding:15px 16px;border:1px solid rgba(215,181,117,.16);border-radius:14px;background:rgba(215,181,117,.055)}
+.guide-price-validity strong{flex:0 0 auto;color:#edcc90;font-size:12px;font-weight:700;line-height:2}
+.guide-price-validity span{color:#c8bfae;font-size:11px;line-height:2}
+
+@media(max-width:680px){
+  .guide-price-showcase{margin:0;padding:20px 14px 18px;border-radius:18px;overflow:hidden}
+  .guide-price-showcase__ornament{display:none}
+  .guide-price-showcase__head{padding:0;margin-bottom:18px;text-align:center}
+  .guide-price-showcase__eyebrow{justify-content:center;font-size:9px}
+  .prose .guide-price-showcase__head h2{margin:6px 0 8px;font-size:20px;line-height:1.65}
+  .guide-price-showcase__head p{max-width:none;font-size:11.5px!important;line-height:1.9!important}
+
+  .guide-price-equation{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;margin-bottom:18px;padding:12px;border-radius:15px}
+  .guide-price-equation span{display:flex;width:100%;min-width:0;min-height:44px;padding:9px 10px;white-space:normal;text-align:center;font-size:12px;line-height:1.7}
+  .guide-price-equation i{display:block;width:100%;height:17px;line-height:17px;text-align:center;transform:none!important;font-size:16px}
+  .guide-price-equation .guide-price-equation__final{min-height:48px;font-size:13px}
+
+  .guide-price-parts{grid-template-columns:minmax(0,1fr);gap:9px}
+  .guide-price-parts article{min-width:0;min-height:0;padding:15px 14px 14px;border-radius:14px}
+  .guide-price-parts__number{top:12px;left:13px;font-size:18px}
+  .prose .guide-price-parts h3{margin-bottom:5px;font-size:13px}
+  .guide-price-parts p{padding-left:28px;font-size:11px!important;line-height:1.85!important}
+
+  .guide-price-showcase__note{gap:8px;margin-top:13px;padding:12px 3px 5px}
+  .guide-price-showcase__note>span{flex-basis:21px;width:21px;height:21px}
+  .guide-price-showcase__note p{font-size:10.5px!important;line-height:1.9!important}
+
+  .guide-price-validity{display:block;margin-top:10px;padding:12px 13px;text-align:right}
+  .guide-price-validity strong{display:block;margin-bottom:2px;font-size:11.5px}
+  .guide-price-validity span{display:block;font-size:10.5px;line-height:1.9}
+}
+
+@media(max-width:380px){
+  .guide-price-showcase{padding-inline:11px;border-radius:15px}
+  .guide-price-equation{padding:10px}
+  .guide-price-equation span{font-size:11px}
+  .prose .guide-price-showcase__head h2{font-size:18px}
+}
