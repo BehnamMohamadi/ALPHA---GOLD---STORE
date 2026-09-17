@@ -1,0 +1,18 @@
+<% const slides = [
+  {image:'hero-light.png',title:settings.heroTitle || 'طلایی برای هر روز',text:settings.heroSubtitle || 'انتخاب‌های ظریف، برای لحظه‌هایی که به شما تعلق دارند.',eyebrow:'مجموعه آلفا',link:'/shop',action:'کشف مجموعه',alt:'گوشواره طلایی در نور طبیعی'},
+  {image:'slide-botanical.png',title:'الهام از طبیعت',text:'جزئیاتی ظریف، با درخششی ماندگار.',eyebrow:'زیبایی در جزئیات',link:'/shop',action:'دیدن زیورآلات',alt:'آویز طلایی روی سنگ روشن در کنار برگ زیتون'},
+  {image:'slide-story.png',title:'برای لحظه‌های شما',text:'یک انتخاب کوچک، بخشی از داستان شما.',eyebrow:'دنیای آلفا',link:'/about',action:'داستان آلفا',alt:'گردنبند و حلقه‌های طلا روی سنگ تراورتن'},
+  {image:'slide-bracelet.png',title:'با آگاهی انتخاب کنید',text:'وزن، عیار و جزئیات قیمت؛ روشن و قابل بررسی.',eyebrow:'راهنمای خرید طلا',link:'/guide',action:'راهنمای انتخاب',alt:'دستبند طلایی روی دست با زمینه آرام زیتونی'}
+]; %>
+<section class="hero alpha-slider" id="hero-slider" role="region" aria-roledescription="اسلایدشو" aria-label="مجموعه‌های آلفا">
+  <% slides.forEach((slide,i)=>{ %>
+  <article class="hero-slide <%= i===0?'is-active':'' %>" data-slide="<%= i %>" role="group" aria-roledescription="اسلاید" aria-label="<%= i+1 %> از ۴" aria-hidden="<%= i!==0 %>" <%- i?'inert':'' %>>
+    <img class="hero-slide-image" src="/images/brand/<%= slide.image %>" alt="<%= slide.alt %>" width="1664" height="936" <%- i===0?'fetchpriority="high" loading="eager"':'loading="lazy"' %> decoding="async">
+    <div class="slide-copy"><span class="eyebrow"><%= slide.eyebrow %></span><% if(i===0){ %><h1 class="slide-title"><%= slide.title %></h1><% }else{ %><h2 class="slide-title"><%= slide.title %></h2><% } %><p><%= slide.text %></p><a class="button" href="<%= slide.link %>"><%= slide.action %> ←</a></div>
+  </article>
+  <% }) %>
+  <div class="slider-controls" hidden>
+    <div class="slider-dots" aria-label="انتخاب اسلاید"><% slides.forEach((s,i)=>{ %><button type="button" data-slide-to="<%= i %>" aria-label="نمایش اسلاید <%= i+1 %>" aria-pressed="<%= i===0 %>"></button><% }) %></div>
+    <span class="sr-only" data-slide-status aria-live="off">اسلاید ۱ از ۴</span>
+  </div>
+</section>

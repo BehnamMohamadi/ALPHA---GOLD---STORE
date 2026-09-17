@@ -6,18 +6,30 @@ const GoldPricing = require("../models/product-models/GoldPricing-model");
 const { Settings } = require("../models/store-models");
 const { calculateProductPrice, rateIsFresh } = require("./product-services/pricing-service");
 const { text } = require("../utils/normalize");
+const { storefrontCategories } = require("./storefront-categories");
 const escapeRegex = v => v.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 async function catalog(query = {}) {
-  const [categories, subcategories, goldPricing, settings] = await Promise.all([
-    Category.find({ isActive: true }).sort("sortOrder").lean(), SubCategory.find({ isActive: true }).sort("sortOrder").lean(),
+  const [categories, allSubcategories, goldPricing, settings] = await Promise.all([
+    Category.find({ isActive: true }).sort("sortOrder").lean(), SubCategory.find({}).sort("sortOrder").lean(),
     GoldPricing.findOne({ key: "main" }).lean(), Settings.findOne({ key: "main" }).lean()
   ]);
-  const filter = { isActive: true, category: { $in: categories.map(c => c._id) }, subCategory: { $in: subcategories.map(c => c._id) }, catalogType: "crafted_gold" };
-  if (typeof query.q === "string" && query.q.trim()) filter.name = { $regex: escapeRegex(text(query.q).slice(0, 100)), $options: "i" };
+  const subcategories = storefrontCategories(allSubcategories, categories);
+  const persisted = subcategories.filter(c => !c.planned);
+  const filter = { isActive: true, category: { $in: categories.map(c => c._id) }, subCategory: { $in: persisted.map(c => c._id) }, catalogType: "crafted_gold" };
+  if (typeof query.q === "string" && query.q.trim()) {
+    const term = escapeRegex(text(query.q).slice(0, 100)).replace(/[یي]/g, "[یي]").replace(/[کك]/g, "[کك]").replace(/[\s\u200c]+/g, "[\\s\\u200c]*");
+    const regex = new RegExp(term, "i");
+    filter.$or = [
+      { name: regex }, { sku: regex },
+      { category: { $in: categories.filter(c => regex.test(text(c.name))).map(c => c._id) } },
+      { subCategory: { $in: persisted.filter(c => regex.test(text(c.name))).map(c => c._id) } },
+    ];
+  }
   for (const [key, all] of [["category", categories], ["subCategory", subcategories]]) {
-    const value = String(query[key] || ""); if (value) { const chosen = all.find(x => String(x._id) === value || x.slug === value); filter[key] = chosen?._id || new mongoose.Types.ObjectId(); }
+    const value = String(query[key] || ""); if (value) { const chosen = all.find(x => String(x._id) === value || x.slug === value); filter[key] = chosen && !chosen.planned ? chosen._id : new mongoose.Types.ObjectId(); }
   }
   if (query.featured === "true") filter.isFeatured = true;
+  if (["female", "male", "kids", "unisex"].includes(query.gender)) filter.gender = query.gender;
   if (query.available === "true") filter.stock = { $gt: 0 };
   if ([18, 21, 22, 24].includes(Number(query.karat))) filter.karat = Number(query.karat);
   const weight = Number(query.maxWeight); if (weight > 0 && Number.isFinite(weight)) filter.goldWeight = { $lte: weight };

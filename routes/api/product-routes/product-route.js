@@ -1,3 +1,4 @@
+const { preventDelete } = require('../../../controller/product-controllers/catalog-lifecycle-controller');
 const express = require("express");
 
 const {
@@ -120,7 +121,7 @@ router.delete(
   protect,
   restrictTo("admin"),
   validateParam("productId", productIdSchema),
-  deleteProductById,
+  preventDelete,
 );
 
 module.exports = router;

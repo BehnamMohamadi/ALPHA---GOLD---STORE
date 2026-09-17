@@ -105,7 +105,7 @@ button {
 .admin-brand span {
   display: block;
   color: #806b42;
-  font-size: 9px;
+  font-size: 12px;
   margin-top: 3px
 }
 
@@ -115,8 +115,8 @@ button {
 
 .admin-nav-title {
   display: block;
-  font-size: 9px;
-  color: #56616b;
+  font-size: 12px;
+  color: #81755f;
   margin: 18px 10px 7px
 }
 
@@ -126,8 +126,8 @@ button {
   align-items: center;
   padding: 10px 11px;
   border-radius: 7px;
-  color: #aeb7c0;
-  font-size: 11px;
+  color: #665e50;
+  font-size: 13px;
   margin: 3px 0
 }
 
@@ -159,7 +159,7 @@ button {
   display: grid;
   place-items: center;
   color: #fff;
-  font-size: 10px
+  font-size: 13px
 }
 
 .sidebar-user-copy {
@@ -168,18 +168,18 @@ button {
 
 .sidebar-user-copy b {
   display: block;
-  font-size: 10px
+  font-size: 13px
 }
 
 .sidebar-user-copy span {
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted)
 }
 
 .icon-only {
   border: 0;
   background: none;
-  color: #87929c;
+  color: #776b58;
   font-size: 17px
 }
 
@@ -212,7 +212,7 @@ button {
   width: 100%;
   margin: 0;
   color: var(--muted);
-  font-size: 10px
+  font-size: 13px
 }
 
 .topbar-left {
@@ -230,8 +230,8 @@ button {
 }
 
 .topbar-status {
-  font-size: 9px;
-  color: #79848f
+  font-size: 12px;
+  color: #736b5e
 }
 
 .mobile-menu-button {
@@ -262,8 +262,8 @@ button {
 }
 
 .metric-label {
-  font-size: 10px;
-  color: #bdc4ca
+  font-size: 13px;
+  color: #706759
 }
 
 .metric-card strong {
@@ -273,8 +273,8 @@ button {
 }
 
 .metric-card small {
-  color: #697682;
-  font-size: 8px
+  color: #786e5d;
+  font-size: 12px
 }
 
 .dashboard-grid {
@@ -306,13 +306,13 @@ button {
 }
 
 .panel-head p {
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   margin: 0
 }
 
 .text-link {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--gold2)
 }
 
@@ -320,7 +320,7 @@ button {
   overflow: auto;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0d141c
+  background: #ffffff
 }
 
 table {
@@ -333,19 +333,19 @@ th,
 td {
   padding: 11px 10px;
   border-bottom: 1px solid var(--border);
-  font-size: 9px;
+  font-size: 12px;
   text-align: right;
   white-space: nowrap
 }
 
 th {
   font-weight: 500;
-  color: #85919d;
-  background: #111923
+  color: #706759;
+  background: #f2efe7
 }
 
 td {
-  color: #d8dde2
+  color: #484337
 }
 
 tr:last-child td {
@@ -375,14 +375,14 @@ tr:last-child td {
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  background: #0c131b;
-  border: 1px solid #1c2833;
+  background: #f8f6f0;
+  border: 1px solid #e1dccf;
   border-radius: 7px;
-  font-size: 10px
+  font-size: 13px
 }
 
 .gold-price-list strong {
-  color: #f1c66e
+  color: #81622f
 }
 
 .gold-meta {
@@ -391,12 +391,12 @@ tr:last-child td {
   padding-top: 12px;
   display: grid;
   gap: 6px;
-  color: #7f8b96;
-  font-size: 8px
+  color: #736b5e;
+  font-size: 12px
 }
 
 .gold-meta b {
-  color: #bac2ca
+  color: #6a6253
 }
 
 .compact-list {
@@ -410,7 +410,7 @@ tr:last-child td {
   gap: 9px;
   align-items: center;
   padding: 8px;
-  background: #0d141c;
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 7px
 }
@@ -420,16 +420,16 @@ tr:last-child td {
   height: 36px;
   border-radius: 6px;
   object-fit: cover;
-  background: #29231b
+  background: #eee8d9
 }
 
 .compact-item b {
   display: block;
-  font-size: 9px
+  font-size: 12px
 }
 
 .compact-item small {
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted)
 }
 
@@ -443,10 +443,10 @@ tr:last-child td {
   grid-template-columns: 12px 1fr auto;
   align-items: center;
   padding: 13px;
-  background: #0d141c;
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 8px;
-  font-size: 10px
+  font-size: 13px
 }
 
 .status-dot {
@@ -485,7 +485,7 @@ tr:last-child td {
   align-items: center;
   border: 1px solid var(--border);
   border-radius: 7px;
-  background: #0c131b;
+  background: #f8f6f0;
   padding: 0 10px;
   min-width: 240px
 }
@@ -497,7 +497,7 @@ tr:last-child td {
   padding: 10px 8px;
   outline: none;
   width: 100%;
-  font-size: 9px
+  font-size: 12px
 }
 
 select,
@@ -505,12 +505,12 @@ select,
 .field textarea,
 .field select {
   border: 1px solid var(--border);
-  background: #0c131b;
-  color: #e5e8eb;
+  background: #f8f6f0;
+  color: #3a342a;
   border-radius: 7px;
   padding: 10px 11px;
   outline: none;
-  font-size: 9px
+  font-size: 12px
 }
 
 select {
@@ -519,16 +519,16 @@ select {
 
 .btn {
   border: 1px solid var(--border);
-  background: #111923;
-  color: #d6dce1;
+  background: #f2efe7;
+  color: #4f483b;
   border-radius: 7px;
   padding: 9px 13px;
-  font-size: 9px;
+  font-size: 12px;
   cursor: pointer
 }
 
 .btn-gold {
-  background: linear-gradient(#f1c66e, #d7a54a);
+  background: linear-gradient(#81622f, #d7a54a);
   border-color: #d8a74d;
   color: #211707;
   font-weight: bold
@@ -541,7 +541,7 @@ select {
 .btn-danger {
   background: var(--redBg);
   border-color: #673737;
-  color: #ff9a91
+  color: #a64030
 }
 
 .full-btn {
@@ -551,7 +551,7 @@ select {
 .badge {
   padding: 4px 7px;
   border-radius: 5px;
-  font-size: 8px;
+  font-size: 12px;
   border: 1px solid transparent
 }
 
@@ -586,11 +586,11 @@ select {
 
 .table-btn {
   border: 1px solid var(--border);
-  background: #111923;
-  color: #aeb8c1;
+  background: #f2efe7;
+  color: #665e50;
   border-radius: 5px;
   padding: 5px 7px;
-  font-size: 8px
+  font-size: 12px
 }
 
 .table-btn:hover {
@@ -609,11 +609,11 @@ select {
   height: 32px;
   border-radius: 5px;
   object-fit: cover;
-  background: #29231b
+  background: #eee8d9
 }
 
 .product-cell b {
-  font-size: 9px
+  font-size: 12px
 }
 
 .pagination {
@@ -622,8 +622,8 @@ select {
   align-items: center;
   margin-top: 12px;
   gap: 12px;
-  color: #798590;
-  font-size: 8px
+  color: #736b5e;
+  font-size: 12px
 }
 
 .page-buttons {
@@ -635,10 +635,10 @@ select {
   width: 27px;
   height: 27px;
   border: 1px solid var(--border);
-  background: #111923;
-  color: #aeb7bf;
+  background: #f2efe7;
+  color: #665e50;
   border-radius: 5px;
-  font-size: 9px
+  font-size: 12px
 }
 
 .page-buttons button.active {
@@ -648,12 +648,12 @@ select {
 }
 
 .note-box {
-  border: 1px solid #624f29;
-  background: #211c12;
-  color: #bdad8c;
+  border: 1px solid #d5c7a7;
+  background: #f5efdf;
+  color: #786644;
   border-radius: 8px;
   padding: 10px 12px;
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.9;
   margin-top: 12px
 }
@@ -663,7 +663,7 @@ select {
 }
 
 .note-box code {
-  color: #f1c46a
+  color: #81622f
 }
 
 .form-layout {
@@ -690,8 +690,8 @@ select {
 
 .field>span {
   display: block;
-  font-size: 8px;
-  color: #aeb7c0;
+  font-size: 12px;
+  color: #665e50;
   margin-bottom: 6px
 }
 
@@ -717,7 +717,7 @@ select {
   border: 1px solid var(--border);
   border-radius: 7px;
   padding: 9px 11px;
-  background: #0c131b
+  background: #f8f6f0
 }
 
 .toggle-field>span {
@@ -732,7 +732,7 @@ select {
   display: block;
   width: 31px;
   height: 17px;
-  background: #293541;
+  background: #cfc6b5;
   border-radius: 20px;
   position: relative
 }
@@ -760,7 +760,7 @@ select {
 .cover-preview {
   aspect-ratio: 16/10;
   border: 1px solid var(--border);
-  background: #0c131b;
+  background: #f8f6f0;
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 9px
@@ -774,12 +774,12 @@ select {
 
 .upload-box {
   display: block;
-  border: 1px dashed #3a4855;
+  border: 1px dashed #d2cbbb;
   border-radius: 7px;
   padding: 11px;
   text-align: center;
-  color: #84919c;
-  font-size: 8px;
+  color: #776b58;
+  font-size: 12px;
   margin: 8px 0
 }
 
@@ -799,7 +799,7 @@ select {
   width: 100%;
   object-fit: cover;
   border-radius: 5px;
-  background: #101822;
+  background: #f4f1e9;
   border: 1px solid var(--border)
 }
 
@@ -819,16 +819,16 @@ select {
 }
 
 .remove-detail {
-  border: 1px solid #5d3131;
-  background: #2e1b1b;
-  color: #ef857b;
+  border: 1px solid #e9bbae;
+  background: #fff0ed;
+  color: #a64030;
   border-radius: 6px
 }
 
 .sticky-actions {
   position: sticky;
   bottom: 12px;
-  background: #0d141ce8;
+  background: #fffdf5ed;
   border: 1px solid var(--border);
   padding: 9px;
   border-radius: 9px;
@@ -866,20 +866,20 @@ select {
 }
 
 .price-card span {
-  font-size: 9px;
-  color: #b6bdc4
+  font-size: 12px;
+  color: #6a6253
 }
 
 .price-card strong {
   display: block;
-  color: #efc36a;
+  color: #81622f;
   font-size: 20px;
   margin: 10px 0
 }
 
 .price-card small {
-  font-size: 8px;
-  color: #64717c
+  font-size: 12px;
+  color: #786e5d
 }
 
 .pricing-form-grid {
@@ -896,7 +896,7 @@ select {
   gap: 15px;
   padding: 10px 0;
   border-bottom: 1px solid var(--border);
-  font-size: 9px
+  font-size: 12px
 }
 
 .meta-list>div:last-child {
@@ -904,12 +904,12 @@ select {
 }
 
 .meta-list dt {
-  color: #7e8a95
+  color: #776b58
 }
 
 .meta-list dd {
   margin: 0;
-  color: #d6dce1;
+  color: #4f483b;
   text-align: left
 }
 
@@ -922,12 +922,12 @@ select {
 
 .expiry-box {
   padding: 18px;
-  background: #0d141c;
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 12px;
   text-align: center;
-  color: #f1c46a
+  color: #81622f
 }
 
 .order-items {
@@ -939,7 +939,7 @@ select {
   display: grid;
   grid-template-columns: 60px 1fr 1.2fr;
   gap: 12px;
-  background: #0d141c;
+  background: #ffffff;
   border: 1px solid var(--border);
   padding: 10px;
   border-radius: 8px
@@ -953,13 +953,13 @@ select {
 }
 
 .order-product b {
-  font-size: 10px
+  font-size: 13px
 }
 
 .order-product small {
   display: block;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 12px;
   margin-top: 5px
 }
 
@@ -970,20 +970,20 @@ select {
 }
 
 .snapshot-grid div {
-  background: #101923;
-  border: 1px solid #1f2b36;
+  background: #f6f3ed;
+  border: 1px solid #dfd9cd;
   border-radius: 5px;
   padding: 7px
 }
 
 .snapshot-grid span {
-  font-size: 7px;
-  color: #71808b;
+  font-size: 12px;
+  color: #786e5d;
   display: block
 }
 
 .snapshot-grid b {
-  font-size: 8px
+  font-size: 12px
 }
 
 .admin-toast {
@@ -995,7 +995,7 @@ select {
   color: #211707;
   border-radius: 7px;
   padding: 10px 14px;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: bold;
   opacity: 0;
   transform: translateY(8px);
@@ -1019,7 +1019,7 @@ select {
 
 .admin-modal {
   width: min(390px, 90vw);
-  background: #111923;
+  background: #f2efe7;
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px
@@ -1031,7 +1031,7 @@ select {
 }
 
 .admin-modal p {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
   line-height: 1.9
 }
@@ -1044,12 +1044,12 @@ select {
 }
 
 .form-error {
-  background: #3a2020;
-  color: #ff9c92;
-  border: 1px solid #683838;
+  background: #fff0ed;
+  color: #a64030;
+  border: 1px solid #e9bbae;
   padding: 9px;
   border-radius: 7px;
-  font-size: 9px
+  font-size: 12px
 }
 
 .login-body {
@@ -1110,7 +1110,7 @@ select {
 .login-art p {
   color: #909aa4;
   line-height: 2;
-  font-size: 11px
+  font-size: 13px
 }
 
 .login-form-wrap {
@@ -1125,7 +1125,7 @@ select {
 
 .eyebrow {
   color: #c89b49;
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 2px
 }
 
@@ -1136,7 +1136,7 @@ select {
 
 .login-card>p {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
   margin-bottom: 25px
 }
 
@@ -1386,8 +1386,8 @@ body.sidebar-open {
     height: 38px;
     border: 1px solid var(--border);
     border-radius: 8px;
-    background: #0d141c;
-    color: #9aa6b1;
+    background: #ffffff;
+    color: #6c614e;
     font-size: 18px;
     padding: 0;
   }
@@ -1784,8 +1784,8 @@ body::-webkit-scrollbar,
   flex: 0 0 38px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0d141c;
-  color: #aab4be;
+  background: #ffffff;
+  color: #665c4b;
   place-items: center;
   font-size: 18px;
   line-height: 1;
@@ -1803,13 +1803,13 @@ body::-webkit-scrollbar,
   gap: 6px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0d141c;
-  color: #9ca8b3;
+  background: #ffffff;
+  color: #6c614e;
 }
 
 .logout-button:hover {
   border-color: #536170;
-  color: #f1c46a;
+  color: #81622f;
 }
 
 .logout-icon {
@@ -1818,7 +1818,7 @@ body::-webkit-scrollbar,
 }
 
 .logout-text {
-  font-size: 9px;
+  font-size: 12px;
 }
 
 /* Small laptop: bottom action becomes a clean circular logout control */
@@ -1909,18 +1909,18 @@ body::-webkit-scrollbar,
 .form-errors {
   margin-bottom: 12px;
   padding: 12px 14px;
-  background: #321b1d;
-  border: 1px solid #73383d;
+  background: #fff0ed;
+  border: 1px solid #e9bbae;
   border-radius: 8px;
-  color: #ffaaa4;
-  font-size: 9px;
+  color: #a64030;
+  font-size: 12px;
   line-height: 1.9;
 }
 
 .form-errors-title {
   display: block;
   margin-bottom: 5px;
-  color: #ffb1aa;
+  color: #a64030;
   font-weight: 700;
 }
 
@@ -1947,7 +1947,7 @@ body::-webkit-scrollbar,
 }
 
 .cart-admin-card {
-  background: #0d141c;
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 9px;
   padding: 12px;
@@ -1963,14 +1963,14 @@ body::-webkit-scrollbar,
 
 .cart-admin-head b {
   display: block;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .cart-admin-head small {
   display: block;
   margin-top: 4px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 12px;
 }
 
 .cart-items-grid {
@@ -1985,8 +1985,8 @@ body::-webkit-scrollbar,
   align-items: center;
   gap: 8px;
   padding: 8px;
-  background: #111923;
-  border: 1px solid #1f2b36;
+  background: #f2efe7;
+  border: 1px solid #dfd9cd;
   border-radius: 7px;
 }
 
@@ -1995,24 +1995,24 @@ body::-webkit-scrollbar,
   height: 46px;
   border-radius: 6px;
   object-fit: cover;
-  background: #191f27;
+  background: #efebe1;
 }
 
 .cart-product b {
   display: block;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .cart-product small {
   display: block;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 12px;
   margin-top: 3px;
 }
 
 .empty-cart-row {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
   padding: 8px 0;
 }
 
@@ -2045,7 +2045,7 @@ body::-webkit-scrollbar,
   min-width: 34px !important;
   min-height: 34px !important;
   flex: 0 0 34px !important;
-  font-size: 9px !important;
+  font-size: 12px !important;
 }
 
 .user-editor-panel {
@@ -2069,7 +2069,7 @@ body::-webkit-scrollbar,
 .shipping-address-box {
   padding: 12px;
 
-  background: #0d141c;
+  background: #ffffff;
 
   border:
     1px solid var(--border);
@@ -2114,7 +2114,7 @@ body::-webkit-scrollbar,
 
   color: var(--muted);
 
-  font-size: 8px;
+  font-size: 12px;
 }
 
 .order-address-panel {

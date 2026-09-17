@@ -1,3 +1,4 @@
+const lifecycle = require('../../../controller/product-controllers/catalog-lifecycle-controller');
 const express = require("express");
 
 const {
@@ -28,6 +29,8 @@ const {
 } = require("../../../validation/product-validations/category-validation");
 
 const router = express.Router();
+
+router.get('/:categoryId/dependencies', protect, restrictTo('admin'), validateParam('categoryId', categoryIdSchema), lifecycle.dependencies('category'));
 
 // ADMIN READ
 router.get(
@@ -80,6 +83,7 @@ router.patch(
   restrictTo("admin"),
   validateParam("categoryId", categoryIdSchema),
   validate(editCategorySchema),
+  lifecycle.deactivate('category'),
   editCategoryById,
 );
 
@@ -88,7 +92,7 @@ router.delete(
   protect,
   restrictTo("admin"),
   validateParam("categoryId", categoryIdSchema),
-  deleteCategoryById,
+  lifecycle.preventDelete,
 );
 
 module.exports = router;

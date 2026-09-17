@@ -1,3 +1,4 @@
+const lifecycle = require('../../../controller/product-controllers/catalog-lifecycle-controller');
 const express = require("express");
 
 const {
@@ -28,6 +29,8 @@ const {
 } = require("../../../validation/product-validations/subCategory-validation");
 
 const router = express.Router();
+
+router.get('/:subCategoryId/dependencies', protect, restrictTo('admin'), validateParam('subCategoryId', subCategoryIdSchema), lifecycle.dependencies('subCategory'));
 
 // ADMIN READ
 router.get(
@@ -83,6 +86,7 @@ router.patch(
   restrictTo("admin"),
   validateParam("subCategoryId", subCategoryIdSchema),
   validate(editSubCategorySchema),
+  lifecycle.deactivate('subCategory'),
   editSubCategoryById,
 );
 
@@ -91,7 +95,7 @@ router.delete(
   protect,
   restrictTo("admin"),
   validateParam("subCategoryId", subCategoryIdSchema),
-  deleteSubCategoryById,
+  lifecycle.preventDelete,
 );
 
 module.exports = router;

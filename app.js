@@ -13,7 +13,8 @@ const cors = require("cors");
 const helmet = require("helmet");
 
 const dotenvConfig = dotenv.config({
-  path: join(__dirname, ".env"), quiet: true,
+  path: join(__dirname, ".env"),
+  quiet: true,
 });
 
 if (dotenvConfig.error && require.main === module && !process.env.MONGODB_URI) {
@@ -43,7 +44,18 @@ process.on("uncaughtException", (err) => {
 const app = express();
 
 app.disable("x-powered-by");
-app.use(helmet({ contentSecurityPolicy: { directives: { "script-src": ["'self'"], "img-src": ["'self'", "data:"], "font-src": ["'self'"], "upgrade-insecure-requests": process.env.NODE_ENV === "production" ? [] : null } } }));
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        "script-src": ["'self'"],
+        "img-src": ["'self'", "data:", "blob:"],
+        "font-src": ["'self'"],
+        "upgrade-insecure-requests": process.env.NODE_ENV === "production" ? [] : null,
+      },
+    },
+  }),
+);
 
 if (process.env.NODE_ENV !== "test") app.use(morgan("dev"));
 
@@ -65,7 +77,12 @@ const envOrigins = process.env.CLIENT_ORIGIN
       .filter(Boolean)
   : [];
 
-const developmentOrigins = ["http://127.0.0.1:3000", "http://localhost:3000", `http://127.0.0.1:${process.env.PORT || 3000}`, `http://localhost:${process.env.PORT || 3000}`];
+const developmentOrigins = [
+  "http://127.0.0.1:3000",
+  "http://localhost:3000",
+  `http://127.0.0.1:${process.env.PORT || 3000}`,
+  `http://localhost:${process.env.PORT || 3000}`,
+];
 
 const allowedOrigins = [
   ...new Set([
@@ -121,7 +138,11 @@ app.use(
 
 app.use(cookieParser());
 app.use(require("./middleware/request-security").requestSecurity);
-app.get("/health", (req, res) => res.status(require("mongoose").connection.readyState === 1 ? 200 : 503).json({ status: require("mongoose").connection.readyState === 1 ? "ok" : "unavailable" }));
+app.get("/health", (req, res) =>
+  res.status(require("mongoose").connection.readyState === 1 ? 200 : 503).json({
+    status: require("mongoose").connection.readyState === 1 ? "ok" : "unavailable",
+  }),
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -162,15 +183,25 @@ const host = process.env.HOST || "127.0.0.1";
 let server;
 
 async function startServer() {
-  if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32) throw new Error("JWT_SECRET must contain at least 32 characters.");
+  if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32)
+    throw new Error("JWT_SECRET must contain at least 32 characters.");
   await connectToDatabase();
   const hello = await require("mongoose").connection.db.admin().command({ hello: 1 });
-  if (!hello.setName) throw new Error("Alpha requires a MongoDB replica set for atomic address and checkout operations. Run npm run dev:local for an isolated preview.");
+  if (!hello.setName)
+    throw new Error(
+      "Alpha requires a MongoDB replica set for atomic address and checkout operations. Run npm run dev:local for an isolated preview.",
+    );
   startPaymentExpirationWorker();
-  server = app.listen(port, host, () => console.info('Alpha: http://' + host + ':' + port));
+  server = app.listen(port, host, () =>
+    console.info("Alpha: http://" + host + ":" + port),
+  );
   return server;
 }
-if (require.main === module) startServer().catch(e => { console.error(e.message); process.exit(1); });
+if (require.main === module)
+  startServer().catch((e) => {
+    console.error(e.message);
+    process.exit(1);
+  });
 
 process.on("unhandledRejection", (err) => {
   console.error(err.name, err.message);

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title><%= title %> | ALPHA</title>
   <link rel="stylesheet" href="/css/admin/admin.css">
-</head>
+<link rel="stylesheet" href="/css/admin/alpha.css"><link rel="stylesheet" href="/css/admin/refined.css?v=2"></head>
 <body>
 <div class="admin-layout">
   <%- include("partials/sidebar", { activePage: "subcategories", adminUser }) %>
@@ -74,7 +74,7 @@
           <div class="field toggle-field">
             <span>فعال</span>
             <label class="switch">
-              <input type="checkbox" name="isActive" checked>
+              <input type="checkbox" name="isActive" aria-label="فعال بودن" checked>
               <i></i>
             </label>
           </div>
@@ -104,6 +104,6 @@
 </div>
 
 <%- include("partials/scripts") %>
-<script src="/js/admin/subcategories.js"></script>
+<script src="/js/admin/subcategories.js?v=lifecycle-2"></script>
 </body>
 </html>

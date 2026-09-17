@@ -13,3 +13,12 @@ Unified sign-in: customers and administrators use `/login` and the same OTP endp
 The storefront section structure follows the PAWEAR reference: utility account links, search/navigation header, brand hero, four service links, image categories, paired promotional panels, new products and buying guidance. ALPHA gold/black imagery is preserved. Account sections remain accessible with the profile sidebar and administrator entry.
 
 Validation: 18 tests pass, including common OTP admin login, role retention, account-link visibility and admin API access checks.
+
+## Development commands
+
+- `npm run dev`: local preview with automatic backend reload, MongoDB replica set `alphaDev` on port 27029, database `alpha-preview`, website http://127.0.0.1:3100. SMS and payments are explicitly mocked.
+- `npm run dev:local`: same preview without nodemon.
+- `npm run dev:configured`: use the database/settings in `.env`; MongoDB must be configured as a replica set.
+- `npm start`: run against the configured environment.
+
+Nodemon ignores MongoDB files, generated artifacts and uploads to avoid restart loops. Frontend styles/templates are served from disk. Run only one preview server on port 3100; set `ALPHA_PORT` to use another port.

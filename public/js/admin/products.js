@@ -141,10 +141,10 @@ const loadProducts = async () => {
 
                     <button
                       class="table-btn"
-                      data-delete-product="${product._id}"
+                      data-toggle-product="${product._id}" data-active="${product.isActive}"
                       data-name="${AdminAPI.escape(product.name)}"
                     >
-                      حذف
+                      ${product.isActive ? "غیرفعال‌سازی" : "فعال‌سازی"}
                     </button>
                   </div>
                 </td>
@@ -159,26 +159,27 @@ const loadProducts = async () => {
     renderProductPagination();
 
     document
-      .querySelectorAll("[data-delete-product]")
+      .querySelectorAll("[data-toggle-product]")
       .forEach((button) => {
         button.onclick = async () => {
           const accepted = await adminConfirm(
-            `محصول «${button.dataset.name}» حذف شود؟`,
+            `محصول «${button.dataset.name}» ${button.dataset.active === "true" ? "غیرفعال" : "فعال"} شود؟`,
           );
 
           if (!accepted) return;
 
+          button.disabled = true;
           try {
             await AdminAPI.request(
-              `/api/products/${button.dataset.deleteProduct}`,
-              { method: "DELETE" },
+              `/api/products/${button.dataset.toggleProduct}`,
+              { method: "PATCH", body: { isActive: button.dataset.active !== "true" } },
             );
 
-            adminToast("محصول حذف شد.");
+            adminToast("وضعیت محصول به‌روزرسانی شد.");
             loadProducts();
           } catch (error) {
             adminToast(error.message, "error");
-          }
+          } finally { button.disabled = false; }
         };
       });
   } catch (error) {

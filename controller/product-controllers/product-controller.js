@@ -449,6 +449,7 @@ const deleteProductById = catchAsync(async (req, res, next) => {
     return next(new AppError(404, "product not found"));
   }
 
+  if (await require('../../models/shopping-models/order-model').exists({ 'items.product': product._id })) return next(new AppError(409, 'این محصول سابقه سفارش دارد؛ برای حفظ سوابق، آن را غیرفعال کنید.'));
   const filesToDelete = [];
 
   if (product.coverImage && product.coverImage !== DEFAULT_COVER_IMAGE) {

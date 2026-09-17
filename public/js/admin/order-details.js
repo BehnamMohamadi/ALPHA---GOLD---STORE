@@ -858,7 +858,7 @@ document.addEventListener("click", async (event) => {
         : "آیا وجه واقعاً به مشتری برگشت داده شده است؟";
   }
 
-  if (!window.confirm(confirmation)) {
+  if (!await adminConfirm(confirmation)) {
     return;
   }
 

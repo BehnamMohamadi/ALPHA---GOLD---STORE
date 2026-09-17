@@ -74,10 +74,16 @@ window.adminConfirm = (text, title = "تأیید عملیات") => new Promise((
 
   titleEl.textContent = title;
   textEl.textContent = text;
+  const previousFocus = document.activeElement;
   modal.classList.remove("hidden");
+  cancel.focus();
+  const onKey = event => { if(event.key === "Escape") { event.preventDefault(); done(false); } if(event.key === "Tab") { event.preventDefault(); (document.activeElement === cancel ? ok : cancel).focus(); } };
+  modal.addEventListener("keydown", onKey);
 
   const done = (value) => {
     modal.classList.add("hidden");
+    modal.removeEventListener("keydown", onKey);
+    previousFocus?.focus();
     ok.onclick = null;
     cancel.onclick = null;
     resolve(value);

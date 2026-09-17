@@ -5,7 +5,7 @@ const {MongoClient}=require('mongodb');
 
 const startLocalDatabase=async()=>{
  if(process.env.NODE_ENV==='production')throw new Error('Local database helper is disabled in production.');
- const target=new URL(process.env.MONGODB_URI);
+ const target=new URL(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27029/alpha-preview?replicaSet=alphaDev');
  if(target.hostname!=='127.0.0.1'||target.port!=='27029'||target.searchParams.get('replicaSet')!=='alphaDev')throw new Error('This helper only manages 127.0.0.1:27029 replica set alphaDev. Configure other databases yourself.');
  const direct='mongodb://127.0.0.1:27029/?directConnection=true';
  let client;

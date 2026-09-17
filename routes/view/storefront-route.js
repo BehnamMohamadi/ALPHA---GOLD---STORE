@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const User = require("../../models/user-model");
+const Wishlist = require("../../models/shopping-models/wishlist-model");
 const Product = require("../../models/product-models/product-model");
 const Category = require("../../models/product-models/category-model");
 const SubCategory = require("../../models/product-models/subCategory-model");
@@ -15,7 +16,8 @@ router.use(wrap(async (req, res, next) => {
   let user = null;
   try { const payload = verifyAccessToken(req.cookies?.accessToken); const candidate = await User.findById(payload.sub); if (candidate?.accountStatus.status === "active" && (payload.version || 0) === candidate.tokenVersion) user = candidate; } catch {}
   const [settings, navCategories, navSubcategories, rate] = await Promise.all([Settings.findOne({ key: "main" }).lean(), Category.find({ isActive: true }).sort("sortOrder").lean(), SubCategory.find({ isActive: true }).sort("sortOrder").lean(), GoldPricing.findOne({ key: "main" }).lean()]);
-  Object.assign(res.locals, { user, settings: settings || new Settings().toObject(), navCategories, navSubcategories, rate, path: req.path,
+  const saved = user ? await Wishlist.findOne({ user: user._id }).select('items.product').lean() : null;
+  Object.assign(res.locals, { user, wishlistIds: new Set((saved?.items || []).map(item => String(item.product))), settings: settings || new Settings().toObject(), navCategories, navSubcategories, rate, path: req.path,
     demo: process.env.ALPHA_DEMO === "true", otpDemo: isDev(), title: "آلفا | فروشگاه طلا", description: "زیورآلات طلا با نمایش شفاف وزن، عیار و جزئیات قیمت در آلفا.",
     number: value => new Intl.NumberFormat("fa-IR").format(value), money: value => typeof value === "number" ? new Intl.NumberFormat("fa-IR").format(value) + " تومان" : "نیاز به به‌روزرسانی نرخ",
     date: value => value ? new Intl.DateTimeFormat("fa-IR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)) : "—"
@@ -24,8 +26,8 @@ router.use(wrap(async (req, res, next) => {
 router.get("/", wrap(async (req, res) => res.render("store/home", { ...await catalog({ limit: 8 }), settings: res.locals.settings, title: "آلفا — طلایی برای هر روز" })));
 router.get(["/shop", "/search", "/category/:slug"], wrap(async (req, res) => {
   const query = { ...req.query, ...(req.params.slug ? { category: req.params.slug } : {}) };
-  const data = await catalog(query); const category = data.categories.find(c => c.slug === req.params.slug);
-  res.render("store/shop", { ...data, settings: res.locals.settings, query, title: query.q ? `جست‌وجوی «${String(query.q).slice(0, 80)}»` : category?.name || "زیورآلات آلفا" });
+  const data = await catalog(query); const category = data.subcategories.find(c => String(c._id) === query.subCategory || c.slug === query.subCategory) || data.categories.find(c => c.slug === req.params.slug || String(c._id) === query.category);
+  res.render("store/shop", { ...data, settings: res.locals.settings, query, title: query.q ? `جست‌وجوی «${String(query.q).slice(0, 80)}»` : category?.name || ({female:"زیورآلات زنانه",male:"زیورآلات مردانه",kids:"زیورآلات کودکانه",unisex:"زنانه و مردانه (مشترک)"}[query.gender]) || "زیورآلات آلفا" });
 }));
 router.get("/product/:slug", wrap(async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug, isActive: true, catalogType: "crafted_gold" }).populate("category").populate("subCategory").lean();

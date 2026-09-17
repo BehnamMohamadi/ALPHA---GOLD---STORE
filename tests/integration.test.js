@@ -114,3 +114,36 @@ test('admin shares customer OTP login and receives account-only panel entry', as
   const regular=await fetch(base+'/admin',{headers:{Cookie:cookies(user)},redirect:'manual'});assert.equal(regular.headers.get('location'),'/account');
   assert.equal((await api('/api/store/admin/settings','GET',null,user)).status,403);
 });
+
+test('admin catalog CRUD, dependency guards, media upload and filtered reads',async()=>{
+ const act=(path,method,body)=>api(path,method,body,admin);
+ let r=await act('/api/categories','POST',{name:'دسته آزمایشی مدیریت',slug:'admin-qa'});assert.equal(r.status,201,JSON.stringify(r.data));const c=r.data.data.category;
+ r=await act('/api/categories/'+c._id,'PATCH',{name:'دسته ویرایش‌شده'});assert.equal(r.status,200);
+ r=await act('/api/subCategories','POST',{name:'زیردسته آزمایشی',slug:'admin-qa',category:c._id});assert.equal(r.status,201,JSON.stringify(r.data));const sc=r.data.data.subCategory;
+ assert.equal((await act('/api/categories/'+c._id,'DELETE')).status,409);
+ r=await act('/api/products','POST',{name:'محصول آزمایشی مدیریت',sku:'ADMIN-QA',slug:'admin-qa',category:c._id,subCategory:sc._id,gender:'unisex',goldWeight:1.5,stock:2});assert.equal(r.status,201,JSON.stringify(r.data));const pr=r.data.data.product;
+ assert.equal((await act('/api/subCategories/'+sc._id,'DELETE')).status,409);
+ r=await act('/api/products/'+pr._id,'PATCH',{pricing:{mode:'custom',profitPercent:0,taxPercent:0,wageEnabled:false},isActive:false,stock:3});assert.equal(r.status,200);
+ r=await act('/api/products/admin/'+pr._id);assert.equal(r.data.data.product.stock,3);assert.equal(r.data.data.product.pricing.profitPercent,0);
+ const f=new FormData();f.append('coverImage',new Blob([require('node:fs').readFileSync(require('node:path').join(__dirname,'../public/images/brand/logo-seal.png'))],{type:'image/png'}),'qa.png');
+ r=await fetch(base+'/api/products/edit-cover/'+pr._id,{method:'PATCH',headers:{Cookie:cookies(admin),'X-Requested-With':'Alpha'},body:f});assert.equal(r.status,200,await r.text());
+ assert.equal((await act('/api/products/delete-cover/'+pr._id,'DELETE')).status,200);
+ assert.equal((await act('/api/products/'+pr._id,'DELETE')).status,204);
+ assert.equal((await act('/api/subCategories/'+sc._id,'PATCH',{name:'زیردسته ویرایش‌شده',isActive:false})).status,200);
+ assert.equal((await act('/api/subCategories/'+sc._id,'DELETE')).status,204);
+ assert.equal((await act('/api/categories/'+c._id,'DELETE')).status,204);
+ assert.equal((await act('/api/products/'+p._id,'DELETE')).status,409);
+ for(const url of ['/api/admin/dashboard','/api/categories/all','/api/subCategories/all','/api/products/all?stock[lte]=10','/api/orders/all','/api/payments/all','/api/users','/api/cart/all','/api/store/admin/audit'])assert.equal((await act(url)).status,200,url);
+});
+test('admin settings, shipping, user editing and status actions persist',async()=>{
+ const act=(path,method,body)=>api(path,method,body,admin);
+ let r=await act('/api/store/admin/shipping','POST',{name:'ارسال آزمایشی مدیریت',cost:20000,provinces:['تهران'],isActive:true});assert.equal(r.status,200,JSON.stringify(r.data));const id=r.data.data.method._id;
+ assert.equal((await act('/api/store/admin/shipping/'+id,'PUT',{name:'ارسال ویرایش‌شده',cost:30000,isActive:false,provinces:[]})).status,200);
+ assert.equal((await act('/api/store/admin/settings','PUT',{heroTitle:'عنوان آزمایشی',otpTtlSeconds:120,otpResendSeconds:60})).status,200);
+ assert.equal((await act('/api/store/admin/settings')).data.data.settings.heroTitle,'عنوان آزمایشی');
+ assert.equal((await act('/api/users/'+other._id,'PATCH',{firstname:'ویرایش',accountStatus:{status:'suspended',reason:'other'}})).status,200);
+ assert.equal((await api('/api/account','GET',null,other)).status,403);
+ assert.equal((await act('/api/users/'+other._id,'PATCH',{accountStatus:{status:'active'}})).status,200);
+ assert.equal((await act('/api/users/'+admin._id,'DELETE')).status,400);
+ assert.equal((await act('/api/addresses/admin/user/'+user._id)).status,200);
+});

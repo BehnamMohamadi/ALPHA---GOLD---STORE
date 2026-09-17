@@ -24,6 +24,10 @@ const editSubCategorySchema = Joi.object({
   category: Joi.string().hex().length(24).optional(),
 
   isActive: Joi.boolean().optional(),
+  deactivation: Joi.object({
+    subCategoryIds: Joi.array().items(Joi.string().hex().length(24).lowercase()).unique().max(5000).default([]),
+    productIds: Joi.array().items(Joi.string().hex().length(24).lowercase()).unique().max(5000).default([]),
+  }).unknown(false).when('isActive', { is: Joi.valid(false).required(), then: Joi.required(), otherwise: Joi.forbidden() }),
 
   sortOrder: Joi.number().integer().min(0).optional(),
 })

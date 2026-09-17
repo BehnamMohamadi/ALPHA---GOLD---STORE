@@ -283,14 +283,14 @@ const loadLookups = async () => {
   const [categoryPayload, subCategoryPayload] =
     await Promise.all([
       AdminAPI.request(
-        `/api/categories${AdminAPI.qs({
+        `/api/categories/all${AdminAPI.qs({
           limit: 100,
           sort: "sortOrder",
         })}`,
       ),
 
       AdminAPI.request(
-        `/api/subCategories${AdminAPI.qs({
+        `/api/subCategories/all${AdminAPI.qs({
           limit: 100,
           sort: "sortOrder",
         })}`,

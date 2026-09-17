@@ -1,0 +1,7 @@
+<section class="section container jewelry-discovery" aria-labelledby="jewelry-types-title">
+  <div class="section-heading"><div><span class="eyebrow">زیور دلخواهت را پیدا کن</span><h2 id="jewelry-types-title">از کدام زیور شروع کنیم؟</h2></div><%- include('browse-link') %></div>
+  <p class="category-drag-hint" id="category-drag-hint"><span aria-hidden="true">↔</span> برای دیدن دسته‌های بیشتر، به چپ و راست بکشید</p>
+  <div class="jewelry-types" data-product-rail tabindex="0" role="region" aria-label="دسته‌بندی زیورآلات" aria-describedby="category-drag-hint"><% subcategories.forEach(c=>{ %>
+    <a class="jewelry-type" href="/shop?subCategory=<%= c._id %>" draggable="false"><span class="jewelry-type-photo"><img src="<%= c.symbol ? '/images/brand/category-'+c.symbol+'-v2.png' : c.icon || '/images/brand/category-pendant-v2.png' %>" alt="" width="512" height="512" loading="lazy" draggable="false"></span><span class="jewelry-type-name"><%= c.name %></span></a>
+  <% }) %></div>
+</section>

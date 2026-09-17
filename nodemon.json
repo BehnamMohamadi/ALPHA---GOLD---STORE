@@ -1,0 +1,6 @@
+{
+  "watch": ["app.js", "controller", "database", "middleware", "models", "routes", "services", "utils", "validation", "scripts/dev-local.js", "scripts/start-local-db.js", "scripts/seed-preview.js"],
+  "ext": "js,json",
+  "ignore": ["artifacts/**", "node_modules/**", "public/**", "tests/**"],
+  "delay": "500"
+}

@@ -142,14 +142,6 @@ const loadSubCategories = async () => {
                       >
                         ویرایش
                       </button>
-
-                      <button
-                        class="table-btn"
-                        data-delete-sub="${subCategory._id}"
-                        data-name="${AdminAPI.escape(subCategory.name)}"
-                      >
-                        حذف
-                      </button>
                     </div>
                   </td>
                 </tr>
@@ -165,39 +157,7 @@ const loadSubCategories = async () => {
           startSubCategoryEdit(button.dataset.editSub);
       });
 
-    document
-      .querySelectorAll("[data-delete-sub]")
-      .forEach((button) => {
-        button.onclick = async () => {
-          if (
-            !await adminConfirm(
-              `زیردسته «${button.dataset.name}» حذف شود؟`,
-            )
-          ) {
-            return;
-          }
 
-          try {
-            await AdminAPI.request(
-              `/api/subCategories/${button.dataset.deleteSub}`,
-              { method: "DELETE" },
-            );
-
-            adminToast("زیردسته حذف شد.");
-
-            if (
-              form.elements.subCategoryId.value ===
-              button.dataset.deleteSub
-            ) {
-              resetSubCategoryForm();
-            }
-
-            loadSubCategories();
-          } catch (error) {
-            adminToast(error.message, "error");
-          }
-        };
-      });
   } catch (error) {
     adminToast(error.message, "error");
   }
@@ -233,6 +193,12 @@ form.addEventListener("submit", async (event) => {
   submitButton.disabled = true;
 
   try {
+    if (subCategoryId && !body.isActive) {
+      const selection = await chooseCatalogDeactivation('subCategory', subCategoryId);
+      if (!selection) return;
+      body.deactivation = selection;
+    }
+
     const payload = await AdminAPI.request(
       subCategoryId
         ? `/api/subCategories/${subCategoryId}`

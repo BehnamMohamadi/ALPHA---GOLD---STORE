@@ -266,6 +266,7 @@ const deleteCategoryById = catchAsync(async (req, res, next) => {
     return next(new AppError(404, "category not found"));
   }
 
+  if (await require('../../models/product-models/subCategory-model').exists({ category: category._id }) || await require('../../models/product-models/product-model').exists({ category: category._id })) return next(new AppError(409, 'این دسته محصول یا زیردسته دارد. ابتدا موارد وابسته را جابه‌جا کنید یا دسته را غیرفعال کنید.'));
   const oldIcon = category.icon;
 
   await Category.findByIdAndDelete(category._id);

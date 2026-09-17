@@ -1,0 +1,42 @@
+/* Personal account: warm editorial header, compact useful cards. */
+.account-shell{padding-top:32px;padding-bottom:56px}
+.account-shell .account-welcome{position:relative;isolation:isolate;overflow:hidden;min-height:220px;padding:34px 38px;border:1px solid #e5d5bc;border-radius:24px;background:#f1e6d5;box-shadow:0 12px 38px #75552709;gap:28px}
+.account-welcome:before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(270deg,#f4ebdd 0%,#f4ebddf5 38%,#f4ebdd50 70%),url('/images/brand/collection-bracelet-v2.png') left center/55% auto no-repeat;opacity:.95}
+.account-shell .account-welcome h1{font-size:32px;color:#493c2b;font-weight:650;margin:8px 0 12px}
+.account-shell .account-welcome .eyebrow{color:#987441;font-size:11px}
+.account-shell .account-welcome p{max-width:440px;color:#77664e;font-size:13px;line-height:2}
+.account-welcome-actions{flex-direction:column;align-items:stretch;min-width:190px}
+.account-welcome-actions .account-admin-entry{box-shadow:0 8px 20px #6d48252b;background:linear-gradient(115deg,#a8864f,#775832);border:0;border-radius:12px}
+.account-welcome-actions .text-link{text-align:center;color:#655034}
+.account-shell .account-layout{gap:24px;grid-template-columns:235px minmax(0,1fr)}
+.account-shell .account-nav{border-radius:20px;background:linear-gradient(165deg,#fffdf8,#f4efe5);border-color:#e8dfce;padding:16px;box-shadow:0 8px 24px #72542e06}
+.account-shell .account-avatar{padding:14px 8px 24px}
+.account-shell .account-initial{width:64px;height:64px;border-radius:50%;background:linear-gradient(140deg,#b99a63,#826539);color:#fff8e9;box-shadow:0 0 0 6px #f0e8d8;border:2px solid #fff9ec;font-size:28px}
+.account-shell .account-nav>a{padding:12px 14px;transition:background .2s,transform .2s}
+.account-shell .account-nav>a:hover{background:#ece4d5;transform:translateX(-2px)}
+.account-shell .account-nav>a.active{background:#e3e8d9;color:#48563d;box-shadow:inset -3px 0 #7d8b63}
+.account-shell .account-nav .account-admin-link{background:linear-gradient(120deg,#a68a56,#81643b);box-shadow:0 5px 12px #8b70321a}
+.account-shell .stat-grid{gap:14px}
+.account-shell .stat{position:relative;overflow:hidden;border:1px solid #e3d6be;border-radius:17px;padding:24px 20px;background:linear-gradient(130deg,#fcf6e9,#efe2c9);min-height:112px}
+.account-shell .stat:after{content:'';position:absolute;width:70px;height:70px;border:14px solid #ffffff50;border-radius:50%;left:-18px;bottom:-30px;pointer-events:none}
+.account-shell .stat:nth-child(2){background:linear-gradient(130deg,#f8ede7,#ecd7c8);border-color:#e8d4c8}
+.account-shell .stat:nth-child(3){background:linear-gradient(130deg,#eef1e7,#dfe7d3);border-color:#d9e1ce}
+.account-shell .stat strong{font-size:36px;color:#6c5530;line-height:1.3}.account-shell .stat:nth-child(3) strong{color:#506148}
+.account-shell .stat span{font-size:12px;color:#675c49}
+.account-shell .account-shortcuts{gap:12px;margin:18px 0 28px}
+.account-shell .account-shortcuts>a{position:relative;background:#fffdf8;border:1px solid #e7dfd1;border-radius:16px;padding:18px;transition:transform .2s,box-shadow .2s}
+.account-shell .account-shortcuts>a:hover{transform:translateY(-3px);box-shadow:0 9px 22px #86683c14}
+.shortcut-icon{display:grid;place-items:center;width:38px;height:38px;margin-bottom:3px;background:#f3e8e1;color:#ad7460;border-radius:12px}
+.shortcut-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.account-shortcuts>a:nth-child(2) .shortcut-icon{background:#ede8d9;color:#967c47}.account-shortcuts>a:nth-child(3) .shortcut-icon{background:#e8edde;color:#73805d}
+.account-shell .account-shortcuts b{font-size:13px;color:#494337}.account-shell .account-shortcuts span:not(.shortcut-icon){font-size:11px}
+.account-shell .account-orders-title{display:flex;align-items:center;gap:12px;font-size:22px;color:#493f30}.account-orders-title:after{content:'';height:1px;flex:1;background:#e4dbcc}
+.account-shell .order-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 20px;padding:22px;margin-bottom:14px;border-radius:18px;border-color:#e7dece;background:#fffdf9;box-shadow:0 5px 16px #74532b04}
+.account-shell .order-card header{grid-column:1/-1;padding-bottom:12px;margin:0}.account-shell .order-card header>b{font-size:12px;color:#665235;overflow-wrap:anywhere}
+.account-shell .order-card>small{grid-column:1;grid-row:2;margin:0}
+.account-shell .order-card .mini-images{grid-column:1;grid-row:3;margin:0;display:flex;gap:7px}
+.account-shell .order-card .mini-images .product-photo{width:64px;height:64px;object-fit:contain;border:1px solid #eee5d6;border-radius:12px;background-color:#f5efe3}
+.account-shell .order-card footer{grid-column:2;grid-row:2/4;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:12px;margin:0}
+.account-shell .order-card footer strong{font-size:15px;color:#6c5531}.account-shell .order-card footer .button{min-height:36px;border:0;background:#eee7d8;color:#76603a;padding:7px 14px;border-radius:9px}
+@media(max-width:760px){.account-shell{padding-top:22px}.account-shell .account-welcome{padding:26px 22px;min-height:250px;border-radius:20px;gap:20px}.account-welcome:before{background:linear-gradient(270deg,#f4ebddfa,#f4ebdddb),url('/images/brand/collection-bracelet-v2.png') center/cover}.account-shell .account-welcome h1{font-size:26px}.account-shell .account-layout{display:flex;flex-direction:column;gap:20px}.account-shell .account-nav{border-radius:14px;padding:8px;flex-wrap:nowrap}.account-shell .account-nav>a{padding:10px 13px}.account-shell .stat{padding:17px 12px;min-height:105px;border-radius:14px}.account-shell .stat span{font-size:10px}.account-shell .stat strong{font-size:29px}.account-shell .stat-grid{gap:8px}.account-shell .account-shortcuts{gap:8px}.account-shell .account-shortcuts>a{padding:13px 10px;border-radius:13px}.account-shell .account-shortcuts b{font-size:11px}.account-shell .account-shortcuts span:not(.shortcut-icon){font-size:9px}.account-shell .order-card{padding:17px;gap:10px;border-radius:16px}.account-shell .order-card header>b{font-size:10px}.account-shell .order-card .mini-images{flex-wrap:wrap}.account-shell .order-card .mini-images .product-photo{width:44px;height:44px}.account-shell .order-card footer strong{font-size:12px}.account-shell .order-card footer .button{font-size:10px}.account-shell .account-orders-title{font-size:20px}}
+@media(prefers-reduced-motion:no-preference){.account-shell .stat,.account-shell .account-shortcuts>a,.account-shell .order-card{animation:account-enter .45s ease both}.account-shell .stat:nth-child(2),.account-shell .order-card:nth-of-type(2){animation-delay:.06s}.account-shell .stat:nth-child(3),.account-shell .order-card:nth-of-type(3){animation-delay:.12s}@keyframes account-enter{from{opacity:.3;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}}

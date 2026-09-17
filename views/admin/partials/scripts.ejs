@@ -1,6 +1,6 @@
-<div id="adminToast" class="admin-toast"></div>
+<div id="adminToast" role="status" aria-live="polite" class="admin-toast"></div>
 <div id="adminConfirm" class="admin-modal-backdrop hidden">
-  <div class="admin-modal">
+  <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmText">
     <h3 id="confirmTitle">تأیید عملیات</h3>
     <p id="confirmText"></p>
     <div class="modal-actions">
@@ -10,6 +10,9 @@
   </div>
 </div>
 <script src="/js/admin/api.js"></script>
+<script src="/js/admin/catalog-lifecycle.js?v=1"></script>
 <script src="/js/admin/layout.js"></script>
 
-<link rel="stylesheet" href="/css/admin/alpha.css">
+
+
+<script src="/js/motion.js" defer></script>

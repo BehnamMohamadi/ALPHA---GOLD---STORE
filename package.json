@@ -5,7 +5,8 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon app.js",
+    "dev": "nodemon scripts/dev-local.js",
+    "dev:configured": "nodemon app.js",
     "start": "node app.js",
     "seed:admin": "node scripts/seed-admin.js",
     "migrate:payments": "node scripts/migrate-payment-flow.js",

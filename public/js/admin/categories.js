@@ -100,14 +100,6 @@ const loadCategories = async () => {
                       >
                         ویرایش
                       </button>
-
-                      <button
-                        class="table-btn"
-                        data-delete-category="${category._id}"
-                        data-name="${AdminAPI.escape(category.name)}"
-                      >
-                        حذف
-                      </button>
                     </div>
                   </td>
                 </tr>
@@ -123,39 +115,7 @@ const loadCategories = async () => {
           startCategoryEdit(button.dataset.editCategory);
       });
 
-    document
-      .querySelectorAll("[data-delete-category]")
-      .forEach((button) => {
-        button.onclick = async () => {
-          if (
-            !await adminConfirm(
-              `دسته «${button.dataset.name}» حذف شود؟`,
-            )
-          ) {
-            return;
-          }
 
-          try {
-            await AdminAPI.request(
-              `/api/categories/${button.dataset.deleteCategory}`,
-              { method: "DELETE" },
-            );
-
-            adminToast("دسته حذف شد.");
-
-            if (
-              form.elements.categoryId.value ===
-              button.dataset.deleteCategory
-            ) {
-              resetCategoryForm();
-            }
-
-            loadCategories();
-          } catch (error) {
-            adminToast(error.message, "error");
-          }
-        };
-      });
   } catch (error) {
     adminToast(error.message, "error");
   }
@@ -185,6 +145,12 @@ form.addEventListener("submit", async (event) => {
   submitButton.disabled = true;
 
   try {
+    if (categoryId && !body.isActive) {
+      const selection = await chooseCatalogDeactivation('category', categoryId);
+      if (!selection) return;
+      body.deactivation = selection;
+    }
+
     const payload = await AdminAPI.request(
       categoryId
         ? `/api/categories/${categoryId}`
