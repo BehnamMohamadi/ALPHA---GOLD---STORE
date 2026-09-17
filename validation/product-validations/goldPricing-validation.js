@@ -11,7 +11,7 @@ const pricesSchema = Joi.object({
 
 const wageSchema = Joi.object({
   type: Joi.string().valid("percent", "fixed").required(),
-  value: Joi.number().min(0).required(),
+  value: Joi.number().min(0).allow(null).required(),
 }).unknown(false);
 
 const createGoldPricingSchema = Joi.object({
@@ -26,9 +26,9 @@ const createGoldPricingSchema = Joi.object({
 
   wage: wageSchema,
 
-  profitPercent: Joi.number().min(0).default(7),
+  profitPercent: Joi.number().min(0).allow(null).default(null),
 
-  taxPercent: Joi.number().min(0).default(9),
+  taxPercent: Joi.number().min(0).allow(null).default(null),
 
   source: Joi.string().trim().max(100).default("manual"),
 }).unknown(false);
@@ -38,9 +38,9 @@ const updateGoldPricingSchema = Joi.object({
 
   wage: wageSchema,
 
-  profitPercent: Joi.number().min(0),
+  profitPercent: Joi.number().min(0).allow(null),
 
-  taxPercent: Joi.number().min(0),
+  taxPercent: Joi.number().min(0).allow(null),
 
   source: Joi.string().trim().max(100),
 })
