@@ -21,17 +21,51 @@
     window.addEventListener('pageshow', sync); sync();
   });
 
-  const normalizePriceValue = value => String(value || '').replace(/[^0-9]/g, '');
+  const faDigits = '۰۱۲۳۴۵۶۷۸۹';
+  const arDigits = '٠١٢٣٤٥٦٧٨٩';
+
+  const faToEnDigits = value =>
+    String(value ?? '')
+      .replace(/[۰-۹]/g, digit => String(faDigits.indexOf(digit)))
+      .replace(/[٠-٩]/g, digit => String(arDigits.indexOf(digit)));
+
+  const enToFaDigits = value =>
+    String(value ?? '').replace(/\d/g, digit => faDigits[Number(digit)]);
+
+  const normalizePriceValue = value =>
+    faToEnDigits(value).replace(/[^0-9]/g, '');
+
   const formatPriceValue = value => {
     const digits = normalizePriceValue(value);
-    return digits ? Number(digits).toLocaleString('en-US') : '';
+    if (!digits) return '';
+    const grouped = digits.replace(/\B(?=(\d{3})+(?!\d))/g, '٬');
+    return enToFaDigits(grouped);
   };
+
   document.querySelectorAll('[data-price-input]').forEach(input => {
     const sync = () => { input.value = formatPriceValue(input.value); };
+
     input.addEventListener('input', sync);
     input.addEventListener('blur', sync);
+
+    input.addEventListener('keydown', event => {
+      const allowedKeys = [
+        'Backspace','Delete','ArrowLeft','ArrowRight','Tab','Home','End'
+      ];
+
+      if (allowedKeys.includes(event.key) || event.ctrlKey || event.metaKey) return;
+
+      const isPersianDigit = /[۰-۹]/.test(event.key);
+      const isArabicDigit = /[٠-٩]/.test(event.key);
+
+      if (!isPersianDigit && !isArabicDigit) {
+        event.preventDefault();
+      }
+    });
+
     sync();
   });
+
   document.querySelectorAll('.filters form').forEach(form => {
     form.addEventListener('submit', () => {
       form.querySelectorAll('[data-price-input]').forEach(input => {
@@ -39,6 +73,7 @@
       });
     });
   });
+
   window.addEventListener('pageshow', () => {
     document.querySelectorAll('[data-price-input]').forEach(input => {
       input.value = formatPriceValue(input.value);
