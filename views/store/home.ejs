@@ -9,49 +9,44 @@
 <%- include('partials/audience-collections') %>
 <section class="section container guide-banner"><div><span class="eyebrow">خرید آگاهانه</span><h2>قیمت طلای شما چطور محاسبه می‌شود؟</h2><p>از وزن و عیار تا اجرت و مالیات؛ همه‌چیز روشن و قابل بررسی.</p></div><a class="button secondary" href="/guide">راهنمای خرید طلا ←</a></section>
 
-<section class="budget-discovery" aria-labelledby="budget-discovery-title">
-  <div class="budget-discovery__shell container">
-    <div class="budget-discovery__intro">
-      <span class="budget-discovery__eyebrow">انتخاب بر اساس بودجه</span>
-      <h2 id="budget-discovery-title">بودجه‌ات را انتخاب کن،<br>آلفا گزینه‌ها را پیدا می‌کند.</h2>
-      <p>قیمت‌ها بر اساس مبلغ نهایی فعلی هر محصول فیلتر می‌شوند؛ بازه دلخواهت را انتخاب کن و مستقیم وارد محصولات مناسب شو.</p>
-      <a class="budget-discovery__all" href="/shop">مشاهده همه محصولات <span aria-hidden="true">←</span></a>
-    </div>
+<section class="budget-filter" aria-labelledby="budget-filter-title">
+  <div class="budget-filter__inner container">
+    <header class="budget-filter__header">
+      <span class="budget-filter__eyebrow">خرید بر اساس بودجه</span>
+      <h2 id="budget-filter-title">بودجه‌ات چقدره؟</h2>
+      <p>یک بازه انتخاب کن تا فقط محصولاتی را ببینی که قیمت نهایی فعلی‌شان داخل همان محدوده است.</p>
+    </header>
 
-    <div class="budget-discovery__ranges" aria-label="فیلتر محصولات بر اساس قیمت">
-      <a class="budget-range" href="/shop?minPrice=1000000&maxPrice=4999999&sort=price" aria-label="محصولات بین ۱ تا ۵ میلیون تومان">
-        <span class="budget-range__label">شروع انتخاب</span>
-        <span class="budget-range__price"><b>۱</b><i>تا</i><b>۵</b></span>
-        <span class="budget-range__unit">میلیون تومان</span>
-        <span class="budget-range__go" aria-hidden="true">←</span>
+    <div class="budget-filter__options" aria-label="فیلتر قیمت محصولات">
+      <a class="budget-option" href="/shop?minPrice=1000000&maxPrice=4999999&sort=price">
+        <span class="budget-option__range"><b>۱</b><i>تا</i><b>۵</b></span>
+        <span class="budget-option__unit">میلیون تومان</span>
+        <span class="budget-option__arrow" aria-hidden="true">←</span>
       </a>
 
-      <a class="budget-range" href="/shop?minPrice=5000000&maxPrice=7999999&sort=price" aria-label="محصولات بین ۵ تا ۸ میلیون تومان">
-        <span class="budget-range__label">انتخاب اقتصادی</span>
-        <span class="budget-range__price"><b>۵</b><i>تا</i><b>۸</b></span>
-        <span class="budget-range__unit">میلیون تومان</span>
-        <span class="budget-range__go" aria-hidden="true">←</span>
+      <a class="budget-option" href="/shop?minPrice=5000000&maxPrice=7999999&sort=price">
+        <span class="budget-option__range"><b>۵</b><i>تا</i><b>۸</b></span>
+        <span class="budget-option__unit">میلیون تومان</span>
+        <span class="budget-option__arrow" aria-hidden="true">←</span>
       </a>
 
-      <a class="budget-range" href="/shop?minPrice=8000000&maxPrice=11999999&sort=price" aria-label="محصولات بین ۸ تا ۱۲ میلیون تومان">
-        <span class="budget-range__label">انتخاب محبوب</span>
-        <span class="budget-range__price"><b>۸</b><i>تا</i><b>۱۲</b></span>
-        <span class="budget-range__unit">میلیون تومان</span>
-        <span class="budget-range__go" aria-hidden="true">←</span>
+      <a class="budget-option" href="/shop?minPrice=8000000&maxPrice=11999999&sort=price">
+        <span class="budget-option__range"><b>۸</b><i>تا</i><b>۱۲</b></span>
+        <span class="budget-option__unit">میلیون تومان</span>
+        <span class="budget-option__arrow" aria-hidden="true">←</span>
       </a>
 
-      <a class="budget-range" href="/shop?minPrice=12000000&maxPrice=20000000&sort=price" aria-label="محصولات بین ۱۲ تا ۲۰ میلیون تومان">
-        <span class="budget-range__label">انتخاب ویژه</span>
-        <span class="budget-range__price"><b>۱۲</b><i>تا</i><b>۲۰</b></span>
-        <span class="budget-range__unit">میلیون تومان</span>
-        <span class="budget-range__go" aria-hidden="true">←</span>
+      <a class="budget-option" href="/shop?minPrice=12000000&maxPrice=20000000&sort=price">
+        <span class="budget-option__range"><b>۱۲</b><i>تا</i><b>۲۰</b></span>
+        <span class="budget-option__unit">میلیون تومان</span>
+        <span class="budget-option__arrow" aria-hidden="true">←</span>
       </a>
     </div>
-  </div>
 
-  <div class="budget-discovery__foot container">
-    <span>قیمت محصولات با نرخ فعلی طلا محاسبه می‌شود.</span>
-    <a href="/guide">نحوه محاسبه قیمت طلا ←</a>
+    <div class="budget-filter__footer">
+      <span>قیمت‌ها با نرخ فعلی طلا محاسبه می‌شوند.</span>
+      <a href="/shop">مشاهده همه محصولات ←</a>
+    </div>
   </div>
 </section>
 </main><%- include('partials/footer') %>
