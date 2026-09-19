@@ -142,7 +142,7 @@
           کاربران
         </span>
       </a>
-      <% for(const [key,label] of Object.entries({settings:'تنظیمات فروشگاه',sms:'پیامک و ورود',shipping:'روش‌های ارسال',content:'محتوای سایت',support:'پشتیبانی',audit:'رویدادهای مدیریت'})){ %>
+      <% for(const [key,label] of Object.entries({settings:'تنظیمات فروشگاه',sms:'پیامک و ورود',shipping:'روش‌های ارسال',content:'محتوای سایت',audit:'رویدادهای مدیریت'})){ %>
       <a class="<%= navClass(key) %>" href="/admin/<%= key %>"><span class="nav-icon">◇</span><span><%= label %></span></a><% } %><a class="admin-nav-link" href="/" target="_blank" rel="noopener">مشاهده فروشگاه ↗</a>
     </nav>
 
