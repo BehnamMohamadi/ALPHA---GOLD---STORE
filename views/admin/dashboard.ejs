@@ -249,8 +249,14 @@
 
             <div>
               <span class="status-dot danger"></span>
-              <span>پرداخت‌نشده</span>
-              <strong id="unpaidOrders">—</strong>
+              <span>سفارش‌های ارسال‌نشده</span>
+              <strong id="unshippedOrders">—</strong>
+            </div>
+
+            <div>
+              <span class="status-dot warning"></span>
+              <span>سفارش‌های تحویل‌نشده</span>
+              <strong id="undeliveredOrders">—</strong>
             </div>
 
             <div>
@@ -266,6 +272,6 @@
 
   <%- include("partials/scripts") %>
 
-  <script src="/js/admin/dashboard.js"></script>
+  <script src="/js/admin/dashboard.js?v=fulfillment-status-2"></script>
 </body>
 </html>
