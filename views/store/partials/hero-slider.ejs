@@ -8,7 +8,7 @@
   <% slides.forEach((slide,i)=>{ %>
   <article class="hero-slide <%= i===0?'is-active':'' %>" data-slide="<%= i %>" role="group" aria-roledescription="اسلاید" aria-label="<%= i+1 %> از ۴" aria-hidden="<%= i!==0 %>" <%- i?'inert':'' %>>
     <img class="hero-slide-image" src="/images/brand/<%= slide.image %>" alt="<%= slide.alt %>" width="1664" height="936" <%- i===0?'fetchpriority="high" loading="eager"':'loading="lazy"' %> decoding="async">
-    <div class="slide-copy"><span class="eyebrow"><%= slide.eyebrow %></span><% if(i===0){ %><h1 class="slide-title"><%= slide.title %></h1><% }else{ %><h2 class="slide-title"><%= slide.title %></h2><% } %><p><%= slide.text %></p><a class="button" href="<%= slide.link %>"><%= slide.action %> ←</a></div>
+    <div class="slide-copy"><span class="eyebrow"><%= slide.eyebrow %></span><% if(i===0){ %><h1 class="slide-title"><%= slide.title %></h1><% }else{ %><h2 class="slide-title"><%= slide.title %></h2><% } %><p><%= slide.text %></p><a class="button" href="<%= slide.link %>"><%= slide.action %></a></div>
   </article>
   <% }) %>
   <div class="slider-controls" hidden>
