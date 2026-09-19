@@ -77,6 +77,22 @@ test('cart, price snapshot, shipping total and idempotent mock payment',async()=
   const success=await api('/api/payments/mock/'+payment._id+'/success','POST');assert.equal(success.status,200,JSON.stringify(success.data));assert.equal(success.data.data.payment.status,'paid');
   await api('/api/payments/mock/'+payment._id+'/success','POST');assert.equal((await Product.findById(p._id)).stock,8);assert.equal((await Order.findById(order._id)).status,'confirmed');
 });
+test('customer order list only exposes registered post-payment orders',async()=>{
+  let list=await api('/api/orders?limit=100');
+  assert.equal(list.status,200);
+  assert.equal(list.data.data.orders.some(o=>String(o._id)===String(order._id)),true);
+
+  await Order.updateOne({_id:order._id},{$set:{status:'pending',paymentStatus:'unpaid'}});
+  list=await api('/api/orders?limit=100');
+  assert.equal(list.data.data.orders.some(o=>String(o._id)===String(order._id)),false);
+
+  await Order.updateOne({_id:order._id},{$set:{status:'expired',paymentStatus:'failed'}});
+  list=await api('/api/orders?limit=100');
+  assert.equal(list.data.data.orders.some(o=>String(o._id)===String(order._id)),false);
+  assert.equal((await api('/api/orders/'+order._id)).status,404);
+
+  await Order.updateOne({_id:order._id},{$set:{status:'confirmed',paymentStatus:'paid'}});
+});
 test('order ownership and fulfillment transitions are protected',async()=>{
   assert.equal((await api('/api/orders/'+order._id,'GET',null,other)).status,404);
   assert.equal((await api('/api/orders/admin/'+order._id,'PATCH',{status:'delivered'},admin)).status,409);
