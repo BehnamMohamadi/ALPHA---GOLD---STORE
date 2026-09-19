@@ -10,6 +10,20 @@ const { AppError } = require("../../utils/app-error");
 
 const { catchAsync } = require("../../utils/catch-async");
 
+// Customer account shows only orders that reached the real post-payment lifecycle.
+// Draft quotes, in-progress payment records and expired orders stay available to admins only.
+const CUSTOMER_VISIBLE_ORDER_STATUSES = [
+  "review",
+  "confirmed",
+  "shipped",
+  "delivered",
+];
+
+const customerOrderFilter = (userId) => ({
+  user: userId,
+  status: { $in: CUSTOMER_VISIBLE_ORDER_STATUSES },
+});
+
 const prepareOrder = catchAsync(async (req, res) => {
   const { order, created } = await prepareCurrentOrder(
     req.user._id,
@@ -33,11 +47,12 @@ const getMyOrders = catchAsync(async (req, res) => {
   };
 
   delete query.user;
+  delete query.status;
+
+  const baseFilter = customerOrderFilter(req.user._id);
 
   const features = new ApiFeatures(
-    Order.find({
-      user: req.user._id,
-    }),
+    Order.find(baseFilter),
 
     query,
   )
@@ -50,8 +65,7 @@ const getMyOrders = catchAsync(async (req, res) => {
 
   const total = await Order.countDocuments({
     ...features.filterObject,
-
-    user: req.user._id,
+    ...baseFilter,
   });
 
   res.status(200).json({
@@ -81,14 +95,10 @@ const getMyOrderHistory = catchAsync(async (req, res) => {
   delete query.user;
   delete query.status;
 
-  const features = new ApiFeatures(
-    Order.find({
-      user: req.user._id,
+  const baseFilter = customerOrderFilter(req.user._id);
 
-      status: {
-        $ne: "pending",
-      },
-    }),
+  const features = new ApiFeatures(
+    Order.find(baseFilter),
 
     query,
   )
@@ -101,12 +111,7 @@ const getMyOrderHistory = catchAsync(async (req, res) => {
 
   const total = await Order.countDocuments({
     ...features.filterObject,
-
-    user: req.user._id,
-
-    status: {
-      $ne: "pending",
-    },
+    ...baseFilter,
   });
 
   res.status(200).json({
@@ -132,7 +137,7 @@ const getMyOrder = catchAsync(async (req, res, next) => {
   const order = await Order.findOne({
     _id: req.params.orderId,
 
-    user: req.user._id,
+    ...customerOrderFilter(req.user._id),
   });
 
   if (!order) {
