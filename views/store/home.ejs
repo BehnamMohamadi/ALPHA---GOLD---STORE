@@ -9,43 +9,66 @@
 <%- include('partials/audience-collections') %>
 <section class="section container guide-banner"><div><span class="eyebrow">خرید آگاهانه</span><h2>قیمت طلای شما چطور محاسبه می‌شود؟</h2><p>از وزن و عیار تا اجرت و مالیات؛ همه‌چیز روشن و قابل بررسی.</p></div><a class="button secondary" href="/guide">راهنمای خرید طلا ←</a></section>
 
-<section class="budget-filter" aria-labelledby="budget-filter-title">
-  <div class="budget-filter__inner container">
-    <header class="budget-filter__header">
-      <span class="budget-filter__eyebrow">خرید بر اساس بودجه</span>
-      <h2 id="budget-filter-title">بودجه‌ات چقدره؟</h2>
-      <p>یک بازه انتخاب کن تا فقط محصولاتی را ببینی که قیمت نهایی فعلی‌شان داخل همان محدوده است.</p>
+<section class="alpha-price-bands" aria-labelledby="alpha-price-bands-title">
+  <div class="alpha-price-bands__inner container">
+    <header class="alpha-price-bands__head">
+      <span class="alpha-price-bands__eyebrow">انتخاب بر اساس بودجه</span>
+      <h2 id="alpha-price-bands-title">محدوده قیمتت را انتخاب کن</h2>
     </header>
 
-    <div class="budget-filter__options" aria-label="فیلتر قیمت محصولات">
-      <a class="budget-option" href="/shop?minPrice=1000000&maxPrice=4999999&sort=price">
-        <span class="budget-option__range"><b>۱</b><i>تا</i><b>۵</b></span>
-        <span class="budget-option__unit">میلیون تومان</span>
-        <span class="budget-option__arrow" aria-hidden="true">←</span>
+    <div class="alpha-price-bands__grid" aria-label="فیلتر محصولات بر اساس قیمت">
+      <a class="alpha-price-card" href="/shop?minPrice=1000000&maxPrice=4999999&sort=price" aria-label="مشاهده محصولات بین ۱ تا ۵ میلیون تومان">
+        <div class="alpha-price-card__visual">
+          <span class="alpha-price-card__spark alpha-price-card__spark--one" aria-hidden="true">✦</span>
+          <span class="alpha-price-card__spark alpha-price-card__spark--two" aria-hidden="true">·</span>
+          <div class="alpha-price-card__number"><b>۱</b><i>—</i><b>۵</b></div>
+        </div>
+        <div class="alpha-price-card__body">
+          <strong>از ۱ تا ۵ میلیون تومان</strong>
+          <span>مشاهده محصولات <i aria-hidden="true">←</i></span>
+        </div>
       </a>
 
-      <a class="budget-option" href="/shop?minPrice=5000000&maxPrice=7999999&sort=price">
-        <span class="budget-option__range"><b>۵</b><i>تا</i><b>۸</b></span>
-        <span class="budget-option__unit">میلیون تومان</span>
-        <span class="budget-option__arrow" aria-hidden="true">←</span>
+      <a class="alpha-price-card" href="/shop?minPrice=5000000&maxPrice=7999999&sort=price" aria-label="مشاهده محصولات بین ۵ تا ۸ میلیون تومان">
+        <div class="alpha-price-card__visual">
+          <span class="alpha-price-card__spark alpha-price-card__spark--one" aria-hidden="true">✦</span>
+          <span class="alpha-price-card__spark alpha-price-card__spark--two" aria-hidden="true">·</span>
+          <div class="alpha-price-card__number"><b>۵</b><i>—</i><b>۸</b></div>
+        </div>
+        <div class="alpha-price-card__body">
+          <strong>از ۵ تا ۸ میلیون تومان</strong>
+          <span>مشاهده محصولات <i aria-hidden="true">←</i></span>
+        </div>
       </a>
 
-      <a class="budget-option" href="/shop?minPrice=8000000&maxPrice=11999999&sort=price">
-        <span class="budget-option__range"><b>۸</b><i>تا</i><b>۱۲</b></span>
-        <span class="budget-option__unit">میلیون تومان</span>
-        <span class="budget-option__arrow" aria-hidden="true">←</span>
+      <a class="alpha-price-card" href="/shop?minPrice=8000000&maxPrice=11999999&sort=price" aria-label="مشاهده محصولات بین ۸ تا ۱۲ میلیون تومان">
+        <div class="alpha-price-card__visual">
+          <span class="alpha-price-card__spark alpha-price-card__spark--one" aria-hidden="true">✦</span>
+          <span class="alpha-price-card__spark alpha-price-card__spark--two" aria-hidden="true">·</span>
+          <div class="alpha-price-card__number"><b>۸</b><i>—</i><b>۱۲</b></div>
+        </div>
+        <div class="alpha-price-card__body">
+          <strong>از ۸ تا ۱۲ میلیون تومان</strong>
+          <span>مشاهده محصولات <i aria-hidden="true">←</i></span>
+        </div>
       </a>
 
-      <a class="budget-option" href="/shop?minPrice=12000000&maxPrice=20000000&sort=price">
-        <span class="budget-option__range"><b>۱۲</b><i>تا</i><b>۲۰</b></span>
-        <span class="budget-option__unit">میلیون تومان</span>
-        <span class="budget-option__arrow" aria-hidden="true">←</span>
+      <a class="alpha-price-card" href="/shop?minPrice=12000000&maxPrice=20000000&sort=price" aria-label="مشاهده محصولات بین ۱۲ تا ۲۰ میلیون تومان">
+        <div class="alpha-price-card__visual">
+          <span class="alpha-price-card__spark alpha-price-card__spark--one" aria-hidden="true">✦</span>
+          <span class="alpha-price-card__spark alpha-price-card__spark--two" aria-hidden="true">·</span>
+          <div class="alpha-price-card__number"><b>۱۲</b><i>—</i><b>۲۰</b></div>
+        </div>
+        <div class="alpha-price-card__body">
+          <strong>از ۱۲ تا ۲۰ میلیون تومان</strong>
+          <span>مشاهده محصولات <i aria-hidden="true">←</i></span>
+        </div>
       </a>
     </div>
 
-    <div class="budget-filter__footer">
-      <span>قیمت‌ها با نرخ فعلی طلا محاسبه می‌شوند.</span>
-      <a href="/shop">مشاهده همه محصولات ←</a>
+    <div class="alpha-price-bands__foot">
+      <span>قیمت‌ها بر اساس نرخ فعلی طلا محاسبه می‌شوند.</span>
+      <a href="/shop">همه محصولات ←</a>
     </div>
   </div>
 </section>
