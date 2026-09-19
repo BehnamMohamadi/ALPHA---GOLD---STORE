@@ -9,4 +9,53 @@
 <section class="section container"><div class="section-heading"><div><span class="eyebrow">سادگی، همیشه زیباست</span><h2>تازه‌های مجموعه آلفا</h2></div><a class="browse-products" href="/shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg><span>مشاهده همه محصولات</span></a></div><p class="rail-hint" id="collection-hint"><span class="drag-cue" aria-hidden="true"></span>برای دیدن بیشتر بکشید</p><div class="products-grid collection-rail" data-product-rail tabindex="0" role="region" aria-label="تازه‌های مجموعه آلفا" aria-describedby="collection-hint"><% products.forEach(p=>{ %><%- include('partials/card',{p}) %><% }) %><% if(!products.length){ %><p class="empty">در حال آماده‌سازی مجموعه جدید هستیم.</p><% } %></div></section>
 <%- include('partials/audience-collections') %>
 <section class="section container guide-banner"><div><span class="eyebrow">خرید آگاهانه</span><h2>قیمت طلای شما چطور محاسبه می‌شود؟</h2><p>از وزن و عیار تا اجرت و مالیات؛ همه‌چیز روشن و قابل بررسی.</p></div><a class="button secondary" href="/guide">راهنمای خرید طلا ←</a></section>
+
+<section class="price-finder" aria-labelledby="price-finder-title">
+  <div class="price-finder__inner container">
+    <header class="price-finder__head">
+      <div>
+        <span class="price-finder__eyebrow">انتخاب بر اساس بودجه</span>
+        <h2 id="price-finder-title">با بودجه‌ات طلا پیدا کن</h2>
+        <p>بازه مورد نظرت را انتخاب کن؛ محصولات بر اساس قیمت نهایی فعلی فیلتر می‌شوند.</p>
+      </div>
+      <a class="price-finder__all" href="/shop">همه محصولات <span aria-hidden="true">←</span></a>
+    </header>
+
+    <div class="price-finder__grid">
+      <a class="price-range-card" href="/shop?minPrice=1000000&maxPrice=4999999&sort=price" aria-label="محصولات از ۱ تا ۵ میلیون تومان">
+        <span class="price-range-card__index">01</span>
+        <small>بازه قیمت</small>
+        <strong><b>۱</b><i>تا</i><b>۵</b></strong>
+        <span class="price-range-card__unit">میلیون تومان</span>
+        <span class="price-range-card__arrow" aria-hidden="true">←</span>
+      </a>
+
+      <a class="price-range-card" href="/shop?minPrice=5000000&maxPrice=7999999&sort=price" aria-label="محصولات از ۵ تا ۸ میلیون تومان">
+        <span class="price-range-card__index">02</span>
+        <small>بازه قیمت</small>
+        <strong><b>۵</b><i>تا</i><b>۸</b></strong>
+        <span class="price-range-card__unit">میلیون تومان</span>
+        <span class="price-range-card__arrow" aria-hidden="true">←</span>
+      </a>
+
+      <a class="price-range-card" href="/shop?minPrice=8000000&maxPrice=11999999&sort=price" aria-label="محصولات از ۸ تا ۱۲ میلیون تومان">
+        <span class="price-range-card__index">03</span>
+        <small>بازه قیمت</small>
+        <strong><b>۸</b><i>تا</i><b>۱۲</b></strong>
+        <span class="price-range-card__unit">میلیون تومان</span>
+        <span class="price-range-card__arrow" aria-hidden="true">←</span>
+      </a>
+
+      <a class="price-range-card" href="/shop?minPrice=12000000&maxPrice=20000000&sort=price" aria-label="محصولات از ۱۲ تا ۲۰ میلیون تومان">
+        <span class="price-range-card__index">04</span>
+        <small>بازه قیمت</small>
+        <strong><b>۱۲</b><i>تا</i><b>۲۰</b></strong>
+        <span class="price-range-card__unit">میلیون تومان</span>
+        <span class="price-range-card__arrow" aria-hidden="true">←</span>
+      </a>
+    </div>
+
+    <p class="price-finder__note">قیمت محصولات با نرخ فعلی طلا محاسبه می‌شود و ممکن است با تغییر نرخ، محصول بین بازه‌ها جابه‌جا شود.</p>
+  </div>
+</section>
 </main><%- include('partials/footer') %>
