@@ -25,7 +25,18 @@ router.use(wrap(async (req, res, next) => {
 }));
 router.get("/", wrap(async (req, res) => res.render("store/home", { ...await catalog({ limit: 8 }), settings: res.locals.settings, title: "آلفا — طلایی برای هر روز" })));
 router.get(["/shop", "/search", "/category/:slug"], wrap(async (req, res) => {
+  const toAsciiDigits = value => String(value ?? "")
+    .replace(/[۰-۹]/g, digit => String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit)))
+    .replace(/[٠-٩]/g, digit => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)))
+    .replace(/[,٬\s]/g, "");
+  const canonicalPrice = value => {
+    const numeric = Number(toAsciiDigits(value));
+    if (!(numeric > 0)) return "";
+    return String(({ 4999999: 5000000, 7999999: 8000000, 11999999: 12000000 })[numeric] || numeric);
+  };
   const query = { ...req.query, ...(req.params.slug ? { category: req.params.slug } : {}) };
+  if (query.minPrice != null) query.minPrice = canonicalPrice(query.minPrice);
+  if (query.maxPrice != null) query.maxPrice = canonicalPrice(query.maxPrice);
   const data = await catalog(query); const category = data.subcategories.find(c => String(c._id) === query.subCategory || c.slug === query.subCategory) || data.categories.find(c => c.slug === req.params.slug || String(c._id) === query.category);
   res.render("store/shop", { ...data, settings: res.locals.settings, query, title: query.q ? `جست‌وجوی «${String(query.q).slice(0, 80)}»` : category?.name || ({female:"زیورآلات زنانه",male:"زیورآلات مردانه",kids:"زیورآلات کودکانه",unisex:"زنانه و مردانه (مشترک)"}[query.gender]) || "زیورآلات آلفا" });
 }));
