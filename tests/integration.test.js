@@ -155,8 +155,8 @@ test('admin settings, shipping, user editing and status actions persist',async()
  const act=(path,method,body)=>api(path,method,body,admin);
  let r=await act('/api/store/admin/shipping','POST',{name:'ارسال آزمایشی مدیریت',cost:20000,provinces:['تهران'],isActive:true});assert.equal(r.status,200,JSON.stringify(r.data));const id=r.data.data.method._id;
  assert.equal((await act('/api/store/admin/shipping/'+id,'PUT',{name:'ارسال ویرایش‌شده',cost:30000,isActive:false,provinces:[]})).status,200);
- assert.equal((await act('/api/store/admin/settings','PUT',{heroTitle:'عنوان آزمایشی',otpTtlSeconds:120,otpResendSeconds:60})).status,200);
- assert.equal((await act('/api/store/admin/settings')).data.data.settings.heroTitle,'عنوان آزمایشی');
+ assert.equal((await act('/api/store/admin/settings','PUT',{heroTitle:'عنوان آزمایشی',whatsapp:'https://wa.me/989121234567',otpTtlSeconds:120,otpResendSeconds:60})).status,200);
+ const savedSettings=(await act('/api/store/admin/settings')).data.data.settings;assert.equal(savedSettings.heroTitle,'عنوان آزمایشی');assert.equal(savedSettings.whatsapp,'https://wa.me/989121234567');
  assert.equal((await act('/api/users/'+other._id,'PATCH',{firstname:'ویرایش',accountStatus:{status:'suspended',reason:'other'}})).status,200);
  assert.equal((await api('/api/account','GET',null,other)).status,403);
  assert.equal((await act('/api/users/'+other._id,'PATCH',{accountStatus:{status:'active'}})).status,200);
