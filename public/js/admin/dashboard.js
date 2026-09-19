@@ -108,9 +108,16 @@ const loadDashboard =
       );
 
       setText(
-        "unpaidOrders",
+        "unshippedOrders",
         AdminAPI.number(
-          orders.unpaid || 0,
+          orders.unshipped || 0,
+        ),
+      );
+
+      setText(
+        "undeliveredOrders",
+        AdminAPI.number(
+          orders.undelivered || 0,
         ),
       );
 
