@@ -35,7 +35,10 @@ async function catalog(query = {}) {
   const weight = Number(query.maxWeight); if (weight > 0 && Number.isFinite(weight)) filter.goldWeight = { $lte: weight };
   const fresh = rateIsFresh(goldPricing, settings?.maxRateAgeMinutes);
   let products = (await Product.find(filter).populate("category", "name slug").populate("subCategory", "name slug").sort("-createdAt").lean()).map(p => priceProduct(p, goldPricing, fresh));
-  const parsePrice = value => Number(String(value ?? "").replace(/[,٬\s]/g, ""));
+  const toEnglishDigits = value => String(value ?? "")
+    .replace(/[۰-۹]/g, digit => String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit)))
+    .replace(/[٠-٩]/g, digit => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)));
+  const parsePrice = value => Number(toEnglishDigits(value).replace(/[,٬\s]/g, ""));
   const min = parsePrice(query.minPrice), max = parsePrice(query.maxPrice);
   if (min > 0) products = products.filter(p => p.price?.finalPrice >= min);
   if (max > 0) products = products.filter(p => p.price?.finalPrice <= max);
