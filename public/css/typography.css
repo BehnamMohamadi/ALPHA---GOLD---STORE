@@ -1,29 +1,54 @@
 /* Storefront typography — deliberately loaded last. */
-body{font-size:15px}
-p{font-size:15px}
-small{font-size:12.5px}
-.desktop-nav{font-size:14px}
-.alpha-search input{font-size:14px}
-.button,.text-link,.text-button{font-size:13.5px}
-.eyebrow{font-size:12px}
-.section-heading>a{font-size:13px}
-.product-card .product-info .eyebrow{font-size:10px}
-.product-card .product-info h3{font-size:14px;line-height:22px}
-.product-card .product-meta>span{font-size:11px}
-.product-card .product-meta>strong{font-size:13px}
-.product-card .cart-add{font-size:12px}
-.detail-specs{font-size:12px}
-.detail-description{font-size:14px}
-.price-breakdown{font-size:13px}
-.price-breakdown summary{font-size:15px}
-.filters label,label{font-size:13.5px}
-input,select,textarea{font-size:14px}
-.page-heading>span,.page-heading>a{font-size:13px}
-.breadcrumbs{font-size:12px}
-.prose p{font-size:15px}
-.content-art nav{font-size:13px}
-.footer-top h3{font-size:14px}
-.footer-top>div>a:not(.brand){font-size:13px}
-.footer-brand p{font-size:13px}
-.footer-bottom{font-size:11px}
-@media(max-width:760px){body{font-size:14px}p{font-size:14px}small{font-size:12px}#mobile-nav{font-size:13.5px}.alpha-search input{font-size:13.5px}.button,.text-link,.text-button{font-size:13px}.product-card .product-info h3{font-size:13px}.product-card .product-meta>span{font-size:10.5px}.product-card .product-meta>strong{font-size:12px}.prose p{font-size:14px}.footer-top>div>a:not(.brand){font-size:12px}.footer-brand p{font-size:11.5px}}
+body{font-size:16px}
+p{font-size:16px}
+small{font-size:13.5px}
+h1{font-size:36px}
+h2{font-size:29px}
+h3{font-size:18px}
+.desktop-nav{font-size:15px}
+.alpha-search input{font-size:15px}
+.button,.text-link,.text-button{font-size:14.5px}
+.eyebrow{font-size:13px}
+.section-heading>a{font-size:14px}
+.product-card .product-info .eyebrow{font-size:11px}
+.product-card .product-info h3{font-size:15px;line-height:23px}
+.product-card .product-meta>span{font-size:12px}
+.product-card .product-meta>strong{font-size:14px}
+.product-card .cart-add{font-size:13px}
+.detail-specs{font-size:13px}
+.detail-description{font-size:15px}
+.price-breakdown{font-size:14px}
+.price-breakdown summary{font-size:16px}
+.filters label,label{font-size:14.5px}
+input,select,textarea{font-size:15px}
+.page-heading>span,.page-heading>a{font-size:14px}
+.breadcrumbs{font-size:13px}
+.prose p{font-size:16px}
+.content-art nav{font-size:14px}
+.footer-top h3{font-size:15px}
+.footer-top>div>a:not(.brand){font-size:14px}
+.footer-brand p{font-size:14px}
+.footer-bottom{font-size:12px}
+.gold-rate-pill,.rate-label{font-size:13px}
+@media(max-width:760px){
+  body{font-size:15px}
+  p{font-size:15px}
+  small{font-size:13px}
+  h1{font-size:30px}
+  h2{font-size:25px}
+  h3{font-size:17px}
+  #mobile-nav{font-size:14.5px}
+  .alpha-search input{font-size:14.5px}
+  .button,.text-link,.text-button{font-size:14px}
+  .eyebrow{font-size:12px}
+  .product-card .product-info h3{font-size:14px;line-height:22px}
+  .product-card .product-meta>span{font-size:11.5px}
+  .product-card .product-meta>strong{font-size:13px}
+  .product-card .cart-add{font-size:12px}
+  .filters label,label{font-size:14px}
+  input,select,textarea{font-size:14.5px}
+  .prose p{font-size:15px}
+  .footer-top>div>a:not(.brand){font-size:13px}
+  .footer-brand p{font-size:12.5px}
+  .footer-bottom{font-size:11.5px}
+}
