@@ -103,3 +103,8 @@ body{font-size:15px}
   .prose p{font-size:14px}
   .footer-top>div>a:not(.brand){font-size:12px}
 }
+
+
+/* Active catalog price-filter badge. */
+.active-price-filter{display:inline-flex;align-items:center;margin-top:10px;padding:6px 11px;border:1px solid #dfd0b5;border-radius:999px;background:#f4ede1;color:#83683e;font-size:11px;font-weight:550;line-height:1.6}
+@media(max-width:760px){.active-price-filter{margin-top:8px;padding:5px 9px;font-size:10.5px}}
