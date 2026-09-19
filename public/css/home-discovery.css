@@ -166,7 +166,7 @@
   line-height:1;
 }
 .alpha-price-card__number b{
-  color:#17130f;
+  color:#4a321b;
   font-size:clamp(56px,5.1vw,82px);
   font-weight:850;
   letter-spacing:-.04em;
@@ -174,7 +174,7 @@
   text-shadow:none;
 }
 .alpha-price-card__number i{
-  color:#17130f;
+  color:#4a321b;
   font-style:normal;
   font-size:38px;
   font-weight:800;
