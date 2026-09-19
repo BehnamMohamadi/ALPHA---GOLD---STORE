@@ -150,6 +150,9 @@ test('admin catalog CRUD, dependency guards, media upload and filtered reads',as
  assert.equal((await act('/api/categories/'+c._id,'DELETE')).status,204);
  assert.equal((await act('/api/products/'+p._id,'DELETE')).status,409);
  for(const url of ['/api/admin/dashboard','/api/categories/all','/api/subCategories/all','/api/products/all?stock[lte]=10','/api/orders/all','/api/payments/all','/api/users','/api/cart/all','/api/store/admin/audit'])assert.equal((await act(url)).status,200,url);
+ const dashboard=(await act('/api/admin/dashboard')).data.data.dashboard;
+ assert.equal(typeof dashboard.orders.unshipped,'number');
+ assert.equal(typeof dashboard.orders.undelivered,'number');
 });
 test('admin settings, shipping, user editing and status actions persist',async()=>{
  const act=(path,method,body)=>api(path,method,body,admin);
