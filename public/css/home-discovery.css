@@ -166,22 +166,19 @@
   line-height:1;
 }
 .alpha-price-card__number b{
-  color:#f7dfa4;
+  color:#17130f;
   font-size:clamp(56px,5.1vw,82px);
   font-weight:850;
   letter-spacing:-.04em;
-  -webkit-text-stroke:1px rgba(145,94,27,.42);
-  text-shadow:
-    0 1px 0 #fff8de,
-    0 3px 0 #d2a85a,
-    0 7px 16px rgba(94,58,17,.22);
+  -webkit-text-stroke:0;
+  text-shadow:none;
 }
 .alpha-price-card__number i{
-  color:#efd28f;
+  color:#17130f;
   font-style:normal;
   font-size:38px;
   font-weight:800;
-  text-shadow:0 3px 10px rgba(94,58,17,.16);
+  text-shadow:none;
 }
 
 .alpha-price-card__body{
