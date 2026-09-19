@@ -24,165 +24,224 @@
 @media(max-width:420px){.jewelry-types .jewelry-type{flex-basis:42%;min-width:120px}}
 @media(prefers-reduced-motion:reduce){.jewelry-type-photo,.jewelry-type-photo img{transition:none}}
 
-/* ALPHA price bands — simple visual price cards. */
+/* ALPHA price bands — champagne/gold budget cards inspired by the approved mockup. */
 .alpha-price-bands{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
   margin-top:30px;
-  padding:48px 0 40px;
-  background:#faf8f3;
-  border-top:1px solid #e8dfd2;
+  padding:54px 0 48px;
+  background:
+    radial-gradient(circle at 8% 18%,rgba(216,181,112,.16),transparent 22%),
+    radial-gradient(circle at 94% 14%,rgba(219,190,132,.13),transparent 23%),
+    linear-gradient(180deg,#fbf8f2 0%,#f6f0e6 100%);
+  border-top:1px solid #eadfce;
 }
-.alpha-price-bands__head{
-  text-align:center;
-  margin-bottom:28px;
+.alpha-price-bands:before,
+.alpha-price-bands:after{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  border-radius:50%;
+  border:1px solid rgba(178,137,74,.18);
+  pointer-events:none;
 }
+.alpha-price-bands:before{width:330px;height:330px;top:-235px;right:-90px}
+.alpha-price-bands:after{width:290px;height:290px;left:-125px;bottom:-210px}
+
+.alpha-price-bands__head{text-align:center;margin:0 auto 30px}
 .alpha-price-bands__eyebrow{
-  display:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin-bottom:4px;
+  color:#b58a43;
+  font-size:17px;
 }
+.alpha-price-bands__eyebrow:before,
+.alpha-price-bands__eyebrow:after{
+  content:'';
+  width:64px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,#cba45e);
+}
+.alpha-price-bands__eyebrow:after{background:linear-gradient(90deg,#cba45e,transparent)}
 .alpha-price-bands__head h2{
   margin:0;
   color:#4a321b;
-  font-size:clamp(34px,3.4vw,46px);
-  font-weight:780;
-  line-height:1.4;
+  font-size:clamp(34px,3.6vw,50px);
+  font-weight:760;
+  line-height:1.45;
 }
 .alpha-price-bands__head p{
-  margin:7px 0 0;
-  color:#948574;
-  font-size:17px;
+  margin:5px 0 0;
+  color:#9a8974;
+  font-size:19px;
   font-weight:500;
 }
+
 .alpha-price-bands__grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:18px;
+  gap:20px;
 }
 .alpha-price-card{
   display:block;
   min-width:0;
   overflow:hidden;
-  border:1px solid #dfd3c2;
-  border-radius:20px;
-  background:#fff;
-  box-shadow:0 8px 24px rgba(82,60,31,.06);
-  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+  border:1px solid #ddc492;
+  border-radius:22px;
+  background:#fffaf2;
+  box-shadow:0 12px 28px rgba(102,73,33,.09);
+  transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease;
 }
 .alpha-price-card__visual{
   position:relative;
   display:grid;
   place-items:center;
-  min-height:220px;
+  min-height:235px;
   overflow:hidden;
   background:
-    linear-gradient(135deg,#d7b77f 0%,#f3e3c3 45%,#dcc08d 100%);
+    radial-gradient(circle at 18% 24%,rgba(255,255,255,.9) 0 1px,transparent 2px),
+    radial-gradient(circle at 74% 28%,rgba(255,255,255,.75) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 54% 78%,rgba(255,255,255,.7) 0 1px,transparent 2px),
+    linear-gradient(140deg,#d7ba83 0%,#f5e8cb 42%,#e2c794 70%,#c8a66a 100%);
 }
 .alpha-price-card:nth-child(2) .alpha-price-card__visual{
-  background:linear-gradient(135deg,#d4b175 0%,#f6ead0 45%,#d9bd88 100%);
+  background:
+    radial-gradient(circle at 22% 32%,rgba(255,255,255,.8) 0 1px,transparent 2px),
+    radial-gradient(circle at 80% 18%,rgba(255,255,255,.8) 0 1px,transparent 2px),
+    linear-gradient(140deg,#d4b275 0%,#f8edd7 44%,#e5cfaa 72%,#c6a066 100%);
 }
 .alpha-price-card:nth-child(3) .alpha-price-card__visual{
-  background:linear-gradient(135deg,#cba96f 0%,#ead9b9 45%,#d5b681 100%);
+  background:
+    radial-gradient(circle at 16% 22%,rgba(255,255,255,.75) 0 1px,transparent 2px),
+    radial-gradient(circle at 72% 36%,rgba(255,255,255,.85) 0 1.5px,transparent 2.5px),
+    linear-gradient(140deg,#cbaa73 0%,#efdec0 43%,#dcc093 72%,#b99257 100%);
 }
 .alpha-price-card:nth-child(4) .alpha-price-card__visual{
-  background:linear-gradient(135deg,#d8ba83 0%,#f1dfbb 45%,#d4b279 100%);
+  background:
+    radial-gradient(circle at 20% 25%,rgba(255,255,255,.85) 0 1px,transparent 2px),
+    radial-gradient(circle at 84% 25%,rgba(255,255,255,.75) 0 1px,transparent 2px),
+    linear-gradient(140deg,#d2b57b 0%,#f6e8c9 43%,#e2c797 72%,#c3a067 100%);
 }
 .alpha-price-card__visual:before{
   content:'';
   position:absolute;
-  inset:0;
+  inset:-20% -28%;
   background:
-    radial-gradient(circle at 20% 18%,rgba(255,255,255,.75) 0 1.5px,transparent 2.5px),
-    radial-gradient(circle at 78% 28%,rgba(255,255,255,.6) 0 1px,transparent 2px),
-    linear-gradient(115deg,transparent 0 38%,rgba(255,255,255,.20) 39%,transparent 43%);
+    linear-gradient(118deg,transparent 0 38%,rgba(255,255,255,.38) 39%,rgba(255,255,255,.08) 43%,transparent 44%),
+    linear-gradient(306deg,transparent 0 56%,rgba(163,117,49,.20) 57%,rgba(255,255,255,.24) 59%,transparent 61%);
+  transform:rotate(-2deg);
 }
 .alpha-price-card__visual:after{
   content:'';
   position:absolute;
-  inset:auto -20% -55% 5%;
-  height:86%;
-  border:1px solid rgba(145,101,38,.22);
+  width:130%;
+  height:80%;
+  left:-28%;
+  bottom:-52%;
   border-radius:50%;
-  transform:rotate(-9deg);
+  border:2px solid rgba(159,113,45,.26);
+  box-shadow:0 -1px 0 rgba(255,255,255,.4);
+  transform:rotate(-11deg);
 }
+.alpha-price-card__spark{
+  position:absolute;
+  z-index:1;
+  color:#fff3d4;
+  text-shadow:0 2px 10px rgba(116,77,23,.24);
+}
+.alpha-price-card__spark--one{top:18px;right:24px;font-size:20px}
+.alpha-price-card__spark--two{left:30px;bottom:24px;font-size:34px}
+
 .alpha-price-card__number{
   position:relative;
-  z-index:1;
+  z-index:2;
   display:flex;
   align-items:center;
-  justify-content:center;
   gap:8px;
   direction:ltr;
   line-height:1;
 }
 .alpha-price-card__number b{
   color:#4a321b;
-  font-size:clamp(58px,5vw,80px);
-  font-weight:820;
+  font-size:clamp(56px,5.1vw,82px);
+  font-weight:850;
   letter-spacing:-.04em;
+  -webkit-text-stroke:0;
+  text-shadow:none;
 }
 .alpha-price-card__number i{
-  color:#7f623c;
+  color:#4a321b;
   font-style:normal;
-  font-size:36px;
-  font-weight:700;
+  font-size:38px;
+  font-weight:800;
+  text-shadow:none;
 }
+
 .alpha-price-card__body{
-  padding:18px 16px 19px;
+  padding:20px 18px 19px;
   text-align:center;
-  background:#fbfaf8;
+  background:linear-gradient(180deg,#fffdf9,#f9f5ee);
 }
 .alpha-price-card__body strong{
   display:block;
-  color:#2e261f;
-  font-size:16px;
+  color:#34271d;
+  font-size:17px;
   font-weight:800;
-  line-height:1.7;
+  line-height:1.75;
 }
 .alpha-price-card__body span{
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap:8px;
-  margin-top:5px;
-  color:#80663e;
-  font-size:12.5px;
-  font-weight:650;
+  margin-top:7px;
+  color:#856431;
+  font-size:13px;
+  font-weight:700;
 }
 .alpha-price-card__body i{
+  color:#b58a43;
   font-style:normal;
-  color:#b18a4f;
-  font-size:20px;
+  font-size:21px;
   line-height:1;
   direction:ltr;
-  transition:transform .2s ease;
+  transition:transform .22s ease;
 }
 .alpha-price-card:hover{
-  transform:translateY(-5px);
-  border-color:#c9a970;
-  box-shadow:0 15px 34px rgba(82,60,31,.10);
+  transform:translateY(-6px);
+  border-color:#c9a35f;
+  box-shadow:0 18px 38px rgba(102,73,33,.14);
 }
-.alpha-price-card:hover .alpha-price-card__body i{
-  transform:translateX(-3px);
-}
+.alpha-price-card:hover .alpha-price-card__body i{transform:translateX(-4px)}
+
 @media(max-width:1000px){
   .alpha-price-bands__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:600px){
-  .alpha-price-bands{padding:36px 0 30px}
-  .alpha-price-bands__head{margin-bottom:20px}
-  .alpha-price-bands__head h2{font-size:30px}
-  .alpha-price-bands__head p{font-size:14px}
-  .alpha-price-bands__grid{gap:10px}
-  .alpha-price-card{border-radius:16px}
-  .alpha-price-card__visual{min-height:150px}
+  .alpha-price-bands{padding:38px 0 32px}
+  .alpha-price-bands__head{margin-bottom:22px}
+  .alpha-price-bands__eyebrow{font-size:14px}
+  .alpha-price-bands__eyebrow:before,.alpha-price-bands__eyebrow:after{width:40px}
+  .alpha-price-bands__head h2{font-size:31px}
+  .alpha-price-bands__head p{font-size:15px}
+  .alpha-price-bands__grid{gap:11px}
+  .alpha-price-card{border-radius:17px}
+  .alpha-price-card__visual{min-height:155px}
   .alpha-price-card__number{gap:5px}
-  .alpha-price-card__number b{font-size:44px}
-  .alpha-price-card__number i{font-size:25px}
-  .alpha-price-card__body{padding:13px 10px 14px}
+  .alpha-price-card__number b{font-size:45px}
+  .alpha-price-card__number i{font-size:27px}
+  .alpha-price-card__body{padding:14px 10px 15px}
   .alpha-price-card__body strong{font-size:13px}
   .alpha-price-card__body span{font-size:11px}
 }
 @media(max-width:380px){
   .alpha-price-bands__grid{grid-template-columns:1fr}
-  .alpha-price-card__visual{min-height:145px}
-  .alpha-price-card__number b{font-size:48px}
+  .alpha-price-card__visual{min-height:150px}
+  .alpha-price-card__number b{font-size:50px}
 }
 @media(prefers-reduced-motion:reduce){
   .alpha-price-card,.alpha-price-card__body i{transition:none}
