@@ -5,6 +5,7 @@ const settingsSchema = new Schema({
   heroSubtitle: { type: String, default: "انتخاب‌های ظریف، برای لحظه‌هایی که به شما تعلق دارند." },
   phone: { type: String, default: "" }, email: { type: String, default: "" }, address: { type: String, default: "" },
   instagram: { type: String, default: "" },
+  whatsapp: { type: String, default: "" },
   salesEnabled: { type: Boolean, default: false },
   maxRateAgeMinutes: { type: Number, default: 1440, min: 1, max: 10080 },
   otpTtlSeconds: { type: Number, default: 120, min: 60, max: 300 },
