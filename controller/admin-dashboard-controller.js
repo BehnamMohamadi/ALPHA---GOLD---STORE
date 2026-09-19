@@ -20,7 +20,7 @@ const getAdminDashboard = catchAsync(async (req, res) => {
     pendingOrders,
     confirmedOrders,
     cancelledOrders,
-    unpaidOrders,
+    shippedOrders,
     paidOrders,
     totalCarts,
     salesResult,
@@ -77,7 +77,7 @@ const getAdminDashboard = catchAsync(async (req, res) => {
     }),
 
     Order.countDocuments({
-      paymentStatus: "unpaid",
+      status: "shipped",
     }),
 
     Order.countDocuments({
@@ -137,7 +137,8 @@ const getAdminDashboard = catchAsync(async (req, res) => {
           pending: pendingOrders,
           confirmed: confirmedOrders,
           cancelled: cancelledOrders,
-          unpaid: unpaidOrders,
+          unshipped: confirmedOrders,
+          undelivered: shippedOrders,
           paid: paidOrders,
         },
 
