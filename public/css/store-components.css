@@ -75,3 +75,31 @@
 .guide-price-showcase__note p{margin:0!important;color:#c8bfae!important;font-size:11px!important;line-height:2!important}
 @media(max-width:760px){.guide-price-showcase{margin-bottom:28px;padding:23px 17px;border-radius:19px}.guide-price-showcase__ornament{top:18px;left:17px;width:34px;height:34px}.guide-price-showcase__head{padding-left:43px;margin-bottom:20px}.prose .guide-price-showcase__head h2{font-size:22px}.guide-price-equation{justify-content:stretch;padding:13px;gap:7px}.guide-price-equation span{flex:1 1 calc(50% - 24px);min-width:120px;white-space:normal;text-align:center}.guide-price-equation i{flex:0 0 14px;text-align:center}.guide-price-parts{grid-template-columns:1fr}.guide-price-parts article{min-height:104px}.guide-price-showcase__note{padding-inline:5px}}
 @media(max-width:430px){.guide-price-equation{display:grid;grid-template-columns:1fr}.guide-price-equation span{width:100%;min-width:0}.guide-price-equation i{transform:rotate(90deg);font-size:16px}.guide-price-equation i:first-of-type{transform:none}.guide-price-showcase__head p{font-size:12px!important}}
+
+
+/* Storefront readability scale — slightly larger text without changing layout density. */
+body{font-size:15px}
+.desktop-nav{font-size:14px}
+.product-card .product-info .eyebrow{font-size:10px}
+.product-card .product-info h3{font-size:14px;line-height:22px}
+.product-card .product-meta>span{font-size:11px}
+.product-card .product-meta>strong{font-size:13px}
+.product-card .cart-add{font-size:12px}
+.detail-description{font-size:14px}
+.price-breakdown{font-size:13px}
+.price-breakdown summary{font-size:15px}
+.prose p{font-size:15px}
+.footer-top>div>a:not(.brand){font-size:13px}
+.footer-top h3{font-size:14px}
+.button{font-size:13px}
+@media(max-width:1100px){.desktop-nav{font-size:13px}}
+@media(max-width:760px){
+  body{font-size:14px}
+  #mobile-nav{font-size:13px}
+  .product-card .product-info h3{font-size:13px}
+  .product-card .product-meta>span{font-size:10.5px}
+  .product-card .product-meta>strong{font-size:12px}
+  .product-card .cart-add{font-size:11px}
+  .prose p{font-size:14px}
+  .footer-top>div>a:not(.brand){font-size:12px}
+}
