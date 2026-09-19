@@ -21,6 +21,30 @@
     window.addEventListener('pageshow', sync); sync();
   });
 
+  const normalizePriceValue = value => String(value || '').replace(/[^0-9]/g, '');
+  const formatPriceValue = value => {
+    const digits = normalizePriceValue(value);
+    return digits ? Number(digits).toLocaleString('en-US') : '';
+  };
+  document.querySelectorAll('[data-price-input]').forEach(input => {
+    const sync = () => { input.value = formatPriceValue(input.value); };
+    input.addEventListener('input', sync);
+    input.addEventListener('blur', sync);
+    sync();
+  });
+  document.querySelectorAll('.filters form').forEach(form => {
+    form.addEventListener('submit', () => {
+      form.querySelectorAll('[data-price-input]').forEach(input => {
+        input.value = normalizePriceValue(input.value);
+      });
+    });
+  });
+  window.addEventListener('pageshow', () => {
+    document.querySelectorAll('[data-price-input]').forEach(input => {
+      input.value = formatPriceValue(input.value);
+    });
+  });
+
   const drawer = document.getElementById('mobile-drawer');
   const trigger = document.querySelector('[data-open-menu]');
   if (drawer && trigger) {
