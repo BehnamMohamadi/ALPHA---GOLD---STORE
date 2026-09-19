@@ -24,26 +24,38 @@
 @media(max-width:420px){.jewelry-types .jewelry-type{flex-basis:42%;min-width:120px}}
 @media(prefers-reduced-motion:reduce){.jewelry-type-photo,.jewelry-type-photo img{transition:none}}
 
-/* Landing budget filter — compact, clear and premium. */
-.budget-filter{margin-top:28px;padding:48px 0 32px;background:#f5f0e7;border-block:1px solid #e4d9c7}
-.budget-filter__inner{min-width:0}
-.budget-filter__header{text-align:center;max-width:760px;margin:0 auto 26px}
-.budget-filter__eyebrow{display:inline-block;margin-bottom:6px;color:#9a7740;font-size:12px;font-weight:650}
-.budget-filter__header h2{margin:0;color:#3a3026;font-size:clamp(28px,3vw,40px);font-weight:650;line-height:1.5}
-.budget-filter__header p{margin:7px auto 0;max-width:650px;color:#756d63;font-size:14px;line-height:2}
-.budget-filter__options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.budget-option{position:relative;display:flex;flex-direction:column;justify-content:center;min-width:0;min-height:138px;padding:20px 20px 18px;border:1px solid #ddd0bd;border-radius:18px;background:#fffdf9;color:#3f352a;box-shadow:0 6px 18px rgba(85,63,34,.04);transition:transform .22s,border-color .22s,box-shadow .22s,background .22s}
-.budget-option:before{content:'';position:absolute;top:0;right:20px;left:20px;height:2px;background:linear-gradient(90deg,transparent,#c6a66e,transparent);opacity:.5}
-.budget-option__range{display:flex;align-items:baseline;gap:8px;line-height:1}
-.budget-option__range b{font-size:clamp(30px,2.7vw,42px);font-weight:600;font-variant-numeric:tabular-nums}
-.budget-option__range i{font-style:normal;color:#9d907e;font-size:12px}
-.budget-option__unit{margin-top:9px;color:#92713d;font-size:12px;font-weight:600}
-.budget-option__arrow{position:absolute;left:18px;bottom:17px;display:grid;place-items:center;width:32px;height:32px;border:1px solid #d3c2a8;border-radius:50%;color:#8d6b38;font-size:17px;direction:ltr;transition:transform .22s,background .22s,color .22s}
-.budget-option:hover{transform:translateY(-4px);border-color:#c6ad82;background:#fff;box-shadow:0 12px 28px rgba(85,63,34,.08)}
-.budget-option:hover .budget-option__arrow{transform:translateX(-3px);background:#a9854f;color:#fff}
-.budget-filter__footer{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-top:18px;color:#8b8277;font-size:11.5px}
-.budget-filter__footer a{color:#775b34;font-weight:600}
-@media(max-width:900px){.budget-filter__options{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.budget-filter{margin-top:18px;padding:36px 0 26px}.budget-filter__header{margin-bottom:20px}.budget-filter__header h2{font-size:27px}.budget-filter__header p{font-size:12.5px}.budget-filter__options{gap:9px}.budget-option{min-height:120px;padding:16px 14px;border-radius:15px}.budget-option__range{gap:6px}.budget-option__range b{font-size:30px}.budget-option__unit{font-size:10.5px}.budget-option__arrow{left:13px;bottom:13px;width:28px;height:28px;font-size:15px}.budget-filter__footer{align-items:flex-start;flex-direction:column;gap:5px;font-size:10.5px}}
-@media(max-width:380px){.budget-filter__options{grid-template-columns:1fr}.budget-option{min-height:110px}.budget-option__range b{font-size:32px}}
-@media(prefers-reduced-motion:reduce){.budget-option,.budget-option__arrow{transition:none}}
+/* ALPHA price bands — visual budget shortcuts with real catalog filters. */
+.alpha-price-bands{margin-top:28px;padding:44px 0 34px;background:#faf8f3;border-top:1px solid #e9e2d6}
+.alpha-price-bands__head{text-align:center;margin-bottom:22px}
+.alpha-price-bands__eyebrow{display:inline-block;margin-bottom:5px;color:#9a7740;font-size:12px;font-weight:650}
+.alpha-price-bands__head h2{margin:0;color:#322c24;font-size:clamp(28px,3vw,39px);font-weight:650;line-height:1.5}
+.alpha-price-bands__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.alpha-price-card{display:block;min-width:0;overflow:hidden;border:1px solid #e2d6c3;border-radius:20px;background:#fff;box-shadow:0 8px 24px rgba(78,57,29,.055);transition:transform .22s,box-shadow .22s,border-color .22s}
+.alpha-price-card__visual{position:relative;display:grid;place-items:center;min-height:205px;overflow:hidden;background:
+radial-gradient(circle at 20% 20%,rgba(255,255,255,.55) 0 2px,transparent 3px),
+radial-gradient(circle at 76% 34%,rgba(255,255,255,.35) 0 1px,transparent 2px),
+linear-gradient(145deg,#a9824b 0%,#c3a16a 45%,#8b6738 100%)}
+.alpha-price-card__visual:before{content:'';position:absolute;inset:0;background:
+linear-gradient(115deg,transparent 0 35%,rgba(255,255,255,.12) 36% 38%,transparent 39% 100%),
+repeating-linear-gradient(25deg,rgba(255,255,255,.035) 0 1px,transparent 1px 11px)}
+.alpha-price-card__visual:after{content:'';position:absolute;inset:auto -18% -48% 10%;height:90%;border-radius:50%;border:1px solid rgba(255,255,255,.18);transform:rotate(-10deg)}
+.alpha-price-card__spark{position:absolute;color:#f7e6bf;text-shadow:0 1px 8px rgba(80,54,17,.25)}
+.alpha-price-card__spark--one{top:20px;right:24px;font-size:20px}
+.alpha-price-card__spark--two{left:30px;bottom:26px;font-size:34px}
+.alpha-price-card__number{position:relative;z-index:1;display:flex;align-items:center;gap:10px;color:#fff8e9;text-shadow:0 3px 12px rgba(76,49,16,.3);line-height:1;direction:rtl}
+.alpha-price-card__number b{font-size:clamp(50px,4.6vw,72px);font-weight:700;font-variant-numeric:tabular-nums}
+.alpha-price-card__number i{font-style:normal;font-size:32px;font-weight:300;color:#f3ddb1}
+.alpha-price-card__body{padding:17px 18px 16px;background:#fff}
+.alpha-price-card__body strong{display:block;color:#2f2a24;font-size:15px;font-weight:700;line-height:1.7}
+.alpha-price-card__body span{display:flex;align-items:center;gap:9px;margin-top:4px;color:#7f6b4d;font-size:12px;font-weight:550}
+.alpha-price-card__body i{font-style:normal;color:#b28848;font-size:18px;line-height:1;direction:ltr}
+.alpha-price-card:hover{transform:translateY(-5px);border-color:#cdb486;box-shadow:0 16px 34px rgba(78,57,29,.10)}
+.alpha-price-card:hover .alpha-price-card__visual{filter:saturate(1.05) brightness(1.02)}
+.alpha-price-card:hover .alpha-price-card__body i{transform:translateX(-3px)}
+.alpha-price-card__body i{transition:transform .22s}
+.alpha-price-bands__foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:16px;color:#888075;font-size:11.5px}
+.alpha-price-bands__foot a{color:#775b34;font-weight:650}
+@media(max-width:1000px){.alpha-price-bands__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.alpha-price-bands{padding:34px 0 27px}.alpha-price-bands__head{margin-bottom:18px}.alpha-price-bands__head h2{font-size:26px}.alpha-price-bands__grid{gap:10px}.alpha-price-card{border-radius:16px}.alpha-price-card__visual{min-height:145px}.alpha-price-card__number{gap:7px}.alpha-price-card__number b{font-size:42px}.alpha-price-card__number i{font-size:23px}.alpha-price-card__body{padding:13px 12px}.alpha-price-card__body strong{font-size:13px}.alpha-price-card__body span{font-size:11px}.alpha-price-bands__foot{align-items:flex-start;flex-direction:column;gap:5px;font-size:10.5px}}
+@media(max-width:380px){.alpha-price-bands__grid{grid-template-columns:1fr}.alpha-price-card__visual{min-height:140px}}
+@media(prefers-reduced-motion:reduce){.alpha-price-card,.alpha-price-card__body i{transition:none}}
